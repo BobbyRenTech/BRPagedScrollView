@@ -413,6 +413,7 @@
 				AC3D2ECD1AEE918000789420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AC3D2ECE1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRDailyActivityScrollviewTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +422,7 @@
 				AC3D2ED01AEE918000789420 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
