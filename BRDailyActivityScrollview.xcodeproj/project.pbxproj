@@ -8,11 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		AC3D2EB21AEE918000789420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB11AEE918000789420 /* AppDelegate.swift */; };
-		AC3D2EB41AEE918000789420 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB31AEE918000789420 /* ViewController.swift */; };
+		AC3D2EB41AEE918000789420 /* HorizontalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */; };
 		AC3D2EB71AEE918000789420 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EB51AEE918000789420 /* Main.storyboard */; };
 		AC3D2EB91AEE918000789420 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EB81AEE918000789420 /* Images.xcassets */; };
 		AC3D2EBC1AEE918000789420 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */; };
 		AC3D2EC81AEE918000789420 /* BRDailyActivityScrollviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */; };
+		AC3D2ED21AEE94BB00789420 /* DayScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,13 +30,14 @@
 		AC3D2EAC1AEE918000789420 /* BRDailyActivityScrollview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRDailyActivityScrollview.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3D2EB01AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3D2EB11AEE918000789420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AC3D2EB31AEE918000789420 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTimelineController.swift; sourceTree = "<group>"; };
 		AC3D2EB61AEE918000789420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC3D2EB81AEE918000789420 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC3D2EBB1AEE918000789420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AC3D2EC11AEE918000789420 /* BRDailyActivityScrollviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRDailyActivityScrollviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3D2EC61AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRDailyActivityScrollviewTests.swift; sourceTree = "<group>"; };
+		AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayScrollViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +80,9 @@
 			isa = PBXGroup;
 			children = (
 				AC3D2EB11AEE918000789420 /* AppDelegate.swift */,
-				AC3D2EB31AEE918000789420 /* ViewController.swift */,
+				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
 				AC3D2EB51AEE918000789420 /* Main.storyboard */,
+				AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */,
 				AC3D2EB81AEE918000789420 /* Images.xcassets */,
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,
@@ -212,8 +215,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC3D2EB41AEE918000789420 /* ViewController.swift in Sources */,
+				AC3D2EB41AEE918000789420 /* HorizontalTimelineController.swift in Sources */,
 				AC3D2EB21AEE918000789420 /* AppDelegate.swift in Sources */,
+				AC3D2ED21AEE94BB00789420 /* DayScrollViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

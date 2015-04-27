@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HorizontalTimelineController.swift
 //  BRDailyActivityScrollview
 //
 //  Created by Bobby Ren on 4/27/15.
@@ -8,11 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class HorizontalTimelineController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
