@@ -15,6 +15,7 @@ class DayScrollViewController: UIViewController {
     @IBOutlet weak var labelText: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var text: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,20 +23,12 @@ class DayScrollViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         self.view.backgroundColor = self.randomColor()
-
-        /*
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let width = appDelegate.window!.frame.size.width
-        let height = appDelegate.window!.frame.size.height
         
-        self.constraintContentWidth.constant = width;
-        self.constraintContentHeight.constant = height;
-
-        self.contentView.setNeedsUpdateConstraints()
-        self.contentView.layoutIfNeeded()
-*/
-//        println("initial scroll: \(scrollView.frame.origin.x) \(scrollView.frame.origin.y) \(scrollView.frame.size.width) \(scrollView.frame.size.height)")
-        
+        let appDelegate = UIApplication.sharedApplication().delegate!
+        self.constraintContentWidth.constant = appDelegate.window!!.frame.size.width
+        self.constraintContentHeight.constant = appDelegate.window!!.frame.size.height * 2
+        self.scrollView.needsUpdateConstraints()
+        self.scrollView.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,11 +38,9 @@ class DayScrollViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         println("view: \(self.view.frame.origin.x) \(self.view.frame.origin.y) \(self.view.frame.size.width) \(self.view.frame.size.height)")
-        /*
-        println("appeared scroll: \(scrollView.frame.origin.x) \(scrollView.frame.origin.y) \(scrollView.frame.size.width) \(scrollView.frame.size.height)")
-        println("content: \(contentView.frame.origin.x) \(contentView.frame.origin.y) \(contentView.frame.size.width) \(contentView.frame.size.height)")
-        println("cell: \(labelText.frame.origin.x) \(labelText.frame.origin.y) \(labelText.frame.size.width) \(labelText.frame.size.height)")
-*/
+        println("scrollview: \(self.scrollView.frame.origin.x) \(self.scrollView.frame.origin.y) \(self.scrollView.frame.size.width) \(self.scrollView.frame.size.height)")
+        println("contentview: \(self.contentView.frame.origin.x) \(self.contentView.frame.origin.y) \(self.contentView.frame.size.width) \(self.contentView.frame.size.height)")
+        println("textview: \(self.text.frame.origin.x) \(self.text.frame.origin.y) \(self.text.frame.size.width) \(self.text.frame.size.height)")
     }
     /*
     // MARK: - Navigation
