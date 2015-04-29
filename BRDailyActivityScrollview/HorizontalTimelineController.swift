@@ -27,11 +27,14 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     var days: Int!
     
+    var dayControllers:NSMutableArray!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        dayControllers = NSMutableArray()
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,17 +73,31 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             
             self.scrollview.addSubview(dayController.view)
             dayController.didMoveToParentViewController(self)
+            
+            self.dayControllers.addObject(dayController)
         }
         
         self.scrollview.contentSize = CGSizeMake(CGFloat(days)*pagewidth, height)
     }
     
     // MARK: - UIScrollViewDelegate
+    func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
+        self.updateCurrentDate()
+    }
+    
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        let center = scrollView.contentOffset.x + scrollView.frame.size.width/2
+        self.updateCurrentDate()
+    }
+    
+    func updateCurrentDate() {
+        let center = self.scrollview.contentOffset.x + self.scrollview.frame.size.width/2
         let index = Int(center / pagewidth)
-     
+        
         println("scrolled to day \(index)")
+        if index >= 0 && index < self.dayControllers.count {
+            let dayController = self.dayControllers.objectAtIndex(index) as! DayScrollViewController
+            self.labelDate.text = BRDateUtils.yearMonthDayForDate(dayController.currentDate!)
+        }
     }
 }
 

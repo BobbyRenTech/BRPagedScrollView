@@ -41,6 +41,7 @@
 		AC3D2EC61AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRDailyActivityScrollviewTests.swift; sourceTree = "<group>"; };
 		AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayScrollViewController.swift; sourceTree = "<group>"; };
+		ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BRDailyActivityScrollview-Bridging-Header.h"; sourceTree = "<group>"; };
 		B2B4729C0FE9B3780C79538D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +100,7 @@
 				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
 				AC3D2EB51AEE918000789420 /* Main.storyboard */,
 				AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */,
+				ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */,
 				AC3D2EB81AEE918000789420 /* Images.xcassets */,
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,
@@ -407,6 +409,7 @@
 				INFOPLIST_FILE = BRDailyActivityScrollview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BRDailyActivityScrollview/BRDailyActivityScrollview-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -418,6 +421,7 @@
 				INFOPLIST_FILE = BRDailyActivityScrollview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BRDailyActivityScrollview/BRDailyActivityScrollview-Bridging-Header.h";
 			};
 			name = Release;
 		};
