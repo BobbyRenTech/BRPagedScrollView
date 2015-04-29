@@ -12,11 +12,10 @@ class DayScrollViewController: UIViewController {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
 
-    @IBOutlet weak var labelText: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     
-    @IBOutlet weak var text: UITextView!
+    @IBOutlet weak var labelText: UILabel!
     @IBOutlet weak var labelCount: UILabel!
     var currentCount: Int?
     
@@ -30,10 +29,6 @@ class DayScrollViewController: UIViewController {
         self.view.backgroundColor = self.randomColor()
         
         let appDelegate = UIApplication.sharedApplication().delegate!
-        self.constraintContentWidth.constant = appDelegate.window!!.frame.size.width
-        self.constraintContentHeight.constant = appDelegate.window!!.frame.size.height * 2
-        self.scrollView.needsUpdateConstraints()
-        self.scrollView.layoutIfNeeded()
         
         // default date is today
         if currentDate == nil {
@@ -50,14 +45,26 @@ class DayScrollViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        self.scrollView.frame.size.width = self.view.frame.size.width;
+        self.scrollView.frame.size.height = self.view.frame.size.height;
+        
+        self.updateContentSize()
+
         println("view: \(self.view.frame.origin.x) \(self.view.frame.origin.y) \(self.view.frame.size.width) \(self.view.frame.size.height)")
         println("scrollview: \(self.scrollView.frame.origin.x) \(self.scrollView.frame.origin.y) \(self.scrollView.frame.size.width) \(self.scrollView.frame.size.height)")
         println("contentview: \(self.contentView.frame.origin.x) \(self.contentView.frame.origin.y) \(self.contentView.frame.size.width) \(self.contentView.frame.size.height)")
-        println("textview: \(self.text.frame.origin.x) \(self.text.frame.origin.y) \(self.text.frame.size.width) \(self.text.frame.size.height)")
+        println("text: \(self.labelText.frame.origin.x) \(self.labelText.frame.origin.y) \(self.labelText.frame.size.width) \(self.labelText.frame.size.height)")
         
 //        if currentCount != nil {
             labelCount.text = "\(currentCount!)"
 //        }
+    }
+    
+    func updateContentSize() {
+        self.constraintContentWidth.constant = self.view.frame.size.width;
+        self.constraintContentHeight.constant = self.labelText.frame.origin.y + self.labelText.frame.size.height + 20;
+        self.contentView.needsUpdateConstraints()
+        self.contentView.layoutIfNeeded()
     }
     /*
     // MARK: - Navigation

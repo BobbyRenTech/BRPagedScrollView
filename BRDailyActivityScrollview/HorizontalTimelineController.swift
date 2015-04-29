@@ -30,6 +30,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +40,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
+        width = self.scrollview.frame.size.width - 2 * BORDER
+        height = self.scrollview.frame.size.height - 2 * BORDER
+        pagewidth = self.scrollview.frame.size.width
         days = 10 // arc4random_uniform(5) + 3
         self.populateDays()
         
@@ -46,17 +51,12 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     }
 
     func populateDays() {
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        pagewidth = appDelegate.window!.frame.size.width
-        width = appDelegate.window!.frame.size.width - 2 * BORDER
-        height = appDelegate.window!.frame.size.height - 2 * BORDER
-
         let today = NSDate()
         for index in 0...days-1 {
             let i = CGFloat(index)
-            var frame = appDelegate.window!.frame as CGRect
+            var frame = self.scrollview.frame as CGRect
             frame.origin.x = i * pagewidth + BORDER
-            frame.origin.y = BORDER
+            frame.origin.y = 0 // BORDER
             frame.size.width -= 2 * BORDER
             frame.size.height -= 2 * BORDER
             
