@@ -15,13 +15,14 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var collectionView: UICollectionView!
 
     var currentDate: NSDate?
+    var activities: NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        self.view.backgroundColor = self.randomColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         
         let appDelegate = UIApplication.sharedApplication().delegate!
         
@@ -29,6 +30,8 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
         if currentDate == nil {
             currentDate = NSDate()
         }
+        
+        activities = NSMutableArray()
   
         let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
         layout.direction = UICollectionViewScrollDirection.Vertical
@@ -45,13 +48,24 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
         layout.blockPixels = CGSizeMake(width/2.0, width/2.0)
     }
     
+    // MARK: Populating data
+    func updateWithActivities(newActivities: [AnyObject]?) {
+        if newActivities == nil || newActivities!.count == 0 {
+            self.activities.removeAllObjects()
+        }
+        else {
+            self.activities.addObjectsFromArray(newActivities!)
+        }
+        self.collectionView.reloadData()
+    }
+    
     // MARK: UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.activities.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {

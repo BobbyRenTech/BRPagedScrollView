@@ -14,6 +14,7 @@
 		AC3D2EBC1AEE918000789420 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */; };
 		AC3D2EC81AEE918000789420 /* BRDailyActivityScrollviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */; };
 		AC3D2ED21AEE94BB00789420 /* DayScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */; };
+		ACEF59F51AF25F9C00EB19BC /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF59F41AF25F9C00EB19BC /* Activity.swift */; };
 		BF03774D2436EF9A0F6BE9AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48043A0E8E25D6C77DAA715D /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +43,7 @@
 		AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRDailyActivityScrollviewTests.swift; sourceTree = "<group>"; };
 		AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayScrollViewController.swift; sourceTree = "<group>"; };
 		ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BRDailyActivityScrollview-Bridging-Header.h"; sourceTree = "<group>"; };
+		ACEF59F41AF25F9C00EB19BC /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		B2B4729C0FE9B3780C79538D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +103,7 @@
 				AC3D2EB51AEE918000789420 /* Main.storyboard */,
 				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
 				AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */,
+				ACEF59F31AF25F7200EB19BC /* Models */,
 				AC3D2EB81AEE918000789420 /* Images.xcassets */,
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,
@@ -131,6 +134,14 @@
 				AC3D2EC61AEE918000789420 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ACEF59F31AF25F7200EB19BC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ACEF59F41AF25F9C00EB19BC /* Activity.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		D5C8741B22B9CF953910C5A2 /* Frameworks */ = {
@@ -278,6 +289,7 @@
 			files = (
 				AC3D2EB41AEE918000789420 /* HorizontalTimelineController.swift in Sources */,
 				AC3D2EB21AEE918000789420 /* AppDelegate.swift in Sources */,
+				ACEF59F51AF25F9C00EB19BC /* Activity.swift in Sources */,
 				AC3D2ED21AEE94BB00789420 /* DayScrollViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
