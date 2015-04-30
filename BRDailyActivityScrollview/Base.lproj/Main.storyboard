@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -18,26 +18,53 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-Lv-cmU">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                 <color key="backgroundColor" red="1" green="0.020100812990000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
+                                </connections>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6f-9T-bmG">
+                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Z-Sx-Z2U">
+                                        <rect key="frame" x="8" y="9" width="584" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Q9Z-Sx-Z2U" secondAttribute="trailing" constant="8" id="IZG-8A-5dX"/>
+                                    <constraint firstItem="Q9Z-Sx-Z2U" firstAttribute="leading" secondItem="A6f-9T-bmG" secondAttribute="leading" constant="8" id="Iqy-Db-g7r"/>
+                                    <constraint firstItem="Q9Z-Sx-Z2U" firstAttribute="top" secondItem="A6f-9T-bmG" secondAttribute="top" constant="9" id="LXY-HN-tc9"/>
+                                    <constraint firstAttribute="bottom" secondItem="Q9Z-Sx-Z2U" secondAttribute="bottom" constant="10" id="fAj-xd-iP2"/>
+                                    <constraint firstAttribute="height" constant="40" id="rWk-ld-Ydh"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="9Nc-km-laZ"/>
+                            <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="60" id="9Nc-km-laZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="A6f-9T-bmG" secondAttribute="trailing" constant="-16" id="CSc-Pq-12a"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8TV-Lv-cmU" secondAttribute="trailing" constant="-16" id="Ufa-k2-2Tz"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="8TV-Lv-cmU" secondAttribute="bottom" id="exY-of-phd"/>
+                            <constraint firstItem="A6f-9T-bmG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="jxb-Ox-vd2"/>
+                            <constraint firstItem="A6f-9T-bmG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="20" id="t1M-7F-x7D"/>
                             <constraint firstItem="8TV-Lv-cmU" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="vcD-Me-ijp"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="labelDate" destination="Q9Z-Sx-Z2U" id="pWw-D6-3RU"/>
                         <outlet property="scrollview" destination="8TV-Lv-cmU" id="OkF-tv-ACt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="264" y="411"/>
         </scene>
         <!--Day Scroll View Controller-->
         <scene sceneID="DuY-JQ-kdP">
@@ -51,59 +78,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPm-lj-BnK">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CFU-RT-zDF">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4L-EJ-A0H" userLabel="View - contentview">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                        <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9a9-o5-6cj">
-                                                <rect key="frame" x="0.0" y="0.0" width="223" height="600"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="223" id="ZKC-3C-9Iy"/>
-                                                </constraints>
-                                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="a4L-EJ-A0H" id="eZG-Df-nV5"/>
-                                                </connections>
-                                            </textView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="9a9-o5-6cj" secondAttribute="bottom" id="6Ks-VE-zEu"/>
-                                            <constraint firstAttribute="width" constant="600" id="Y5d-3K-Hpd"/>
-                                            <constraint firstAttribute="height" constant="600" id="kw6-YB-KCh"/>
-                                            <constraint firstItem="9a9-o5-6cj" firstAttribute="top" secondItem="a4L-EJ-A0H" secondAttribute="top" id="xf6-c0-jdM"/>
-                                            <constraint firstItem="9a9-o5-6cj" firstAttribute="leading" secondItem="a4L-EJ-A0H" secondAttribute="leading" id="ypw-al-PZe"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.01639625364" blue="0.90186062840000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="a4L-EJ-A0H" firstAttribute="leading" secondItem="cPm-lj-BnK" secondAttribute="leading" id="Yhn-CP-OsG"/>
-                                    <constraint firstItem="a4L-EJ-A0H" firstAttribute="top" secondItem="cPm-lj-BnK" secondAttribute="top" id="eea-ro-5DV"/>
-                                    <constraint firstAttribute="trailing" secondItem="a4L-EJ-A0H" secondAttribute="trailing" id="wgY-vR-C2Y"/>
-                                    <constraint firstAttribute="bottom" secondItem="a4L-EJ-A0H" secondAttribute="bottom" id="zht-GO-K60"/>
+                                    <constraint firstAttribute="height" constant="600" id="Nrs-Ql-UXj"/>
+                                    <constraint firstAttribute="width" constant="600" id="sOX-su-j8R"/>
                                 </constraints>
-                            </scrollView>
+                                <collectionViewLayout key="collectionViewLayout" id="vMe-Ax-9wy" customClass="RFQuiltLayout">
+                                    <connections>
+                                        <outlet property="delegate" destination="7cB-q9-23s" id="EoA-4t-pbo"/>
+                                    </connections>
+                                </collectionViewLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCell" id="Mkx-3r-2HS">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <size key="customSize" width="100" height="100"/>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="7cB-q9-23s" id="9r9-ex-lUT"/>
+                                    <outlet property="delegate" destination="7cB-q9-23s" id="nPM-oP-e58"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="pnG-Rt-0Sp" firstAttribute="top" secondItem="cPm-lj-BnK" secondAttribute="bottom" id="Tuc-7O-YIZ"/>
-                            <constraint firstItem="cPm-lj-BnK" firstAttribute="top" secondItem="bSW-Oc-3iH" secondAttribute="topMargin" id="Xyr-nl-6OW"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="cPm-lj-BnK" secondAttribute="trailing" constant="-16" id="fBF-jy-9Yo"/>
-                            <constraint firstItem="cPm-lj-BnK" firstAttribute="leading" secondItem="bSW-Oc-3iH" secondAttribute="leadingMargin" constant="-16" id="xLd-CC-RFD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CFU-RT-zDF" secondAttribute="trailing" constant="-16" id="NhN-15-fOM"/>
+                            <constraint firstItem="CFU-RT-zDF" firstAttribute="top" secondItem="bSW-Oc-3iH" secondAttribute="topMargin" id="O69-3P-qP0"/>
+                            <constraint firstItem="CFU-RT-zDF" firstAttribute="leading" secondItem="bSW-Oc-3iH" secondAttribute="leadingMargin" constant="-16" id="Pot-rO-Eg6"/>
+                            <constraint firstItem="pnG-Rt-0Sp" firstAttribute="top" secondItem="CFU-RT-zDF" secondAttribute="bottom" id="S7h-bE-6VW"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="constraintContentHeight" destination="kw6-YB-KCh" id="B8F-xe-AVG"/>
-                        <outlet property="constraintContentWidth" destination="Y5d-3K-Hpd" id="nrI-Ob-0n8"/>
-                        <outlet property="contentView" destination="a4L-EJ-A0H" id="7aW-pz-ikI"/>
-                        <outlet property="scrollView" destination="cPm-lj-BnK" id="syn-27-2yH"/>
-                        <outlet property="text" destination="9a9-o5-6cj" id="oNu-1i-DEb"/>
+                        <outlet property="collectionView" destination="CFU-RT-zDF" id="oyF-vO-Cjb"/>
+                        <outlet property="constraintContentHeight" destination="Nrs-Ql-UXj" id="hc9-Vp-TtY"/>
+                        <outlet property="constraintContentWidth" destination="sOX-su-j8R" id="S4V-c2-JRo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWD-KA-M4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
