@@ -58,7 +58,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         // for now, generate a random number of activities
         let labels = ["Check your weight", "Examine your feed", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
         for index in 0...days-1 {
-            let dayController = self.dayControllers[index] as! DayScrollViewController
+            let dayController = self.dayControllers[index] as! DayViewController
             let activityCt = arc4random_uniform(6) + 2
             var activitiesArray = [AnyObject]()
             for i in 0...activityCt-1 {
@@ -91,7 +91,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             frame.size.width -= 2 * BORDER
             frame.size.height -= 2 * BORDER
             
-            let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayScrollViewController") as! DayScrollViewController
+            let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
             // set date for each dayController
             dayController.currentDate = today.dateByAddingTimeInterval(NSTimeInterval(i * 24 * 3600))
 
@@ -121,7 +121,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         
         println("scrolled to day \(index)")
         if index >= 0 && index < self.dayControllers.count {
-            let dayController = self.dayControllers.objectAtIndex(index) as! DayScrollViewController
+            let dayController = self.dayControllers.objectAtIndex(index) as! DayViewController
             self.labelDate.text = BRDateUtils.yearMonthDayForDate(dayController.currentDate!)
         }
     }

@@ -1,5 +1,5 @@
 //
-//  DayScrollViewController.swift
+//  DayViewController.swift
 //  BRDailyActivityScrollview
 //
 //  Created by Bobby Ren on 4/27/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DayScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
+class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
 
