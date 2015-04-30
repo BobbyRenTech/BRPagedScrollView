@@ -19,7 +19,7 @@
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-Lv-cmU">
                                 <rect key="frame" x="0.0" y="60" width="600" height="540"/>
-                                <color key="backgroundColor" red="1" green="0.020100812990000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
                                 </connections>
@@ -30,11 +30,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Z-Sx-Z2U">
                                         <rect key="frame" x="8" y="9" width="584" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.21458675990000001" green="0.62942441500000001" blue="0.841796875" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Q9Z-Sx-Z2U" secondAttribute="trailing" constant="8" id="IZG-8A-5dX"/>
                                     <constraint firstItem="Q9Z-Sx-Z2U" firstAttribute="leading" secondItem="A6f-9T-bmG" secondAttribute="leading" constant="8" id="Iqy-Db-g7r"/>
@@ -44,7 +44,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.21458675986842105" green="0.62942441496368418" blue="0.841796875" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="60" id="9Nc-km-laZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="A6f-9T-bmG" secondAttribute="trailing" constant="-16" id="CSc-Pq-12a"/>
@@ -66,10 +66,10 @@
             </objects>
             <point key="canvasLocation" x="264" y="411"/>
         </scene>
-        <!--Day Scroll View Controller-->
+        <!--Day View Controller-->
         <scene sceneID="DuY-JQ-kdP">
             <objects>
-                <viewController storyboardIdentifier="DayScrollViewController" id="7cB-q9-23s" customClass="DayScrollViewController" customModule="BRDailyActivityScrollview" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DayViewController" id="7cB-q9-23s" customClass="DayViewController" customModule="BRDailyActivityScrollview" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uWs-cn-Frh"/>
                         <viewControllerLayoutGuide type="bottom" id="pnG-Rt-0Sp"/>
@@ -80,6 +80,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CFU-RT-zDF">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="600" id="Nrs-Ql-UXj"/>
                                     <constraint firstAttribute="width" constant="600" id="sOX-su-j8R"/>
@@ -107,7 +108,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="CFU-RT-zDF" secondAttribute="trailing" constant="-16" id="NhN-15-fOM"/>
                             <constraint firstItem="CFU-RT-zDF" firstAttribute="top" secondItem="bSW-Oc-3iH" secondAttribute="topMargin" id="O69-3P-qP0"/>

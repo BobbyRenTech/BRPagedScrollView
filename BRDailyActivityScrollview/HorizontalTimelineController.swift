@@ -19,8 +19,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var labelDate: UILabel!
     
     let BORDER:CGFloat = 5.0
+    let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)
     
-    var appDelegate: AppDelegate!
     var pagewidth: CGFloat!
     var width: CGFloat!
     var height: CGFloat!
@@ -32,8 +32,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         dayControllers = NSMutableArray()
     }
 
@@ -46,15 +44,45 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         width = self.scrollview.frame.size.width - 2 * BORDER
         height = self.scrollview.frame.size.height - 2 * BORDER
         pagewidth = self.scrollview.frame.size.width
-        days = 10 // arc4random_uniform(5) + 3
+        days = Int(arc4random_uniform(5) + 3)
         self.populateDays()
         
         let offset = CGPointMake(pagewidth * CGFloat(days-1), 0)
         self.scrollview.setContentOffset(offset, animated: true)
+        
+        self.loadActivities()
+    }
+    
+    // MARK: Activity data
+    func loadActivities() {
+        // for now, generate a random number of activities
+        let labels = ["Check your weight", "Examine your feed", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
+        for index in 0...days-1 {
+            let dayController = self.dayControllers[index] as! DayViewController
+            let activityCt = arc4random_uniform(6) + 2
+            var activitiesArray = [AnyObject]()
+            for i in 0...activityCt-1 {
+                let textIndex = Int(arc4random_uniform(UInt32(labels.count)))
+                let typeIndex = Int(arc4random_uniform(3))
+                let text = labels[textIndex] as String
+                var type: ActivityType
+                if typeIndex == 0 {
+                    type = ActivityType.Single
+                }
+                else if typeIndex == 1 {
+                    type = ActivityType.Wide
+                }
+                else {
+                    type = ActivityType.Tall
+                }
+                let activity = Activity(type: type, icon: nil, text: text)
+                activitiesArray.append(activity)
+            }
+            dayController.updateWithActivities(activitiesArray as [AnyObject])
+        }
     }
 
     func populateDays() {
-        let today = NSDate()
         for index in 0...days-1 {
             let i = CGFloat(index)
             var frame = self.scrollview.frame as CGRect
@@ -63,10 +91,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             frame.size.width -= 2 * BORDER
             frame.size.height -= 2 * BORDER
             
-            let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayScrollViewController") as! DayScrollViewController
+            let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
             // set date for each dayController
             dayController.currentDate = today.dateByAddingTimeInterval(NSTimeInterval(i * 24 * 3600))
-            dayController.currentCount = index
 
             self.addChildViewController(dayController)
             dayController.view.frame = frame
@@ -76,7 +103,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             
             self.dayControllers.addObject(dayController)
         }
-        
         self.scrollview.contentSize = CGSizeMake(CGFloat(days)*pagewidth, height)
     }
     
@@ -95,7 +121,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         
         println("scrolled to day \(index)")
         if index >= 0 && index < self.dayControllers.count {
-            let dayController = self.dayControllers.objectAtIndex(index) as! DayScrollViewController
+            let dayController = self.dayControllers.objectAtIndex(index) as! DayViewController
             self.labelDate.text = BRDateUtils.yearMonthDayForDate(dayController.currentDate!)
         }
     }
