@@ -10,4 +10,5 @@
 #define BRDailyActivityScrollview_BRDailyActivityScrollView_Bridging_Header_h
 
 #import "BRDateUtils.h"
+#import "RFQuiltLayout.h"
 #endif

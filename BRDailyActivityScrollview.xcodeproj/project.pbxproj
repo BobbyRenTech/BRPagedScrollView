@@ -96,11 +96,11 @@
 		AC3D2EAE1AEE918000789420 /* BRDailyActivityScrollview */ = {
 			isa = PBXGroup;
 			children = (
-				AC3D2EB11AEE918000789420 /* AppDelegate.swift */,
-				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
-				AC3D2EB51AEE918000789420 /* Main.storyboard */,
-				AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */,
 				ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */,
+				AC3D2EB11AEE918000789420 /* AppDelegate.swift */,
+				AC3D2EB51AEE918000789420 /* Main.storyboard */,
+				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
+				AC3D2ED11AEE94BB00789420 /* DayScrollViewController.swift */,
 				AC3D2EB81AEE918000789420 /* Images.xcassets */,
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,

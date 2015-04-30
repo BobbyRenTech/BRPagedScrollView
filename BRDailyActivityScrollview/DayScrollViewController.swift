@@ -8,17 +8,15 @@
 
 import UIKit
 
-class DayScrollViewController: UIViewController {
+class DayScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
+    let reuseIdentifier = "ActivityCell"
+
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
 
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var contentView: UIView!
-    
-    @IBOutlet weak var labelText: UILabel!
-    @IBOutlet weak var labelCount: UILabel!
+    @IBOutlet weak var collectionView: UICollectionView!
+
     var currentCount: Int?
-    
     var currentDate: NSDate?
     
     override func viewDidLoad() {
@@ -37,6 +35,9 @@ class DayScrollViewController: UIViewController {
         if currentCount == nil {
             currentCount = -1
         }
+  
+        let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
+        layout.direction = UICollectionViewScrollDirection.Vertical
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,36 +46,19 @@ class DayScrollViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.scrollView.frame.size.width = self.view.frame.size.width;
-        self.scrollView.frame.size.height = self.view.frame.size.height;
-        
         self.updateContentSize()
 
-        println("view: \(self.view.frame.origin.x) \(self.view.frame.origin.y) \(self.view.frame.size.width) \(self.view.frame.size.height)")
-        println("scrollview: \(self.scrollView.frame.origin.x) \(self.scrollView.frame.origin.y) \(self.scrollView.frame.size.width) \(self.scrollView.frame.size.height)")
-        println("contentview: \(self.contentView.frame.origin.x) \(self.contentView.frame.origin.y) \(self.contentView.frame.size.width) \(self.contentView.frame.size.height)")
-        println("text: \(self.labelText.frame.origin.x) \(self.labelText.frame.origin.y) \(self.labelText.frame.size.width) \(self.labelText.frame.size.height)")
-        
-//        if currentCount != nil {
-            labelCount.text = "\(currentCount!)"
-//        }
+        let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
+        let width = self.view.frame.size.width - 20
+        layout.blockPixels = CGSizeMake(width/2.0, width/2.0)
     }
     
     func updateContentSize() {
         self.constraintContentWidth.constant = self.view.frame.size.width;
-        self.constraintContentHeight.constant = self.labelText.frame.origin.y + self.labelText.frame.size.height + 20;
-        self.contentView.needsUpdateConstraints()
-        self.contentView.layoutIfNeeded()
+        self.constraintContentHeight.constant = self.view.frame.size.height;//self.labelText.frame.origin.y + self.labelText.frame.size.height + 20;
+//        self.contentView.needsUpdateConstraints()
+//        self.contentView.layoutIfNeeded()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     func randomColor() -> UIColor {
 //        return UIColor.blackColor()
@@ -82,4 +66,33 @@ class DayScrollViewController: UIViewController {
         let index = arc4random_uniform(UInt32(colors.count))
         return colors[Int(index)]
     }
+    
+    // MARK: UICollectionViewDataSource
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        
+        // Configure the cell
+        cell.contentView.backgroundColor = self.randomColor()
+        
+        return cell
+    }
+    
+    // MARK: - RFQuiltLayout
+    func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
+        return CGSizeMake(1, 1);
+    }
+    
+    func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
+        let border = 5 as CGFloat
+        return UIEdgeInsetsMake(border, border, border, border);
+    }
+  
 }
