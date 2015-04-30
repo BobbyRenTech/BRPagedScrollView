@@ -20,7 +20,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     let BORDER:CGFloat = 5.0
     
-    var appDelegate: AppDelegate!
     var pagewidth: CGFloat!
     var width: CGFloat!
     var height: CGFloat!
@@ -32,8 +31,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         dayControllers = NSMutableArray()
     }
 
@@ -66,7 +63,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayScrollViewController") as! DayScrollViewController
             // set date for each dayController
             dayController.currentDate = today.dateByAddingTimeInterval(NSTimeInterval(i * 24 * 3600))
-            dayController.currentCount = index
 
             self.addChildViewController(dayController)
             dayController.view.frame = frame

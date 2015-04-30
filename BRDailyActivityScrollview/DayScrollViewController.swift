@@ -9,14 +9,11 @@
 import UIKit
 
 class DayScrollViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
-    let reuseIdentifier = "ActivityCell"
-
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
 
     @IBOutlet weak var collectionView: UICollectionView!
 
-    var currentCount: Int?
     var currentDate: NSDate?
     
     override func viewDidLoad() {
@@ -32,9 +29,6 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
         if currentDate == nil {
             currentDate = NSDate()
         }
-        if currentCount == nil {
-            currentCount = -1
-        }
   
         let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
         layout.direction = UICollectionViewScrollDirection.Vertical
@@ -46,25 +40,9 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.updateContentSize()
-
         let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
         let width = self.view.frame.size.width - 20
         layout.blockPixels = CGSizeMake(width/2.0, width/2.0)
-    }
-    
-    func updateContentSize() {
-        self.constraintContentWidth.constant = self.view.frame.size.width;
-        self.constraintContentHeight.constant = self.view.frame.size.height;//self.labelText.frame.origin.y + self.labelText.frame.size.height + 20;
-//        self.contentView.needsUpdateConstraints()
-//        self.contentView.layoutIfNeeded()
-    }
-
-    func randomColor() -> UIColor {
-//        return UIColor.blackColor()
-        let colors = [UIColor.redColor(), UIColor.blueColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.brownColor()] as Array
-        let index = arc4random_uniform(UInt32(colors.count))
-        return colors[Int(index)]
     }
     
     // MARK: UICollectionViewDataSource
@@ -73,11 +51,11 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 10
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCell", forIndexPath: indexPath) as! UICollectionViewCell
         
         // Configure the cell
         cell.contentView.backgroundColor = self.randomColor()
@@ -85,7 +63,7 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
-    // MARK: - RFQuiltLayout
+    // MARK: - RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
         return CGSizeMake(1, 1);
     }
@@ -95,4 +73,10 @@ class DayScrollViewController: UIViewController, UICollectionViewDataSource, UIC
         return UIEdgeInsetsMake(border, border, border, border);
     }
   
+    // MARK: - Utils
+    func randomColor() -> UIColor {
+        let colors = [UIColor.redColor(), UIColor.blueColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.brownColor()] as Array
+        let index = arc4random_uniform(UInt32(colors.count))
+        return colors[Int(index)]
+    }
 }
