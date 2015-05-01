@@ -56,10 +56,10 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         for index in 0...days-1 {
             let i = CGFloat(index)
             var frame = self.scrollview.frame as CGRect
-            frame.origin.x = i * pagewidth
-            frame.origin.y = 0
+            let offset:CGFloat = 1 // on iPhone 6+, if this offset is 0, the very first dayController is very weird
+            frame.origin.x = i * pagewidth + offset
+            frame.origin.y = offset
             frame.size.width -= BORDER // gives right border 10 pixels for each cell because right cell inset is 0
-//            frame.size.height -= 2 * BORDER
             
             let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
             // set date for each dayController
