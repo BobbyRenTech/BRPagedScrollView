@@ -8,6 +8,8 @@
 
 import UIKit
 
+let BORDER:CGFloat = 10
+
 class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
@@ -22,7 +24,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
 
         // Do any additional setup after loading the view.
         
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.clearColor()
         
         let appDelegate = UIApplication.sharedApplication().delegate!
         
@@ -44,8 +46,10 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     
     override func viewDidAppear(animated: Bool) {
         let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
-        let width = self.view.frame.size.width - 20
-        layout.blockPixels = CGSizeMake(width/2.0, width/2.0)
+        let GOLDEN_RATIO = 1.618 as CGFloat
+        let width = CGFloat((self.view.frame.size.width)/2.0)
+        let height = width / GOLDEN_RATIO
+        layout.blockPixels = CGSizeMake(width, height)
     }
     
     // MARK: Populating data
@@ -69,22 +73,46 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCell", forIndexPath: indexPath) as! UICollectionViewCell
+        
+        var cell: ActivityCell;
+        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
+        if activity.type == ActivityType.Tall {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellTall", forIndexPath: indexPath) as! ActivityCell
+        }
+        else if activity.type == ActivityType.Wide {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
+        }
+        else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellSingle", forIndexPath: indexPath) as! ActivityCell
+        }
         
         // Configure the cell
         cell.contentView.backgroundColor = self.randomColor()
+        cell.labelText.text = activity.text
         
         return cell
     }
     
     // MARK: - RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
-        return CGSizeMake(1, 1);
+        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
+        if activity.type == ActivityType.Tall {
+            return CGSizeMake(1, 2);
+        }
+        else if activity.type == ActivityType.Wide {
+            return CGSizeMake(2, 1);
+        }
+        else {
+            return CGSizeMake(1, 1);
+        }
     }
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        let border = 5 as CGFloat
-        return UIEdgeInsetsMake(border, border, border, border);
+        let top:CGFloat = 0
+        let left:CGFloat = BORDER
+        let bottom:CGFloat = BORDER
+        let right:CGFloat = 0
+        return UIEdgeInsetsMake(top, left, bottom, right);
     }
   
     // MARK: - Utils

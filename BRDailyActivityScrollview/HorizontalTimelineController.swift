@@ -18,7 +18,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var labelDate: UILabel!
     
-    let BORDER:CGFloat = 5.0
     let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)
     
     var pagewidth: CGFloat!
@@ -53,43 +52,14 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         self.loadActivities()
     }
     
-    // MARK: Activity data
-    func loadActivities() {
-        // for now, generate a random number of activities
-        let labels = ["Check your weight", "Examine your feed", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
-        for index in 0...days-1 {
-            let dayController = self.dayControllers[index] as! DayViewController
-            let activityCt = arc4random_uniform(6) + 2
-            var activitiesArray = [AnyObject]()
-            for i in 0...activityCt-1 {
-                let textIndex = Int(arc4random_uniform(UInt32(labels.count)))
-                let typeIndex = Int(arc4random_uniform(3))
-                let text = labels[textIndex] as String
-                var type: ActivityType
-                if typeIndex == 0 {
-                    type = ActivityType.Single
-                }
-                else if typeIndex == 1 {
-                    type = ActivityType.Wide
-                }
-                else {
-                    type = ActivityType.Tall
-                }
-                let activity = Activity(type: type, icon: nil, text: text)
-                activitiesArray.append(activity)
-            }
-            dayController.updateWithActivities(activitiesArray as [AnyObject])
-        }
-    }
-
     func populateDays() {
         for index in 0...days-1 {
             let i = CGFloat(index)
             var frame = self.scrollview.frame as CGRect
-            frame.origin.x = i * pagewidth + BORDER
-            frame.origin.y = 0 // BORDER
-            frame.size.width -= 2 * BORDER
-            frame.size.height -= 2 * BORDER
+            let offset:CGFloat = 1 // on iPhone 6+, if this offset is 0, the very first dayController is very weird
+            frame.origin.x = i * pagewidth + offset
+            frame.origin.y = offset
+            frame.size.width -= BORDER // gives right border 10 pixels for each cell because right cell inset is 0
             
             let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
             // set date for each dayController
@@ -124,6 +94,48 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             let dayController = self.dayControllers.objectAtIndex(index) as! DayViewController
             self.labelDate.text = BRDateUtils.yearMonthDayForDate(dayController.currentDate!)
         }
+    }
+    
+    // MARK: Activity data
+    func loadActivities() {
+        // for now, generate a random number of activities
+        let labels = ["Check your weight", "Examine your feet", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
+        for index in 0...days-1 {
+            let dayController = self.dayControllers[index] as! DayViewController
+            let activityCt = arc4random_uniform(6) + 2
+            var activitiesArray = [AnyObject]()
+            
+            activitiesArray.append(self.sponsoredActivity())
+            for i in 0...activityCt-1 {
+                let textIndex = Int(arc4random_uniform(UInt32(labels.count)))
+                let text = labels[textIndex] as String
+                var type: ActivityType
+                if text == "Check your weight" || text == "Take meds" {
+                    type = ActivityType.Tall
+                }
+                else {
+                    type = ActivityType.Single
+                }
+                let activity = Activity(type: type, icon: nil, text: text)
+                activitiesArray.append(activity)
+            }
+            activitiesArray.append(self.challengeActivity())
+            dayController.updateWithActivities(activitiesArray as [AnyObject])
+        }
+    }
+    
+    func sponsoredActivity() -> Activity {
+        // generate the sponsored CVS activity
+        let params: NSDictionary = ["type": ActivityTypeWide, "text": "CVS"]
+        let activity = Activity(params: params)
+        return activity
+    }
+    
+    func challengeActivity() -> Activity {
+        // generate the sponsored challenge activity
+        let params: NSDictionary = ["type": ActivityTypeWide, "text": "Whole foods challenge"]
+        let activity = Activity(params: params)
+        return activity
     }
 }
 
