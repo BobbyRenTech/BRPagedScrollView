@@ -18,17 +18,17 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-Lv-cmU">
-                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
+                                <rect key="frame" x="0.0" y="120" width="600" height="480"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
                                 </connections>
                             </scrollView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ud9-F1-uB4">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                                <rect key="frame" x="0.0" y="52" width="600" height="70"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="hOJ-wJ-emx"/>
+                                    <constraint firstAttribute="height" constant="70" id="hOJ-wJ-emx"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="KrI-ha-udl" kind="embed" identifier="EmbedWeekHeader" id="dW5-Ns-96E"/>
@@ -37,8 +37,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.21458675986842105" green="0.62942441496368418" blue="0.841796875" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="60" id="9Nc-km-laZ"/>
-                            <constraint firstItem="ud9-F1-uB4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="STq-Qz-6RS"/>
+                            <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="120" id="9Nc-km-laZ"/>
+                            <constraint firstItem="ud9-F1-uB4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="52" id="STq-Qz-6RS"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8TV-Lv-cmU" secondAttribute="trailing" constant="-16" id="Ufa-k2-2Tz"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="8TV-Lv-cmU" secondAttribute="bottom" id="exY-of-phd"/>
                             <constraint firstItem="ud9-F1-uB4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="feb-SK-TUm"/>
@@ -220,7 +220,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Eb3-ml-wGB"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5tO-W7-9BO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

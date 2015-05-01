@@ -105,6 +105,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         if segue.identifier == "EmbedWeekHeader" {
             let controller:WeekHeaderViewController = segue.destinationViewController as! WeekHeaderViewController
             controller.setDateInWeek(NSDate())
+            controller.view.backgroundColor = UIColor.clearColor()
             self.weekHeaderController = controller
         }
     }

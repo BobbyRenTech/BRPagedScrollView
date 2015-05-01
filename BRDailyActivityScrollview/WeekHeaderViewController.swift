@@ -68,27 +68,41 @@ class WeekHeaderViewController: UIViewController {
         let weekdays = ["Su", "M", "T", "W", "Th", "F", "S"]
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd"
-        let border:CGFloat = (self.view.frame.size.width - (55 * 7))/2
-        let x = border + CGFloat(dayIndex * 55)
+        let border:CGFloat = (self.view.frame.size.width - (50 * 7))/2
+        let x = border + CGFloat(dayIndex * 50)
+
         var frame = CGRectMake(x, 0, 50, 70)
         var view = UIView(frame: frame)
-        frame = CGRectMake(5, 5, 10, 10)
-        var label = UILabel(frame: frame)
-        label.text = weekdays[dayIndex]
-        view.addSubview(label)
-        frame = CGRectMake(10, 20, 30, 30)
-        var label2 = UILabel(frame: frame)
+        view.backgroundColor = UIColor.clearColor()
+        
+        frame = CGRectMake(0, 0, 50, 70)
+        var icon = UIImageView(frame: frame)
+        icon.backgroundColor = UIColor.clearColor()
+        icon.contentMode = UIViewContentMode.ScaleAspectFit
+        view.addSubview(icon)
+        
+        frame = CGRectMake(5, 10, 30, 10)
+        var labelDay = UILabel(frame: frame)
+        labelDay.text = weekdays[dayIndex]
+        labelDay.font = UIFont.systemFontOfSize(11)
+        view.addSubview(labelDay)
+        
+        frame = CGRectMake(10, 15, 40, 40)
+        var labelDate = UILabel(frame: frame)
         let dateString = dateFormatter.stringFromDate(date)
-        label2.text = dateString
-        view.addSubview(label2)
+        labelDate.text = dateString
+        labelDate.font = UIFont.boldSystemFontOfSize(18)
+        view.addSubview(labelDate)
         
         if self.currentDate != nil && date == self.currentDate {
-            label2.textColor = UIColor.blackColor()
-            view.backgroundColor = UIColor.whiteColor()
+            icon.image = UIImage(named: "weekdayWhite")
+            labelDay.textColor = UIColor.blackColor()
+            labelDate.textColor = UIColor.blackColor()
         }
         else {
-            label2.textColor = UIColor.whiteColor()
-            view.backgroundColor = UIColor.blackColor()
+            icon.image = UIImage(named: "weekdayGray")
+            labelDay.textColor = UIColor.whiteColor()
+            labelDate.textColor = UIColor.whiteColor()
         }
         return view
     }
