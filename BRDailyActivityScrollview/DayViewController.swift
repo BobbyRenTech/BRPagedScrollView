@@ -45,7 +45,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     override func viewDidAppear(animated: Bool) {
         let layout = self.collectionView.collectionViewLayout as! RFQuiltLayout
         let width = self.view.frame.size.width - 20
-        layout.blockPixels = CGSizeMake(width/2.0, width/2.0)
+        layout.blockPixels = CGSizeMake(10, 10)
     }
     
     // MARK: Populating data
@@ -69,22 +69,43 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCell", forIndexPath: indexPath) as! UICollectionViewCell
+        
+        var cell: ActivityCell;
+        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
+        if activity.type == ActivityType.Tall {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellTall", forIndexPath: indexPath) as! ActivityCell
+        }
+        else if activity.type == ActivityType.Wide {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
+        }
+        else {
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellSingle", forIndexPath: indexPath) as! ActivityCell
+        }
         
         // Configure the cell
         cell.contentView.backgroundColor = self.randomColor()
+        cell.labelText.text = activity.text
         
         return cell
     }
     
     // MARK: - RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
-        return CGSizeMake(1, 1);
+        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
+        if activity.type == ActivityType.Tall {
+            return CGSizeMake(15, 23);
+        }
+        else if activity.type == ActivityType.Wide {
+            return CGSizeMake(30, 15);
+        }
+        else {
+            return CGSizeMake(15, 10);
+        }
     }
     
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
-        let border = 5 as CGFloat
-        return UIEdgeInsetsMake(border, border, border, border);
+        let border = 25 as CGFloat
+        return UIEdgeInsetsMake(0, border, border, 0);
     }
   
     // MARK: - Utils

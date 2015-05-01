@@ -91,15 +91,110 @@
                                     </connections>
                                 </collectionViewLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCell" id="Mkx-3r-2HS">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCellSingle" id="Mkx-3r-2HS" customClass="ActivityCell" customModule="BRDailyActivityScrollview" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEo-p6-fOi">
+                                                    <rect key="frame" x="5" y="5" width="140" height="90"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xD7-ZA-FdQ">
+                                                            <rect key="frame" x="20" y="20" width="84" height="57"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <size key="customSize" width="100" height="100"/>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="hEo-p6-fOi" firstAttribute="top" secondItem="Mkx-3r-2HS" secondAttribute="top" constant="5" id="6LI-OV-teT"/>
+                                            <constraint firstAttribute="trailing" secondItem="hEo-p6-fOi" secondAttribute="trailing" constant="5" id="9r7-Jt-PKf"/>
+                                            <constraint firstAttribute="bottom" secondItem="hEo-p6-fOi" secondAttribute="bottom" constant="5" id="EaR-yT-TtH"/>
+                                            <constraint firstItem="hEo-p6-fOi" firstAttribute="leading" secondItem="Mkx-3r-2HS" secondAttribute="leading" constant="5" id="pgI-Al-1l6"/>
+                                        </constraints>
+                                        <size key="customSize" width="150" height="100"/>
+                                        <connections>
+                                            <outlet property="canvas" destination="hEo-p6-fOi" id="Mov-KW-kLB"/>
+                                            <outlet property="labelText" destination="xD7-ZA-FdQ" id="9Fb-Xc-eSu"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCellWide" id="lmR-uJ-2Lb" customClass="ActivityCell" customModule="BRDailyActivityScrollview" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hAE-u3-Nxw">
+                                                    <rect key="frame" x="5" y="5" width="320" height="90"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9j8-ma-6we">
+                                                            <rect key="frame" x="20" y="20" width="184" height="59"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="hAE-u3-Nxw" secondAttribute="bottom" constant="5" id="LHv-jY-ksd"/>
+                                            <constraint firstItem="hAE-u3-Nxw" firstAttribute="leading" secondItem="lmR-uJ-2Lb" secondAttribute="leading" constant="5" id="j0V-PB-Rdf"/>
+                                            <constraint firstItem="hAE-u3-Nxw" firstAttribute="top" secondItem="lmR-uJ-2Lb" secondAttribute="top" constant="5" id="qu6-D2-CT5"/>
+                                            <constraint firstAttribute="trailing" secondItem="hAE-u3-Nxw" secondAttribute="trailing" constant="5" id="vrJ-4h-0P9"/>
+                                        </constraints>
+                                        <size key="customSize" width="330" height="100"/>
+                                        <connections>
+                                            <outlet property="canvas" destination="hAE-u3-Nxw" id="csz-3I-TH1"/>
+                                            <outlet property="labelText" destination="9j8-ma-6we" id="GrB-ds-BxY"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCellTall" id="Iay-6C-GPJ" customClass="ActivityCell" customModule="BRDailyActivityScrollview" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="150" height="220"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVM-vt-xTt">
+                                                    <rect key="frame" x="5" y="5" width="140" height="210"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECg-9W-Cij">
+                                                            <rect key="frame" x="20" y="20" width="71" height="98"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="rVM-vt-xTt" secondAttribute="trailing" constant="5" id="WIx-35-l71"/>
+                                            <constraint firstAttribute="bottom" secondItem="rVM-vt-xTt" secondAttribute="bottom" constant="5" id="d38-G2-aZM"/>
+                                            <constraint firstItem="rVM-vt-xTt" firstAttribute="leading" secondItem="Iay-6C-GPJ" secondAttribute="leading" constant="5" id="lUK-Em-T6e"/>
+                                            <constraint firstItem="rVM-vt-xTt" firstAttribute="top" secondItem="Iay-6C-GPJ" secondAttribute="top" constant="5" id="qM8-cw-0Ch"/>
+                                        </constraints>
+                                        <size key="customSize" width="150" height="220"/>
+                                        <connections>
+                                            <outlet property="canvas" destination="rVM-vt-xTt" id="4rw-nt-K2g"/>
+                                            <outlet property="labelText" destination="ECg-9W-Cij" id="LM7-Cd-K77"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
