@@ -18,7 +18,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var labelDate: UILabel!
     
-    let BORDER:CGFloat = 5.0
     let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)
     
     var pagewidth: CGFloat!
@@ -57,10 +56,10 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         for index in 0...days-1 {
             let i = CGFloat(index)
             var frame = self.scrollview.frame as CGRect
-            frame.origin.x = i * pagewidth + BORDER
-            frame.origin.y = 0 // BORDER
-            frame.size.width -= 2 * BORDER
-            frame.size.height -= 2 * BORDER
+            frame.origin.x = i * pagewidth
+            frame.origin.y = 0
+            frame.size.width -= BORDER // gives right border 10 pixels for each cell because right cell inset is 0
+//            frame.size.height -= 2 * BORDER
             
             let dayController = storyboard!.instantiateViewControllerWithIdentifier("DayViewController") as! DayViewController
             // set date for each dayController
