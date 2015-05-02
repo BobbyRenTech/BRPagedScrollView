@@ -68,14 +68,19 @@ class WeekHeaderViewController: UIViewController {
         let weekdays = ["Su", "M", "T", "W", "Th", "F", "S"]
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "dd"
-        let border:CGFloat = (self.view.frame.size.width - (50 * 7))/2
-        let x = border + CGFloat(dayIndex * 50)
+        
+        var width:Int = 50
+        if self.view.frame.size.width == 320 {
+            width = 40
+        }
+        let border:CGFloat = (self.view.frame.size.width - CGFloat(width * 7))/2
+        let x = border + CGFloat(dayIndex * width)
 
-        var frame = CGRectMake(x, 0, 50, 70)
+        var frame = CGRectMake(x, 0, CGFloat(width), 70)
         var view = UIView(frame: frame)
         view.backgroundColor = UIColor.clearColor()
         
-        frame = CGRectMake(0, 0, 50, 70)
+        frame = CGRectMake(0, 0, CGFloat(width), 70)
         var icon = UIImageView(frame: frame)
         icon.backgroundColor = UIColor.clearColor()
         icon.contentMode = UIViewContentMode.ScaleAspectFit

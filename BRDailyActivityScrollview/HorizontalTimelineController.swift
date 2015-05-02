@@ -44,7 +44,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         if !isSetup {
-            self.setGradient()
+            self.setGradient() // todo: maybe gradient should be set in dayViewController. but dayViewController doesn't know about WeekHeader's height.
             
             width = self.scrollview.frame.size.width - 2 * BORDER
             height = self.scrollview.frame.size.height - 2 * BORDER

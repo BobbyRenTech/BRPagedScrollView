@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xd-Zf-La6" userLabel="View - maskingView">
-                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                                <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-Lv-cmU">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="500"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
@@ -54,7 +54,7 @@
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="3xd-Zf-La6" secondAttribute="bottom" id="OpL-br-z5N"/>
                             <constraint firstItem="ud9-F1-uB4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="52" id="STq-Qz-6RS"/>
                             <constraint firstItem="ud9-F1-uB4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="feb-SK-TUm"/>
-                            <constraint firstItem="3xd-Zf-La6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="80" id="iZR-LW-h1K"/>
+                            <constraint firstItem="3xd-Zf-La6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="iZR-LW-h1K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ud9-F1-uB4" secondAttribute="trailing" constant="-16" id="rQE-gC-jjt"/>
                         </constraints>
                     </view>
