@@ -17,54 +17,57 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-Lv-cmU">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xd-Zf-La6" userLabel="View - maskingView">
                                 <rect key="frame" x="0.0" y="60" width="600" height="540"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
-                                </connections>
-                            </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6f-9T-bmG">
-                                <rect key="frame" x="0.0" y="20" width="600" height="40"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9Z-Sx-Z2U">
-                                        <rect key="frame" x="8" y="9" width="584" height="21"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8TV-Lv-cmU">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
+                                        </connections>
+                                    </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.21458675990000001" green="0.62942441500000001" blue="0.841796875" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Q9Z-Sx-Z2U" secondAttribute="trailing" constant="8" id="IZG-8A-5dX"/>
-                                    <constraint firstItem="Q9Z-Sx-Z2U" firstAttribute="leading" secondItem="A6f-9T-bmG" secondAttribute="leading" constant="8" id="Iqy-Db-g7r"/>
-                                    <constraint firstItem="Q9Z-Sx-Z2U" firstAttribute="top" secondItem="A6f-9T-bmG" secondAttribute="top" constant="9" id="LXY-HN-tc9"/>
-                                    <constraint firstAttribute="bottom" secondItem="Q9Z-Sx-Z2U" secondAttribute="bottom" constant="10" id="fAj-xd-iP2"/>
-                                    <constraint firstAttribute="height" constant="40" id="rWk-ld-Ydh"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="8TV-Lv-cmU" secondAttribute="trailing" constant="-8" id="Kws-pX-9MM"/>
+                                    <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="3xd-Zf-La6" secondAttribute="topMargin" constant="-8" id="Wmg-Hn-agB"/>
+                                    <constraint firstItem="8TV-Lv-cmU" firstAttribute="leading" secondItem="3xd-Zf-La6" secondAttribute="leadingMargin" constant="-8" id="p0z-L8-VYc"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="8TV-Lv-cmU" secondAttribute="bottom" constant="-8" id="wUL-wr-5fq"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ud9-F1-uB4">
+                                <rect key="frame" x="0.0" y="52" width="600" height="70"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="hOJ-wJ-emx"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="KrI-ha-udl" kind="embed" identifier="EmbedWeekHeader" id="dW5-Ns-96E"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="0.21458675986842105" green="0.62942441496368418" blue="0.841796875" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="60" id="9Nc-km-laZ"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="A6f-9T-bmG" secondAttribute="trailing" constant="-16" id="CSc-Pq-12a"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8TV-Lv-cmU" secondAttribute="trailing" constant="-16" id="Ufa-k2-2Tz"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="8TV-Lv-cmU" secondAttribute="bottom" id="exY-of-phd"/>
-                            <constraint firstItem="A6f-9T-bmG" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="jxb-Ox-vd2"/>
-                            <constraint firstItem="A6f-9T-bmG" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="20" id="t1M-7F-x7D"/>
-                            <constraint firstItem="8TV-Lv-cmU" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="vcD-Me-ijp"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3xd-Zf-La6" secondAttribute="trailing" constant="-16" id="4ZA-Xw-xhd"/>
+                            <constraint firstItem="3xd-Zf-La6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="KCK-RR-FgJ"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="3xd-Zf-La6" secondAttribute="bottom" id="OpL-br-z5N"/>
+                            <constraint firstItem="ud9-F1-uB4" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" constant="52" id="STq-Qz-6RS"/>
+                            <constraint firstItem="ud9-F1-uB4" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="feb-SK-TUm"/>
+                            <constraint firstItem="3xd-Zf-La6" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="40" id="iZR-LW-h1K"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ud9-F1-uB4" secondAttribute="trailing" constant="-16" id="rQE-gC-jjt"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="labelDate" destination="Q9Z-Sx-Z2U" id="pWw-D6-3RU"/>
+                        <outlet property="maskingView" destination="3xd-Zf-La6" id="lC0-Cx-wuy"/>
                         <outlet property="scrollview" destination="8TV-Lv-cmU" id="OkF-tv-ACt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="264" y="411"/>
+            <point key="canvasLocation" x="258" y="382"/>
         </scene>
         <!--Day View Controller-->
         <scene sceneID="DuY-JQ-kdP">
@@ -220,6 +223,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uWD-KA-M4b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="436" y="1055"/>
+        </scene>
+        <!--Week Header View Controller-->
+        <scene sceneID="jUM-6V-CwP">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KrI-ha-udl" customClass="WeekHeaderViewController" customModule="BRDailyActivityScrollview" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LPY-Xg-6WC"/>
+                        <viewControllerLayoutGuide type="bottom" id="Eb3-ml-wGB"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="5tO-W7-9BO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aJf-ku-ogP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="979" y="99"/>
         </scene>
     </scenes>
 </document>

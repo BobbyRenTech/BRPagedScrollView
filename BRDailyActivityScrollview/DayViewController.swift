@@ -50,6 +50,9 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let width = CGFloat((self.view.frame.size.width)/2.0)
         let height = width / GOLDEN_RATIO
         layout.blockPixels = CGSizeMake(width, height)
+        
+        // because we want dayViewController to fade, the top part of the scrollable area needs to be blank.
+        self.collectionView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
     }
     
     // MARK: Populating data
