@@ -11,14 +11,14 @@ import UIKit
 class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var scrollview : UIScrollView!
-//    @IBOutlet weak var contentView : UIView!
+    @IBOutlet weak var maskingView : UIView!
     
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     
     @IBOutlet weak var labelDate: UILabel!
     
-    let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)
+    let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)!
     
     var pagewidth: CGFloat!
     var width: CGFloat!
@@ -28,6 +28,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     var dayControllers:NSMutableArray!
     var weekHeaderController:WeekHeaderViewController?
+    
+    var isSetup:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,16 +43,35 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        width = self.scrollview.frame.size.width - 2 * BORDER
-        height = self.scrollview.frame.size.height - 2 * BORDER
-        pagewidth = self.scrollview.frame.size.width
-        days = 7 // display one week
-        self.populateDays()
-        
-        let offset = CGPointMake(pagewidth * CGFloat(days-1), 0)
-        self.scrollview.setContentOffset(offset, animated: true)
-        
-        self.loadActivities()
+        if !isSetup {
+            self.setGradient()
+            
+            width = self.scrollview.frame.size.width - 2 * BORDER
+            height = self.scrollview.frame.size.height - 2 * BORDER
+            pagewidth = self.scrollview.frame.size.width
+            days = 7 // display one week
+            self.populateDays()
+            
+            let offset = CGPointMake(pagewidth * CGFloat(days-1), 0)
+            self.scrollview.setContentOffset(offset, animated: true)
+            
+            self.loadActivities()
+            isSetup = true
+        }
+    }
+    
+//    override func viewDidLayoutSubviews() {
+//    }
+    
+    func setGradient() {
+        let l:CAGradientLayer = CAGradientLayer()
+        var frame = self.maskingView.bounds
+        frame.origin.y = 0
+        l.frame = frame
+        l.colors = [UIColor.clearColor().CGColor, UIColor.whiteColor().CGColor]
+        l.startPoint = CGPointMake(0.5, 0)
+        l.endPoint = CGPointMake(0.5, 0.1)
+        self.maskingView.layer.mask = l
     }
     
     func populateDays() {

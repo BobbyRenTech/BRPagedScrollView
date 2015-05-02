@@ -16,6 +16,7 @@
 		AC3D2ED21AEE94BB00789420 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2ED11AEE94BB00789420 /* DayViewController.swift */; };
 		ACA553271AF3D59D00C97734 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA553261AF3D59D00C97734 /* ActivityCell.swift */; };
 		ACA553291AF4291C00C97734 /* WeekHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA553281AF4291C00C97734 /* WeekHeaderViewController.swift */; };
+		ACABC8351AF4482800E3EBA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACABC8341AF4482800E3EBA5 /* QuartzCore.framework */; };
 		ACEF59F51AF25F9C00EB19BC /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACEF59F41AF25F9C00EB19BC /* Activity.swift */; };
 		BF03774D2436EF9A0F6BE9AA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48043A0E8E25D6C77DAA715D /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -46,6 +47,7 @@
 		AC3D2ED11AEE94BB00789420 /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		ACA553261AF3D59D00C97734 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		ACA553281AF4291C00C97734 /* WeekHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekHeaderViewController.swift; sourceTree = "<group>"; };
+		ACABC8341AF4482800E3EBA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BRDailyActivityScrollview-Bridging-Header.h"; sourceTree = "<group>"; };
 		ACEF59F41AF25F9C00EB19BC /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		B2B4729C0FE9B3780C79538D /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACABC8351AF4482800E3EBA5 /* QuartzCore.framework in Frameworks */,
 				BF03774D2436EF9A0F6BE9AA /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +156,7 @@
 		D5C8741B22B9CF953910C5A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACABC8341AF4482800E3EBA5 /* QuartzCore.framework */,
 				48043A0E8E25D6C77DAA715D /* libPods.a */,
 			);
 			name = Frameworks;
