@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
+class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayViewDelegate {
 
     @IBOutlet weak var scrollview : UIScrollView!
     @IBOutlet weak var maskingView : UIView!
@@ -60,9 +60,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-//    override func viewDidLayoutSubviews() {
-//    }
-    
     func setGradient() {
         let l:CAGradientLayer = CAGradientLayer()
         var frame = self.maskingView.bounds
@@ -90,6 +87,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
 
             self.addChildViewController(dayController)
             dayController.view.frame = frame
+            dayController.delegate = self
             
             self.scrollview.addSubview(dayController.view)
             dayController.didMoveToParentViewController(self)
@@ -128,6 +126,25 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             controller.setDateInWeek(NSDate())
             controller.view.backgroundColor = UIColor.clearColor()
             self.weekHeaderController = controller
+        }
+    }
+    
+    // MARK: DayViewDelegate
+    func didSelectActivityTile(controller: DayViewController, activity: Activity, canvas:UIView, frame: CGRect) {
+        let frameInView = controller.view.convertRect(frame, toView: self.view)
+        println("Activity: \(activity.text) frame: \(frameInView.origin.x) \(frameInView.origin.y)")
+        
+        // create a copy of the view
+        let copyView = UIView(frame: frameInView)
+        copyView.layer.cornerRadius = 5
+        copyView.backgroundColor = canvas.backgroundColor
+        self.view.addSubview(copyView)
+
+        let final = self.view.frame
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            copyView.frame = final
+        }) { (success) -> Void in
+            println("done")
         }
     }
     

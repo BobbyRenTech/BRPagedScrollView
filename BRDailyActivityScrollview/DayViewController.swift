@@ -10,6 +10,10 @@ import UIKit
 
 let BORDER:CGFloat = 10
 
+protocol DayViewDelegate {
+    func didSelectActivityTile(controller:DayViewController, activity:Activity, canvas:UIView, frame:CGRect)
+}
+
 class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
@@ -18,6 +22,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
 
     var currentDate: NSDate?
     var activities: NSMutableArray!
+    var delegate: DayViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +99,16 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         cell.labelText.text = activity.text
         
         return cell
+    }
+    
+    // MARK: - UICollectionViewDelegate 
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell: ActivityCell = self.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! ActivityCell
+        let frame = collectionView.convertRect(cell.frame, toView: self.view)
+        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
+        if self.delegate != nil {
+            self.delegate!.didSelectActivityTile(self, activity:activity, canvas:cell.canvas, frame: frame)
+        }
     }
     
     // MARK: - RFQuiltLayoutDelegate
