@@ -179,6 +179,19 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
 
             self.copyView!.alpha = 0
         }
+        else {
+            let tap = UITapGestureRecognizer(target: self, action: "closeEmptyActivityView")
+            self.copyView!.addGestureRecognizer(tap)
+        }
+    }
+    
+    func closeEmptyActivityView() {
+        self.maskingView.alpha = 1
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.copyView!.frame = self.copyFrame!
+            }, completion: { (success) -> Void in
+                self.copyView!.removeFromSuperview()
+        })
     }
     
     // MARK: WeightViewDelegate
