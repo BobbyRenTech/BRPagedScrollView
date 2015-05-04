@@ -84,10 +84,10 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         
         var cell: ActivityCell;
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
-        if activity.type == ActivityType.Tall {
+        if activity.isTall() {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellTall", forIndexPath: indexPath) as! ActivityCell
         }
-        else if activity.type == ActivityType.Wide {
+        else if activity.isWide() {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
         }
         else {
@@ -113,10 +113,10 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     // MARK: - RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
-        if activity.type == ActivityType.Tall {
+        if activity.isTall() {
             return CGSizeMake(1, 2);
         }
-        else if activity.type == ActivityType.Wide {
+        else if activity.isWide() {
             return CGSizeMake(2, 1);
         }
         else {

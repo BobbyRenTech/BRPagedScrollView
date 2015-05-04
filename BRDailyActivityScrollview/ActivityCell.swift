@@ -22,4 +22,5 @@ class ActivityCell: UICollectionViewCell {
         self.backgroundColor = UIColor.whiteColor()
         self.labelText.text = activity.text
     }
-    }
+    
+}

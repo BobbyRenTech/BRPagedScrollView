@@ -10,79 +10,87 @@ import UIKit
 
 // ActivityType indicates whether the activity should be display in a certain way
 enum ActivityType {
-    case Single
-    case Tall // more important activities for a user
-    case Wide // sponsored activities, show on the top and bottom
+    case Sponsored
+    case Weight
+    case Feet
+    case Glucose
+    case Hunger
+    case Medicine
+    case Feel
+    case Challenge
 }
-
-let ActivityTypeSingle = "ActivityTypeSingle"
-let ActivityTypeTall = "ActivityTypeTall"
-let ActivityTypeWide = "ActivityTypeWide"
 
 class Activity: NSObject {
     var type: ActivityType
+    var iconName: String?
     var icon: UIImage?
     var text: String?
+    var completed: Bool?
+    var weight: CGFloat?
+    var feetStatus: String?
     
-    init(type:ActivityType, icon:UIImage?, text:String?) {
-        self.type = type
-        self.icon = icon
-        self.text = text
-    }
-    
-    init(params:NSDictionary) {
-        self.type = ActivityType.Single
-        if let activityType = params["type"] as? String {
-            if activityType == ActivityTypeSingle {
-                self.type = ActivityType.Single
-            }
-            else if activityType == ActivityTypeTall {
-                self.type = ActivityType.Tall
-            }
-            else if activityType == ActivityTypeWide {
-                self.type = ActivityType.Wide
+    init(params:[String: Any]) {
+        if let activityType = params["type"] as? ActivityType {
+            self.type = activityType
+            self.completed = params["completed"] as? Bool
+            self.weight = params["weight"] as? CGFloat
+            self.feetStatus = params["feetStatus"] as? String
+            
+            switch self.type {
+            case ActivityType.Sponsored:
+                self.text = "Get a flu shot"
+                self.iconName = "cvs"
+                break;
+            case ActivityType.Weight:
+                self.text = "Check your weight"
+                self.iconName = "scale-blue"
+                break;
+            case ActivityType.Feet:
+                self.text = "Check your feet"
+                self.iconName = "foot-blue"
+                break;
+            case ActivityType.Glucose:
+                self.text = "Check your glucose"
+                self.iconName = "diabetes-blue"
+                break;
+            case ActivityType.Hunger:
+                self.text = "How's your hunger?"
+                self.iconName = "apple-blue"
+                break;
+            case ActivityType.Medicine:
+                self.text = "Take your medicine"
+                self.iconName = "pills-blue"
+                break;
+            case ActivityType.Feel:
+                self.text = "How do you feel?"
+                self.iconName = "person-blue"
+                break;
+            case ActivityType.Challenge:
+                self.text = "Whole foods challenge"
+                self.iconName = "wholefoods"
+                break;
+            default:
+                break;
             }
         }
+        else {
+            self.type = ActivityType.Challenge
+        }
         
-        if let iconName = params["icon"] as? String {
-            self.icon = UIImage(named: iconName)
+        if self.iconName != nil {
+            self.icon = UIImage(named: self.iconName!)
         }
         else {
             self.icon = nil
         }
-        
-        if let activityText = params["text"] as? String {
-            self.text = activityText
-        }
-        else {
-            self.text = nil
-        }
     }
     
-    class func activityLabels() -> [String] {
-        let labels = ["Check your weight", "Examine your feet", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
-        return labels
-    }
-    
-    func isWeightActivity()->Bool {
-        return self.text == "Check your weight"
+    func isWide()->Bool {
+        return self.type == ActivityType.Sponsored || self.type == ActivityType.Challenge
     }
 
-    func isFootActivity()->Bool {
-        return self.text == "Examine your feet"
+    func isTall()->Bool {
+        return self.type == ActivityType.Weight || self.type == ActivityType.Medicine
     }
     
-    func isMedsActivity() -> Bool {
-        return self.text == "Take meds"
-    }
-    
-    func activityType() -> ActivityType {
-        if self.isWeightActivity() || self.isMedsActivity() {
-            return ActivityType.Tall
-        }
-        else {
-            return ActivityType.Single
-        }
-    }
-
 }

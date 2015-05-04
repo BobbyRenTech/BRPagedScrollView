@@ -161,7 +161,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     }
     
     func displayActivityDetails(activity:Activity) {
-        if activity.isWeightActivity() {
+        if activity.type == ActivityType.Weight {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("WeightViewController") as! WeightViewController
             self.addChildViewController(controller)
             controller.view.frame = self.copyView!.frame
@@ -205,26 +205,15 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     // MARK: Activity data
     func loadActivities() {
         // for now, generate a random number of activities
-        let labels = ["Check your weight", "Examine your feet", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
         for index in 0...days-1 {
             let dayController = self.dayControllers[index] as! DayViewController
-            let activityCt = arc4random_uniform(6) + 2
+            let activityCt = 6//arc4random_uniform(6) + 2
             var activitiesArray = [AnyObject]()
             
             activitiesArray.append(self.sponsoredActivity())
-            for i in 0...activityCt-1 {
-                let textIndex = Int(arc4random_uniform(UInt32(labels.count)))
-                let text = labels[textIndex] as String
-                var type: ActivityType
-                if text == "Check your weight" || text == "Take meds" {
-                    type = ActivityType.Tall
-                }
-                else {
-                    type = ActivityType.Single
-                }
-                let activity = Activity(type: type, icon: nil, text: text)
-                activitiesArray.append(activity)
-            }
+            activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
+            activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
+            activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
             activitiesArray.append(self.challengeActivity())
             dayController.updateWithActivities(activitiesArray as [AnyObject])
         }
@@ -232,14 +221,14 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     
     func sponsoredActivity() -> Activity {
         // generate the sponsored CVS activity
-        let params: NSDictionary = ["type": ActivityTypeWide, "text": "CVS"]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored]
         let activity = Activity(params: params)
         return activity
     }
     
     func challengeActivity() -> Activity {
         // generate the sponsored challenge activity
-        let params: NSDictionary = ["type": ActivityTypeWide, "text": "Whole foods challenge"]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge]
         let activity = Activity(params: params)
         return activity
     }
