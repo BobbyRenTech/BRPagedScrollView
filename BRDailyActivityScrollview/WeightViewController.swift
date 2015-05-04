@@ -42,7 +42,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.inputController!.updateWeight(self.activity!.weight)
+        self.inputController!.setupButtons()
     }
     
     @IBAction func done() {
@@ -60,25 +60,16 @@ class WeightViewController: UIViewController, WeightInputDelegate {
             let controller = segue.destinationViewController as! WeightInputViewController
             controller.delegate = self
             self.inputController = controller
+            if self.activity!.weight != nil {
+                self.inputController!.weight = Int(self.activity!.weight!)
+            }
         }
     }
 
     // MARK: - WeightInputDelegate
-    func didDecrementWeight() {
-        if self.activity!.weight != nil {
-            self.activity!.weight! -= 1.0
-            self.activity!.completed = true
-            self.inputController!.updateWeight(self.activity!.weight!)
-            self.delegate!.didEnterWeight(self.activity!.weight!)
-        }
-    }
-    
-    func didIncrementWeight() {
-        if self.activity!.weight != nil {
-            self.activity!.weight! += 1.0
-            self.activity!.completed = true
-            self.inputController!.updateWeight(self.activity!.weight!)
-            self.delegate!.didEnterWeight(self.activity!.weight!)
-        }
+    func didSetWeight(newWeight: CGFloat) {
+        self.activity!.weight = newWeight
+        self.activity!.completed = true
+        self.delegate!.didEnterWeight(self.activity!.weight!)
     }
 }
