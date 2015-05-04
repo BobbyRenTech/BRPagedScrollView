@@ -14,11 +14,14 @@ protocol WeightViewDelegate {
 }
 
 
-class WeightViewController: UIViewController {
+class WeightViewController: UIViewController, WeightInputDelegate {
     
     @IBOutlet weak var labelWeight: UILabel!
-    @IBOutlet weak var inputWeight: UITextField!
     @IBOutlet weak var viewContent: UIView!
+
+    var activity: Activity?
+
+    weak var inputController: WeightInputViewController?
 
     var delegate: WeightViewDelegate?
 
@@ -29,18 +32,6 @@ class WeightViewController: UIViewController {
         self.viewContent.layer.borderColor = ColorUtil.blueColor().CGColor
         self.viewContent.layer.borderWidth = 1
         self.viewContent.layer.backgroundColor = UIColor.whiteColor().CGColor
-
-        /*
-        // layout issues!
-        var keyboardDoneButtonView = UIToolbar()
-        keyboardDoneButtonView.barStyle = UIBarStyle.Default
-        keyboardDoneButtonView.translucent = false
-        keyboardDoneButtonView.backgroundColor = UIColor.greenColor()
-        var done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "done")
-        var cancel = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "done")
-        keyboardDoneButtonView.setItems([cancel, done], animated: true)
-        self.inputWeight.inputAccessoryView = keyboardDoneButtonView
-        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,28 +42,43 @@ class WeightViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.inputWeight.becomeFirstResponder()
+        self.inputController!.updateWeight(self.activity!.weight)
     }
     
     @IBAction func done() {
-        self.inputWeight.resignFirstResponder()
         if self.delegate != nil {
-            if self.inputWeight.text != nil && count(self.inputWeight.text) > 0 {
-                self.delegate!.didEnterWeight(CGFloat(self.inputWeight.text!.toInt()!))
-            }
-            else {
-                self.delegate!.didCloseEnterWeight()
-            }
+            self.delegate!.didCloseEnterWeight()
         }
     }
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "EmbedWeightInput" {
+            let controller = segue.destinationViewController as! WeightInputViewController
+            controller.delegate = self
+            self.inputController = controller
+        }
     }
-    */
 
+    // MARK: - WeightInputDelegate
+    func didDecrementWeight() {
+        if self.activity!.weight != nil {
+            self.activity!.weight! -= 1.0
+            self.activity!.completed = true
+            self.inputController!.updateWeight(self.activity!.weight!)
+            self.delegate!.didEnterWeight(self.activity!.weight!)
+        }
+    }
+    
+    func didIncrementWeight() {
+        if self.activity!.weight != nil {
+            self.activity!.weight! += 1.0
+            self.activity!.completed = true
+            self.inputController!.updateWeight(self.activity!.weight!)
+            self.delegate!.didEnterWeight(self.activity!.weight!)
+        }
+    }
 }
