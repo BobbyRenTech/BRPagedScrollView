@@ -11,6 +11,8 @@ import QuartzCore
 
 class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var iconSponsor: UIImageView?
     
     override func awakeFromNib() {
         self.layer.cornerRadius = 5
@@ -21,6 +23,14 @@ class ActivityCell: UICollectionViewCell {
         self.layer.borderColor = ColorUtil.greenColor().CGColor
         self.backgroundColor = UIColor.whiteColor()
         self.labelText.text = activity.text
+        
+        if activity.icon != nil {
+            self.icon.image = activity.icon
+        }
+        if activity.type == ActivityType.Sponsored && self.iconSponsor != nil {
+            // sponsor icon should be company icon
+//            self.iconSponsor!.image = activity
+        }
     }
     
 }
