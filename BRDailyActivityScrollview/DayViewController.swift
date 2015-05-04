@@ -95,8 +95,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         }
         
         // Configure the cell
-        cell.contentView.backgroundColor = self.randomColor()
-        cell.labelText.text = activity.text
+        cell.setupWithActivity(activity)
         
         return cell
     }
@@ -107,7 +106,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let frame = collectionView.convertRect(cell.frame, toView: self.view)
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
         if self.delegate != nil {
-            self.delegate!.didSelectActivityTile(self, activity:activity, canvas:cell.canvas, frame: frame)
+            self.delegate!.didSelectActivityTile(self, activity:activity, canvas:cell, frame: frame)
         }
     }
     
@@ -131,6 +130,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let bottom:CGFloat = BORDER
         let right:CGFloat = 0
         return UIEdgeInsetsMake(top, left, bottom, right);
+    }
+    
+    func maxCellWidth() -> CGFloat {
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
+        return cell.frame.size.width
     }
   
     // MARK: - Utils

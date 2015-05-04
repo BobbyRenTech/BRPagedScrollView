@@ -10,8 +10,9 @@ import UIKit
 
 class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayViewDelegate {
 
-    @IBOutlet weak var scrollview : UIScrollView!
+    @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var maskingView : UIView!
+    @IBOutlet weak var scrollview : UIScrollView!
     
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
@@ -136,13 +137,19 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         
         // create a copy of the view
         let copyView = UIView(frame: frameInView)
-        copyView.layer.cornerRadius = 5
         copyView.backgroundColor = canvas.backgroundColor
+        copyView.layer.cornerRadius = canvas.layer.cornerRadius
+        copyView.layer.borderWidth = canvas.layer.borderWidth
+        copyView.layer.borderColor = canvas.layer.borderColor
         self.view.addSubview(copyView)
 
-        let final = self.view.frame
+        let dayController = self.dayControllers[0] as! DayViewController
+        var final:CGRect = CGRectMake(0, 0, dayController.maxCellWidth() + 5, self.maskingView.frame.size.height + 5)
+        final.origin.x = (self.view.frame.size.width - final.size.width)/2
+        final.origin.y = self.calendarView.frame.origin.y
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             copyView.frame = final
+            self.maskingView.alpha = 0
         }) { (success) -> Void in
             println("done")
         }
