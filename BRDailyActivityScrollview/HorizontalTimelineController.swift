@@ -57,8 +57,14 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             days = 7 // display one week
             self.populateDays()
             
-            let offset = CGPointMake(pagewidth * CGFloat(days-1), 0)
-            self.scrollview.setContentOffset(offset, animated: true)
+            for i in 0...days-1 {
+                let dayController = self.dayControllers.objectAtIndex(i) as! DayViewController
+                if dayController.currentDate == BRDateUtils.beginningOfDate(NSDate(), GMT: false) {
+                    let offset = CGPointMake(pagewidth * CGFloat(i), 0)
+                    self.scrollview.setContentOffset(offset, animated: true)
+                    break
+                }
+            }
             
             self.loadActivities()
             isSetup = true
