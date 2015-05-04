@@ -24,6 +24,9 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     var activities: NSMutableArray!
     var delegate: DayViewDelegate?
     
+    // hack - weight should be stored in activity
+    var weight: CGFloat?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -95,6 +98,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         }
         
         // Configure the cell
+        // hack: activity for weight checks for stored weight in DayViewController; should be stored in activity
+        if activity.type == ActivityType.Weight {
+            if self.weight != nil {
+                activity.didCompleteWeight(self.weight!)
+            }
+        }
         cell.setupWithActivity(activity)
         
         return cell
@@ -137,4 +146,4 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
         return cell.frame.size.width
     }
-  }
+}

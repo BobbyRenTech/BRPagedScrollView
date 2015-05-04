@@ -23,6 +23,7 @@ class ActivityCell: UICollectionViewCell {
         self.layer.borderColor = ColorUtil.greenColor().CGColor
         self.backgroundColor = UIColor.whiteColor()
         self.labelText.text = activity.text
+        self.labelText.textColor = ColorUtil.blueColor()
         
         if activity.icon != nil {
             self.icon.image = activity.icon
@@ -30,6 +31,13 @@ class ActivityCell: UICollectionViewCell {
         if activity.type == ActivityType.Sponsored && self.iconSponsor != nil {
             // sponsor icon should be company icon
 //            self.iconSponsor!.image = activity
+        }
+        
+        // completed activities
+        if activity.completed == true {
+            self.backgroundColor = ColorUtil.darkBlueColor()
+            self.labelText.textColor = UIColor.whiteColor()
+            self.icon.image = activity.icon
         }
     }
     

@@ -93,4 +93,11 @@ class Activity: NSObject {
         return self.type == ActivityType.Weight || self.type == ActivityType.Medicine
     }
     
+    func didCompleteWeight(weight:CGFloat) {
+        self.completed = true
+        self.weight = weight
+        self.text = "Today's weight\n\(weight) lbs"
+        self.iconName = "scale"
+        self.icon = UIImage(named: self.iconName!)
+    }
 }

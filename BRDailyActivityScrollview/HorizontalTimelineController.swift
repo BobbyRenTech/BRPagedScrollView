@@ -33,6 +33,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     
     var dayControllers:NSMutableArray!
     var weekHeaderController:WeekHeaderViewController?
+    var currentDayController:DayViewController?
     
     var isSetup:Bool = false
     
@@ -127,6 +128,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             if self.weekHeaderController != nil {
                 self.weekHeaderController!.setCurrentDayOfWeek(dayController.currentDate!)
             }
+            
+            self.currentDayController = dayController
         }
     }
     
@@ -203,6 +206,10 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     // MARK: WeightViewDelegate
     func didEnterWeight(weight: CGFloat) {
         println("new weight: \(weight)")
+        if self.currentDayController != nil {
+            self.currentDayController!.weight = weight
+            self.currentDayController!.collectionView.reloadData()
+        }
         self.didCloseEnterWeight()
     }
     

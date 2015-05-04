@@ -57,7 +57,12 @@ class WeightViewController: UIViewController {
     @IBAction func done() {
         self.inputWeight.resignFirstResponder()
         if self.delegate != nil {
-            self.delegate?.didCloseEnterWeight()
+            if self.inputWeight.text != nil && count(self.inputWeight.text) > 0 {
+                self.delegate!.didEnterWeight(CGFloat(self.inputWeight.text!.toInt()!))
+            }
+            else {
+                self.delegate!.didCloseEnterWeight()
+            }
         }
     }
     /*

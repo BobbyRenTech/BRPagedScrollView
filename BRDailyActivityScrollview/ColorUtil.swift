@@ -24,4 +24,7 @@ class ColorUtil: NSObject {
         return UIColor(red: 157.0/255.0, green: 225.0/255.0, blue: 47.0/255.0, alpha: 1)
     }
 
+    class func darkBlueColor() -> UIColor {
+        return UIColor(red: 63/255.0, green: 125/255.0, blue: 170/255.0, alpha: 1)
+    }
 }
