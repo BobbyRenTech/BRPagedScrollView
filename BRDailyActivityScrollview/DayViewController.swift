@@ -10,6 +10,10 @@ import UIKit
 
 let BORDER:CGFloat = 10
 
+protocol DayViewDelegate {
+    func didSelectActivityTile(controller:DayViewController, activity:Activity, canvas:UIView, frame:CGRect)
+}
+
 class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
@@ -18,6 +22,10 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
 
     var currentDate: NSDate?
     var activities: NSMutableArray!
+    var delegate: DayViewDelegate?
+    
+    // hack - weight should be stored in activity
+    var weight: CGFloat?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,10 +87,10 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         
         var cell: ActivityCell;
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
-        if activity.type == ActivityType.Tall {
+        if activity.isTall() {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellTall", forIndexPath: indexPath) as! ActivityCell
         }
-        else if activity.type == ActivityType.Wide {
+        else if activity.isWide() {
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
         }
         else {
@@ -90,19 +98,34 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         }
         
         // Configure the cell
-        cell.contentView.backgroundColor = self.randomColor()
-        cell.labelText.text = activity.text
+        // hack: activity for weight checks for stored weight in DayViewController; should be stored in activity
+        if activity.type == ActivityType.Weight {
+            if self.weight != nil {
+                activity.didCompleteWeight(self.weight!)
+            }
+        }
+        cell.setupWithActivity(activity)
         
         return cell
+    }
+    
+    // MARK: - UICollectionViewDelegate 
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        let cell: ActivityCell = self.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! ActivityCell
+        let frame = collectionView.convertRect(cell.frame, toView: self.view)
+        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
+        if self.delegate != nil {
+            self.delegate!.didSelectActivityTile(self, activity:activity, canvas:cell, frame: frame)
+        }
     }
     
     // MARK: - RFQuiltLayoutDelegate
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
-        if activity.type == ActivityType.Tall {
+        if activity.isTall() {
             return CGSizeMake(1, 2);
         }
-        else if activity.type == ActivityType.Wide {
+        else if activity.isWide() {
             return CGSizeMake(2, 1);
         }
         else {
@@ -117,11 +140,10 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let right:CGFloat = 0
         return UIEdgeInsetsMake(top, left, bottom, right);
     }
-  
-    // MARK: - Utils
-    func randomColor() -> UIColor {
-        let colors = [UIColor.redColor(), UIColor.blueColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.brownColor()] as Array
-        let index = arc4random_uniform(UInt32(colors.count))
-        return colors[Int(index)]
+    
+    func maxCellWidth() -> CGFloat {
+        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
+        return cell.frame.size.width
     }
 }

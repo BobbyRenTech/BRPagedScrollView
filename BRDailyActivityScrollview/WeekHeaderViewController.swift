@@ -55,9 +55,9 @@ class WeekHeaderViewController: UIViewController {
             self.weekIcons!.removeAll(keepCapacity: true)
             
             for i in 0 ... 6 {
-                let today = self.weekStart!.dateByAddingTimeInterval(NSTimeInterval(i * 24 * 3600))
+                let date = self.weekStart!.dateByAddingTimeInterval(NSTimeInterval(i * 24 * 3600))
                 
-                let dayView = self.viewForDay(i, date: today) as UIView!
+                let dayView = self.viewForDay(i, date: date) as UIView!
                 self.view.addSubview(dayView)
                 self.weekIcons!.append(dayView)
             }
@@ -80,18 +80,28 @@ class WeekHeaderViewController: UIViewController {
         var view = UIView(frame: frame)
         view.backgroundColor = UIColor.clearColor()
         
+        // background
         frame = CGRectMake(0, 0, CGFloat(width), 70)
+        var bg = UIImageView(frame: frame)
+        bg.backgroundColor = UIColor.clearColor()
+        bg.contentMode = UIViewContentMode.ScaleAspectFit
+        view.addSubview(bg)
+
+        // icon
+        frame = CGRectMake(20, 13, 10, 10)
         var icon = UIImageView(frame: frame)
         icon.backgroundColor = UIColor.clearColor()
         icon.contentMode = UIViewContentMode.ScaleAspectFit
         view.addSubview(icon)
-        
-        frame = CGRectMake(5, 10, 30, 10)
+
+        // day of week
+        frame = CGRectMake(5, 13, 30, 10)
         var labelDay = UILabel(frame: frame)
         labelDay.text = weekdays[dayIndex]
         labelDay.font = UIFont.systemFontOfSize(11)
         view.addSubview(labelDay)
         
+        // date
         frame = CGRectMake(10, 15, 40, 40)
         var labelDate = UILabel(frame: frame)
         let dateString = dateFormatter.stringFromDate(date)
@@ -100,15 +110,23 @@ class WeekHeaderViewController: UIViewController {
         view.addSubview(labelDate)
         
         if self.currentDate != nil && date == self.currentDate {
-            icon.image = UIImage(named: "weekdayWhite")
+            bg.image = UIImage(named: "weekdayWhite")
             labelDay.textColor = UIColor.blackColor()
             labelDate.textColor = UIColor.blackColor()
         }
         else {
-            icon.image = UIImage(named: "weekdayGray")
+            bg.image = UIImage(named: "weekdayGray")
             labelDay.textColor = UIColor.whiteColor()
             labelDate.textColor = UIColor.whiteColor()
         }
+        
+        if date.timeIntervalSinceDate(BRDateUtils.beginningOfDate(NSDate(), GMT: false)) < 0 {
+            icon.image = UIImage(named: "iconCheck");
+        }
+        else {
+            icon.image = UIImage(named: "iconX")
+        }
+
         return view
     }
     

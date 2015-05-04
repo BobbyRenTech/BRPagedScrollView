@@ -8,15 +8,20 @@
 
 import UIKit
 
-class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
+class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayViewDelegate, WeightViewDelegate {
 
-    @IBOutlet weak var scrollview : UIScrollView!
+    @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var maskingView : UIView!
+    @IBOutlet weak var scrollview : UIScrollView!
     
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     
     @IBOutlet weak var labelDate: UILabel!
+    
+    var currentActivityController: UIViewController?
+    var copyView: UIView?
+    var copyFrame: CGRect?
     
     let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)!
     
@@ -28,6 +33,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     var dayControllers:NSMutableArray!
     var weekHeaderController:WeekHeaderViewController?
+    var currentDayController:DayViewController?
     
     var isSetup:Bool = false
     
@@ -52,16 +58,19 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             days = 7 // display one week
             self.populateDays()
             
-            let offset = CGPointMake(pagewidth * CGFloat(days-1), 0)
-            self.scrollview.setContentOffset(offset, animated: true)
+            for i in 0...days-1 {
+                let dayController = self.dayControllers.objectAtIndex(i) as! DayViewController
+                if dayController.currentDate == BRDateUtils.beginningOfDate(NSDate(), GMT: false) {
+                    let offset = CGPointMake(pagewidth * CGFloat(i), 0)
+                    self.scrollview.setContentOffset(offset, animated: true)
+                    break
+                }
+            }
             
             self.loadActivities()
             isSetup = true
         }
     }
-    
-//    override func viewDidLayoutSubviews() {
-//    }
     
     func setGradient() {
         let l:CAGradientLayer = CAGradientLayer()
@@ -90,6 +99,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
 
             self.addChildViewController(dayController)
             dayController.view.frame = frame
+            dayController.delegate = self
             
             self.scrollview.addSubview(dayController.view)
             dayController.didMoveToParentViewController(self)
@@ -118,6 +128,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             if self.weekHeaderController != nil {
                 self.weekHeaderController!.setCurrentDayOfWeek(dayController.currentDate!)
             }
+            
+            self.currentDayController = dayController
         }
     }
     
@@ -131,29 +143,103 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    // MARK: DayViewDelegate
+    func didSelectActivityTile(controller: DayViewController, activity: Activity, canvas:UIView, frame: CGRect) {
+        let frameInView = controller.view.convertRect(frame, toView: self.view)
+        println("Activity: \(activity.text) frame: \(frameInView.origin.x) \(frameInView.origin.y)")
+        
+        // create a copy of the view
+        self.copyView = UIView(frame: frameInView)
+        self.copyView!.backgroundColor = canvas.backgroundColor
+        self.copyView!.layer.cornerRadius = canvas.layer.cornerRadius
+        self.copyView!.layer.borderWidth = canvas.layer.borderWidth
+        self.copyView!.layer.borderColor = canvas.layer.borderColor
+        self.view.addSubview(self.copyView!)
+        self.copyFrame = frameInView
+
+        var final:CGRect = CGRectMake(0, 0, self.view.frame.size.width-20, self.maskingView.frame.size.height + 5)
+        final.origin.x = (self.view.frame.size.width - final.size.width)/2
+        final.origin.y = self.calendarView.frame.origin.y
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.copyView!.frame = final
+            self.maskingView.alpha = 0
+        }) { (success) -> Void in
+            println("done")
+            self.displayActivityDetails(activity)
+        }
+    }
+    
+    func displayActivityDetails(activity:Activity) {
+        if activity.type == ActivityType.Weight {
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("WeightViewController") as! WeightViewController
+            self.addChildViewController(controller)
+            controller.view.frame = self.copyView!.frame
+            self.view.addSubview(controller.view)
+            controller.didMoveToParentViewController(self)
+            
+            controller.delegate = self
+
+            controller.view.backgroundColor = self.copyView!.backgroundColor
+            controller.view.layer.cornerRadius = self.copyView!.layer.cornerRadius
+            controller.view.layer.borderWidth = self.copyView!.layer.borderWidth
+            controller.view.layer.borderColor = self.copyView!.layer.borderColor
+            
+            self.currentActivityController = controller
+
+            self.copyView!.alpha = 0
+        }
+        else {
+            let tap = UITapGestureRecognizer(target: self, action: "closeEmptyActivityView")
+            self.copyView!.addGestureRecognizer(tap)
+        }
+    }
+    
+    func closeEmptyActivityView() {
+        self.maskingView.alpha = 1
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.copyView!.frame = self.copyFrame!
+            }, completion: { (success) -> Void in
+                self.copyView!.removeFromSuperview()
+        })
+    }
+    
+    // MARK: WeightViewDelegate
+    func didEnterWeight(weight: CGFloat) {
+        println("new weight: \(weight)")
+        if self.currentDayController != nil {
+            self.currentDayController!.weight = weight
+            self.currentDayController!.collectionView.reloadData()
+        }
+        self.didCloseEnterWeight()
+    }
+    
+    func didCloseEnterWeight() {
+        if self.currentActivityController != nil {
+            self.copyView!.alpha = 1
+            self.currentActivityController!.view.alpha = 0
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.copyView!.frame = self.copyFrame!
+            }, completion: { (success) -> Void in
+                self.currentActivityController!.view.removeFromSuperview()
+                self.copyView!.removeFromSuperview()
+            })
+            
+            self.maskingView.alpha = 1
+        }
+    }
+    
     // MARK: Activity data
     func loadActivities() {
         // for now, generate a random number of activities
-        let labels = ["Check your weight", "Examine your feet", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
         for index in 0...days-1 {
             let dayController = self.dayControllers[index] as! DayViewController
-            let activityCt = arc4random_uniform(6) + 2
+            let activityCt = 6//arc4random_uniform(6) + 2
             var activitiesArray = [AnyObject]()
             
             activitiesArray.append(self.sponsoredActivity())
-            for i in 0...activityCt-1 {
-                let textIndex = Int(arc4random_uniform(UInt32(labels.count)))
-                let text = labels[textIndex] as String
-                var type: ActivityType
-                if text == "Check your weight" || text == "Take meds" {
-                    type = ActivityType.Tall
-                }
-                else {
-                    type = ActivityType.Single
-                }
-                let activity = Activity(type: type, icon: nil, text: text)
-                activitiesArray.append(activity)
-            }
+            activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
+            activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
+            activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
             activitiesArray.append(self.challengeActivity())
             dayController.updateWithActivities(activitiesArray as [AnyObject])
         }
@@ -161,14 +247,14 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     
     func sponsoredActivity() -> Activity {
         // generate the sponsored CVS activity
-        let params: NSDictionary = ["type": ActivityTypeWide, "text": "CVS"]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored]
         let activity = Activity(params: params)
         return activity
     }
     
     func challengeActivity() -> Activity {
         // generate the sponsored challenge activity
-        let params: NSDictionary = ["type": ActivityTypeWide, "text": "Whole foods challenge"]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge]
         let activity = Activity(params: params)
         return activity
     }
