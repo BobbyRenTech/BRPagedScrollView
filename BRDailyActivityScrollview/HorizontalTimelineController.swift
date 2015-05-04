@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayViewDelegate {
+class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayViewDelegate, WeightViewDelegate {
 
     @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var maskingView : UIView!
@@ -18,6 +18,10 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     
     @IBOutlet weak var labelDate: UILabel!
+    
+    var currentActivityController: UIViewController?
+    var copyView: UIView?
+    var copyFrame: CGRect?
     
     let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)!
     
@@ -136,22 +140,65 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         println("Activity: \(activity.text) frame: \(frameInView.origin.x) \(frameInView.origin.y)")
         
         // create a copy of the view
-        let copyView = UIView(frame: frameInView)
-        copyView.backgroundColor = canvas.backgroundColor
-        copyView.layer.cornerRadius = canvas.layer.cornerRadius
-        copyView.layer.borderWidth = canvas.layer.borderWidth
-        copyView.layer.borderColor = canvas.layer.borderColor
-        self.view.addSubview(copyView)
+        self.copyView = UIView(frame: frameInView)
+        self.copyView!.backgroundColor = canvas.backgroundColor
+        self.copyView!.layer.cornerRadius = canvas.layer.cornerRadius
+        self.copyView!.layer.borderWidth = canvas.layer.borderWidth
+        self.copyView!.layer.borderColor = canvas.layer.borderColor
+        self.view.addSubview(self.copyView!)
+        self.copyFrame = frameInView
 
-        let dayController = self.dayControllers[0] as! DayViewController
-        var final:CGRect = CGRectMake(0, 0, dayController.maxCellWidth() + 5, self.maskingView.frame.size.height + 5)
+        var final:CGRect = CGRectMake(0, 0, self.view.frame.size.width-20, self.maskingView.frame.size.height + 5)
         final.origin.x = (self.view.frame.size.width - final.size.width)/2
         final.origin.y = self.calendarView.frame.origin.y
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            copyView.frame = final
+            self.copyView!.frame = final
             self.maskingView.alpha = 0
         }) { (success) -> Void in
             println("done")
+            self.displayActivityDetails(activity)
+        }
+    }
+    
+    func displayActivityDetails(activity:Activity) {
+        if activity.isWeightActivity() {
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("WeightViewController") as! WeightViewController
+            self.addChildViewController(controller)
+            controller.view.frame = self.copyView!.frame
+            self.view.addSubview(controller.view)
+            controller.didMoveToParentViewController(self)
+            
+            controller.delegate = self
+
+            controller.view.backgroundColor = self.copyView!.backgroundColor
+            controller.view.layer.cornerRadius = self.copyView!.layer.cornerRadius
+            controller.view.layer.borderWidth = self.copyView!.layer.borderWidth
+            controller.view.layer.borderColor = self.copyView!.layer.borderColor
+            
+            self.currentActivityController = controller
+
+            self.copyView!.alpha = 0
+        }
+    }
+    
+    // MARK: WeightViewDelegate
+    func didEnterWeight(weight: CGFloat) {
+        println("new weight: \(weight)")
+        self.didCloseEnterWeight()
+    }
+    
+    func didCloseEnterWeight() {
+        if self.currentActivityController != nil {
+            self.copyView!.alpha = 1
+            self.currentActivityController!.view.alpha = 0
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.copyView!.frame = self.copyFrame!
+            }, completion: { (success) -> Void in
+                self.currentActivityController!.view.removeFromSuperview()
+                self.copyView!.removeFromSuperview()
+            })
+            
+            self.maskingView.alpha = 1
         }
     }
     

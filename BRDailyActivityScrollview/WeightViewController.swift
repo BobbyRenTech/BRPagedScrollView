@@ -8,15 +8,39 @@
 
 import UIKit
 
+protocol WeightViewDelegate {
+    func didEnterWeight(weight:CGFloat)
+    func didCloseEnterWeight()
+}
+
+
 class WeightViewController: UIViewController {
     
     @IBOutlet weak var labelWeight: UILabel!
     @IBOutlet weak var inputWeight: UITextField!
+    @IBOutlet weak var viewContent: UIView!
+
+    var delegate: WeightViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.viewContent.layer.borderColor = ColorUtil.blueColor().CGColor
+        self.viewContent.layer.borderWidth = 1
+        self.viewContent.layer.backgroundColor = UIColor.whiteColor().CGColor
+
+        /*
+        // layout issues!
+        var keyboardDoneButtonView = UIToolbar()
+        keyboardDoneButtonView.barStyle = UIBarStyle.Default
+        keyboardDoneButtonView.translucent = false
+        keyboardDoneButtonView.backgroundColor = UIColor.greenColor()
+        var done = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: "done")
+        var cancel = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: "done")
+        keyboardDoneButtonView.setItems([cancel, done], animated: true)
+        self.inputWeight.inputAccessoryView = keyboardDoneButtonView
+        */
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +48,18 @@ class WeightViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.inputWeight.becomeFirstResponder()
+    }
+    
+    @IBAction func done() {
+        self.inputWeight.resignFirstResponder()
+        if self.delegate != nil {
+            self.delegate?.didCloseEnterWeight()
+        }
+    }
     /*
     // MARK: - Navigation
 

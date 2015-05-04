@@ -137,11 +137,4 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
         return cell.frame.size.width
     }
-  
-    // MARK: - Utils
-    func randomColor() -> UIColor {
-        let colors = [UIColor.redColor(), UIColor.blueColor(), UIColor.yellowColor(), UIColor.greenColor(), UIColor.brownColor()] as Array
-        let index = arc4random_uniform(UInt32(colors.count))
-        return colors[Int(index)]
-    }
-}
+  }

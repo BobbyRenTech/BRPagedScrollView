@@ -58,4 +58,31 @@ class Activity: NSObject {
             self.text = nil
         }
     }
+    
+    class func activityLabels() -> [String] {
+        let labels = ["Check your weight", "Examine your feet", "Check your glucose", "Take meds", "Eat healthy", "Go exercise", "Get a flu shot"]
+        return labels
+    }
+    
+    func isWeightActivity()->Bool {
+        return self.text == "Check your weight"
+    }
+
+    func isFootActivity()->Bool {
+        return self.text == "Examine your feet"
+    }
+    
+    func isMedsActivity() -> Bool {
+        return self.text == "Take meds"
+    }
+    
+    func activityType() -> ActivityType {
+        if self.isWeightActivity() || self.isMedsActivity() {
+            return ActivityType.Tall
+        }
+        else {
+            return ActivityType.Single
+        }
+    }
+
 }
