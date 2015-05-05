@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-sky" translatesAutoresizingMaskIntoConstraints="NO" id="9af-IX-OX1">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="-8" y="0.0" width="616" height="600"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXA-4e-ydf" userLabel="View - date navigator">
                                         <rect key="frame" x="0.0" y="17" width="600" height="35"/>
@@ -79,9 +79,9 @@
                                     <constraint firstAttribute="bottom" secondItem="9af-IX-OX1" secondAttribute="bottom" id="Ndt-8f-flq"/>
                                     <constraint firstItem="UXA-4e-ydf" firstAttribute="top" secondItem="ImK-d7-E61" secondAttribute="top" constant="17" id="Py2-hn-MVs"/>
                                     <constraint firstItem="9af-IX-OX1" firstAttribute="top" secondItem="ImK-d7-E61" secondAttribute="top" id="TfN-ee-m2A"/>
-                                    <constraint firstAttribute="trailing" secondItem="9af-IX-OX1" secondAttribute="trailing" id="kes-Z8-M0J"/>
+                                    <constraint firstAttribute="trailing" secondItem="9af-IX-OX1" secondAttribute="trailing" constant="-8" id="kes-Z8-M0J"/>
                                     <constraint firstItem="UXA-4e-ydf" firstAttribute="leading" secondItem="ImK-d7-E61" secondAttribute="leading" id="vee-F2-PsA"/>
-                                    <constraint firstItem="9af-IX-OX1" firstAttribute="leading" secondItem="ImK-d7-E61" secondAttribute="leading" id="yp9-n0-pWR"/>
+                                    <constraint firstItem="9af-IX-OX1" firstAttribute="leading" secondItem="ImK-d7-E61" secondAttribute="leading" constant="-8" id="yp9-n0-pWR"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3xd-Zf-La6" userLabel="View - maskingView">
