@@ -39,9 +39,8 @@ class ActivityCell: UICollectionViewCell {
         // completed activities
         if activity.completed == true {
             self.backgroundColor = ColorUtil.darkBlueColor()
-            self.labelText.textColor = UIColor.whiteColor()
-            self.labelText.text = "Today's weight\n\(activity.weight!)"
             self.icon.image = activity.icon
+            self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
         }
         
         if activity.text != nil {
@@ -51,5 +50,21 @@ class ActivityCell: UICollectionViewCell {
         }
 
     }
-    
+
+    func attributedStringForWeight(weight:CGFloat) -> NSAttributedString? {
+        var weightString = "\(Int(weight)) lbs"
+        var baseString = "Today's weight\n\(weightString)"
+        
+        var attributedString = NSMutableAttributedString(string: baseString)
+        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.blueColor()]
+        var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
+        
+        var targetString = baseString as NSString
+        var range = targetString.rangeOfString(weightString)
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
+        
+        result.addAttributes(otherAttrs, range: range)
+        
+        return result
+    }
 }

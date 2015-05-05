@@ -114,4 +114,5 @@ class Activity: NSObject {
         self.iconName = "scale"
         self.icon = UIImage(named: self.iconName!)
     }
+
 }
