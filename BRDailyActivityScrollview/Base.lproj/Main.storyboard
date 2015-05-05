@@ -26,7 +26,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXA-4e-ydf" userLabel="View - date navigator">
                                         <rect key="frame" x="0.0" y="17" width="600" height="35"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdg-8V-3bn">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdg-8V-3bn">
                                                 <rect key="frame" x="8" y="-7" width="30" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="kc1-hx-azQ"/>
@@ -38,7 +38,7 @@
                                                     <action selector="didClickNavigationButtons:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="k1T-a2-SZW"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDY-nh-01K">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDY-nh-01K">
                                                 <rect key="frame" x="562" y="-7" width="30" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="Ujj-qO-ghK"/>

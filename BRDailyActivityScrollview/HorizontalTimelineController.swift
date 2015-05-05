@@ -168,7 +168,15 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     
     // MARK: - Date navigator
     @IBAction func didClickNavigationButtons(button: UIButton!) {
-        
+        var offset: CGPoint;
+        if button == self.buttonLeft {
+            offset = CGPointMake(self.scrollview.contentOffset.x - pagewidth, self.scrollview.contentOffset.y)
+        }
+        else {
+            offset = CGPointMake(self.scrollview.contentOffset.x + pagewidth, self.scrollview.contentOffset.y)
+        }
+        button.enabled = false // temporarily disable multiple clicks on it
+        self.scrollview.setContentOffset(offset, animated: true)
     }
     
     // MARK: DayViewDelegate
