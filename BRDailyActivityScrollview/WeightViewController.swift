@@ -68,8 +68,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
 
     // MARK: - WeightInputDelegate
     func didSetWeight(newWeight: CGFloat) {
-        self.activity!.weight = newWeight
-        self.activity!.completed = true
+        self.activity!.didCompleteWeight(newWeight)
         self.delegate!.didEnterWeight(self.activity!.weight!)
     }
 }

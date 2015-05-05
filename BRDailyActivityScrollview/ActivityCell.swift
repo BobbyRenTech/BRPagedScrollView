@@ -37,6 +37,7 @@ class ActivityCell: UICollectionViewCell {
         if activity.completed == true {
             self.backgroundColor = ColorUtil.darkBlueColor()
             self.labelText.textColor = UIColor.whiteColor()
+            self.labelText.text = "Today's weight\n\(activity.weight!)"
             self.icon.image = activity.icon
         }
     }

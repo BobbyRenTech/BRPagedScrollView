@@ -89,6 +89,7 @@ class Activity: NSObject {
         if self.type == ActivityType.Weight {
             if self.weight != nil {
                 if self.completed == true {
+                    // todo: use a common method like didCompleteWeight
                     self.text = "Today's weight\n\(weight) lbs"
                     self.iconName = "scale"
                     self.icon = UIImage(named: self.iconName!)

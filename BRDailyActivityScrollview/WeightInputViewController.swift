@@ -27,6 +27,7 @@ class WeightInputViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.updateWeight()
     }
 
     override func didReceiveMemoryWarning() {
