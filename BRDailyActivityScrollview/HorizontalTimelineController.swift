@@ -173,12 +173,13 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         if activity.type == ActivityType.Weight {
             let controller = storyboard!.instantiateViewControllerWithIdentifier("WeightViewController") as! WeightViewController
             self.addChildViewController(controller)
+            controller.delegate = self
+            controller.activity = activity
+
             controller.view.frame = self.copyView!.frame
             self.view.addSubview(controller.view)
             controller.didMoveToParentViewController(self)
             
-            controller.delegate = self
-
             controller.view.backgroundColor = self.copyView!.backgroundColor
             controller.view.layer.cornerRadius = self.copyView!.layer.cornerRadius
             controller.view.layer.borderWidth = self.copyView!.layer.borderWidth
@@ -207,7 +208,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     func didEnterWeight(weight: CGFloat) {
         println("new weight: \(weight)")
         if self.currentDayController != nil {
-            self.currentDayController!.weight = weight
             self.currentDayController!.collectionView.reloadData()
         }
         self.didCloseEnterWeight()

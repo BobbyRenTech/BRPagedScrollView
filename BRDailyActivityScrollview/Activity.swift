@@ -83,6 +83,20 @@ class Activity: NSObject {
         else {
             self.icon = nil
         }
+        
+        // Configure the cell
+        // hack: activity for weight checks for stored weight in DayViewController; should be stored in activity
+        if self.type == ActivityType.Weight {
+            if self.weight != nil {
+                if self.completed == true {
+                    // todo: use a common method like didCompleteWeight
+                    self.text = "Today's weight\n\(weight) lbs"
+                    self.iconName = "scale"
+                    self.icon = UIImage(named: self.iconName!)
+                }
+            }
+        }
+
     }
     
     func isWide()->Bool {
@@ -100,4 +114,5 @@ class Activity: NSObject {
         self.iconName = "scale"
         self.icon = UIImage(named: self.iconName!)
     }
+
 }

@@ -14,6 +14,9 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var iconSponsor: UIImageView?
     
+    @IBOutlet weak var constraintLabelWidth: NSLayoutConstraint!
+    @IBOutlet weak var constraintLabelHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         self.layer.cornerRadius = 5
     }
@@ -36,9 +39,32 @@ class ActivityCell: UICollectionViewCell {
         // completed activities
         if activity.completed == true {
             self.backgroundColor = ColorUtil.darkBlueColor()
-            self.labelText.textColor = UIColor.whiteColor()
             self.icon.image = activity.icon
+            self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
         }
+        
+        if activity.text != nil {
+            let string = activity.text! as NSString
+            let size:CGSize = string.sizeWithAttributes([NSFontAttributeName: labelText.font])
+            self.constraintLabelHeight.constant = size.height + 5
+        }
+
     }
-    
+
+    func attributedStringForWeight(weight:CGFloat) -> NSAttributedString? {
+        var weightString = "\(Int(weight)) lbs"
+        var baseString = "Today's weight\n\(weightString)"
+        
+        var attributedString = NSMutableAttributedString(string: baseString)
+        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.blueColor()]
+        var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
+        
+        var targetString = baseString as NSString
+        var range = targetString.rangeOfString(weightString)
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
+        
+        result.addAttributes(otherAttrs, range: range)
+        
+        return result
+    }
 }
