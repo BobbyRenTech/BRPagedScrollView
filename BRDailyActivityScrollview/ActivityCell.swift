@@ -14,6 +14,9 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var iconSponsor: UIImageView?
     
+    @IBOutlet weak var constraintLabelWidth: NSLayoutConstraint!
+    @IBOutlet weak var constraintLabelHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         self.layer.cornerRadius = 5
     }
@@ -40,6 +43,13 @@ class ActivityCell: UICollectionViewCell {
             self.labelText.text = "Today's weight\n\(activity.weight!)"
             self.icon.image = activity.icon
         }
+        
+        if activity.text != nil {
+            let string = activity.text! as NSString
+            let size:CGSize = string.sizeWithAttributes([NSFontAttributeName: labelText.font])
+            self.constraintLabelHeight.constant = size.height + 5
+        }
+
     }
     
 }
