@@ -272,30 +272,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         // for now, generate a random number of activities
         for index in 0...days-1 {
             let dayController = self.dayControllers[index] as! DayViewController
-            let activityCt = 6//arc4random_uniform(6) + 2
-            var activitiesArray = [AnyObject]()
-            
-            activitiesArray.append(self.sponsoredActivity())
-            activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
-            activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
-            activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
-            activitiesArray.append(self.challengeActivity())
-            dayController.updateWithActivities(activitiesArray as [AnyObject])
+            dayController.loadActivities()
         }
-    }
-    
-    func sponsoredActivity() -> Activity {
-        // generate the sponsored CVS activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored]
-        let activity = Activity(params: params)
-        return activity
-    }
-    
-    func challengeActivity() -> Activity {
-        // generate the sponsored challenge activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge]
-        let activity = Activity(params: params)
-        return activity
     }
 }
 
