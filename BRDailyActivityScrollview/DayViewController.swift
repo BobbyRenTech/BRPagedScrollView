@@ -35,7 +35,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         
         // default date is today
         if currentDate == nil {
-            currentDate = NSDate()
+            currentDate = BRDateUtils.beginningOfDate(NSDate(), GMT: false)
         }
         
         activities = NSMutableArray()

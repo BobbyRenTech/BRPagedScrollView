@@ -23,12 +23,64 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg-sky" translatesAutoresizingMaskIntoConstraints="NO" id="9af-IX-OX1">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UXA-4e-ydf" userLabel="View - date navigator">
+                                        <rect key="frame" x="0.0" y="17" width="600" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdg-8V-3bn">
+                                                <rect key="frame" x="8" y="-7" width="30" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="kc1-hx-azQ"/>
+                                                </constraints>
+                                                <state key="normal" image="caretLeft">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didClickNavigationButtons:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="k1T-a2-SZW"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UDY-nh-01K">
+                                                <rect key="frame" x="562" y="-7" width="30" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="30" id="Ujj-qO-ghK"/>
+                                                </constraints>
+                                                <state key="normal" image="caretRight">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didClickNavigationButtons:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3aS-W7-W9F"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAC-4n-Exg">
+                                                <rect key="frame" x="46" y="1" width="508" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Rdg-8V-3bn" firstAttribute="top" secondItem="UXA-4e-ydf" secondAttribute="top" constant="-7" id="Bgm-Is-Mdi"/>
+                                            <constraint firstAttribute="trailing" secondItem="UDY-nh-01K" secondAttribute="trailing" constant="8" id="G5d-zY-tc2"/>
+                                            <constraint firstAttribute="bottom" secondItem="UDY-nh-01K" secondAttribute="bottom" constant="-8" id="POi-z3-uIU"/>
+                                            <constraint firstItem="YAC-4n-Exg" firstAttribute="top" secondItem="UXA-4e-ydf" secondAttribute="top" constant="1" id="RAD-l7-s9c"/>
+                                            <constraint firstItem="Rdg-8V-3bn" firstAttribute="leading" secondItem="UXA-4e-ydf" secondAttribute="leading" constant="8" id="SKf-bq-yy6"/>
+                                            <constraint firstItem="YAC-4n-Exg" firstAttribute="leading" secondItem="Rdg-8V-3bn" secondAttribute="trailing" constant="8" id="lgY-jB-0ZI"/>
+                                            <constraint firstAttribute="bottom" secondItem="YAC-4n-Exg" secondAttribute="bottom" id="mXF-jM-8C2"/>
+                                            <constraint firstAttribute="bottom" secondItem="Rdg-8V-3bn" secondAttribute="bottom" constant="-8" id="oWa-Qc-XB9"/>
+                                            <constraint firstAttribute="height" constant="35" id="rIt-BW-t3B"/>
+                                            <constraint firstItem="UDY-nh-01K" firstAttribute="top" secondItem="UXA-4e-ydf" secondAttribute="top" constant="-7" id="yYu-FR-iIK"/>
+                                            <constraint firstItem="UDY-nh-01K" firstAttribute="leading" secondItem="YAC-4n-Exg" secondAttribute="trailing" constant="8" id="ylK-m9-NUl"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UXA-4e-ydf" secondAttribute="trailing" id="BAZ-YN-GaH"/>
                                     <constraint firstAttribute="bottom" secondItem="9af-IX-OX1" secondAttribute="bottom" id="Ndt-8f-flq"/>
+                                    <constraint firstItem="UXA-4e-ydf" firstAttribute="top" secondItem="ImK-d7-E61" secondAttribute="top" constant="17" id="Py2-hn-MVs"/>
                                     <constraint firstItem="9af-IX-OX1" firstAttribute="top" secondItem="ImK-d7-E61" secondAttribute="top" id="TfN-ee-m2A"/>
                                     <constraint firstAttribute="trailing" secondItem="9af-IX-OX1" secondAttribute="trailing" id="kes-Z8-M0J"/>
+                                    <constraint firstItem="UXA-4e-ydf" firstAttribute="leading" secondItem="ImK-d7-E61" secondAttribute="leading" id="vee-F2-PsA"/>
                                     <constraint firstItem="9af-IX-OX1" firstAttribute="leading" secondItem="ImK-d7-E61" secondAttribute="leading" id="yp9-n0-pWR"/>
                                 </constraints>
                             </view>
@@ -80,14 +132,18 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="buttonLeft" destination="Rdg-8V-3bn" id="9Yh-oH-Fo6"/>
+                        <outlet property="buttonRight" destination="UDY-nh-01K" id="BJy-dG-eDr"/>
                         <outlet property="calendarView" destination="ud9-F1-uB4" id="Wej-Cj-Jsk"/>
+                        <outlet property="dateView" destination="UXA-4e-ydf" id="yzU-jY-BT7"/>
+                        <outlet property="labelDate" destination="YAC-4n-Exg" id="riD-R0-Hx1"/>
                         <outlet property="maskingView" destination="3xd-Zf-La6" id="lC0-Cx-wuy"/>
                         <outlet property="scrollview" destination="8TV-Lv-cmU" id="OkF-tv-ACt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="258" y="382"/>
+            <point key="canvasLocation" x="256" y="386"/>
         </scene>
         <!--Day View Controller-->
         <scene sceneID="DuY-JQ-kdP">
@@ -528,6 +584,8 @@
     </scenes>
     <resources>
         <image name="bg-sky" width="250" height="707"/>
+        <image name="caretLeft" width="14" height="30"/>
+        <image name="caretRight" width="14" height="30"/>
         <image name="scale-blue" width="257" height="306"/>
     </resources>
 </document>

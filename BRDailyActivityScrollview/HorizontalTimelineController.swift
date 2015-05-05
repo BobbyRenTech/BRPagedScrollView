@@ -17,6 +17,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var dateView: UIView!
+    @IBOutlet weak var buttonLeft: UIButton!
+    @IBOutlet weak var buttonRight: UIButton!
     @IBOutlet weak var labelDate: UILabel!
     
     var currentActivityController: UIViewController?
@@ -130,6 +133,26 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             }
             
             self.currentDayController = dayController
+            
+            if dayController.currentDate == BRDateUtils.beginningOfDate(NSDate(), GMT: false) {
+                self.labelDate.text = "TODAY"
+            }
+            else {
+                let formatter = NSDateFormatter()
+                formatter.dateFormat = "MM/dd"
+                self.labelDate.text = formatter.stringFromDate(dayController.currentDate!)
+            }
+            
+            if index == 0 {
+                self.buttonLeft.enabled = false
+            }
+            else if index == self.dayControllers.count - 1 {
+                self.buttonRight.enabled = false
+            }
+            else {
+                self.buttonLeft.enabled = true
+                self.buttonRight.enabled = true
+            }
         }
     }
     
@@ -141,6 +164,19 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             controller.view.backgroundColor = UIColor.clearColor()
             self.weekHeaderController = controller
         }
+    }
+    
+    // MARK: - Date navigator
+    @IBAction func didClickNavigationButtons(button: UIButton!) {
+        var offset: CGPoint;
+        if button == self.buttonLeft {
+            offset = CGPointMake(self.scrollview.contentOffset.x - pagewidth, self.scrollview.contentOffset.y)
+        }
+        else {
+            offset = CGPointMake(self.scrollview.contentOffset.x + pagewidth, self.scrollview.contentOffset.y)
+        }
+        button.enabled = false // temporarily disable multiple clicks on it
+        self.scrollview.setContentOffset(offset, animated: true)
     }
     
     // MARK: DayViewDelegate
