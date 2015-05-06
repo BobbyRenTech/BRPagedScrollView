@@ -15,21 +15,40 @@ class CalendarHeaderWeekViewController: UIViewController {
     var currentDate: NSDate?
     
     var weekdays:[CalendarHeaderDayViewController]!
+    var didInitViews: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         weekdays = [CalendarHeaderDayViewController]()
-        for i in 0 ... 6 {
-            let dayController: CalendarHeaderDayViewController = storyboard!.instantiateViewControllerWithIdentifier("CalendarHeaderDayViewController") as! CalendarHeaderDayViewController
-            self.weekdays.append(dayController)
-        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        let width:CGFloat = (self.view.frame.size.width - 40) / 7
+        for i in 0 ... 6 {
+            let dayController: CalendarHeaderDayViewController = storyboard!.instantiateViewControllerWithIdentifier("CalendarHeaderDayViewController") as! CalendarHeaderDayViewController
+            let frame:CGRect = CGRectMake(20 + width * CGFloat(i), 0, width, self.view.frame.size.height)
+            dayController.view.frame = frame
+            
+            if !self.didInitViews {
+                self.view.addSubview(dayController.view)
+                self.weekdays.append(dayController)
+            }
+        }
+        
+        if !self.didInitViews {
+            self.setDateInWeek(NSDate())
+        }
+        
+        self.didInitViews = true
     }
     
     func setDateInWeek(date: NSDate) {
@@ -84,7 +103,7 @@ class CalendarHeaderWeekViewController: UIViewController {
         }
     }
     
-    func updateActivitiesForDate(activities:[Activity]?, date:NSDate!) {
+    func updateActivitiesForDate(activities:NSMutableArray?, date:NSDate!) {
         for i in 0 ... 6 {
             let dayController:CalendarHeaderDayViewController = self.weekdays[i]
             if dayController.date == date {

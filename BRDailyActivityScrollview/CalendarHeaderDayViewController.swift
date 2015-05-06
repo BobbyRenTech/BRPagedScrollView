@@ -16,9 +16,9 @@ class CalendarHeaderDayViewController: UIViewController {
     @IBOutlet weak var imageViewStatus: UIImageView!
     
     var date:NSDate!
-    var activities:[Activity]!
+    var activities:NSMutableArray!
 
-    let weekdays = ["Su", "M", "T", "W", "Th", "F", "S"]
+    let weekdays = ["M", "T", "W", "Th", "F", "S", "Su"]
     let dateFormatter = NSDateFormatter()
 
     override func viewDidLoad() {
@@ -28,7 +28,7 @@ class CalendarHeaderDayViewController: UIViewController {
         if self.date == nil {
             self.date = NSDate()
         }
-        self.activities = [Activity]()
+        self.activities = NSMutableArray()
         dateFormatter.dateFormat = "dd"
     }
 
@@ -40,19 +40,19 @@ class CalendarHeaderDayViewController: UIViewController {
     func updateDate(date:NSDate) {
         self.date = date
         
-        labelDay.text = BRDateUtils.weekdayStringFromDate(date, GMT: false)
+        self.labelDay.text = BRDateUtils.weekdayStringFromDate(date, arrayStartingWithMonday: weekdays, GMT: false)
         let dateString = dateFormatter.stringFromDate(date)
-        labelDate.text = dateString
+        self.labelDate.text = dateString
     }
     
-    func updateActivities(activities:[Activity]?, replaceExisting:Bool) {
+    func updateActivities(activities:NSArray?, replaceExisting:Bool) {
         if replaceExisting {
-            self.activities.removeAll(keepCapacity: false)
+            self.activities.removeAllObjects()
         }
         
         if activities != nil && activities!.count > 0 {
             // todo: check each individual one
-            self.activities = self.activities + activities!
+            self.activities.addObjectsFromArray(activities! as [AnyObject])
         }
         
         self.updateStatus()
@@ -62,13 +62,19 @@ class CalendarHeaderDayViewController: UIViewController {
         // changes background icon depending on whether this day is being viewed
         if isCurrentDay {
             self.imageViewBG.image = UIImage(named: "weekdayWhite")
+            self.labelDate.textColor = UIColor.darkGrayColor()
+            self.labelDay.textColor = UIColor.darkGrayColor()
         }
         else {
             self.imageViewBG.image = UIImage(named:"weekdayGray")
+            self.labelDate.textColor = UIColor.whiteColor()
+            self.labelDay.textColor = UIColor.whiteColor()
         }
     }
     
     private func updateStatus() {
+        self.imageViewStatus.backgroundColor = UIColor.clearColor()
+        let frame = self.imageViewStatus.frame
         if self.isComplete() {
             self.imageViewStatus.image = UIImage(named: "iconCheck");
         }
@@ -78,7 +84,13 @@ class CalendarHeaderDayViewController: UIViewController {
     }
     private func isComplete() -> Bool {
         var completeCount: Int = 0
-        for activity:Activity in self.activities {
+        
+        let array = self.activities as NSArray
+        if array.count == 0 {
+            return false
+        }
+        
+        for activity in array as! [Activity] {
             if activity.completed != nil && activity.completed! == true{
                 completeCount += 1
             }

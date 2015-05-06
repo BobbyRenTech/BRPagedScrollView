@@ -516,63 +516,63 @@
                         <viewControllerLayoutGuide type="bottom" id="UGn-N8-U7c"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="t0m-je-FMf">
-                        <rect key="frame" x="0.0" y="0.0" width="120" height="65"/>
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="65"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UlV-Zw-44W">
-                                <rect key="frame" x="0.0" y="0.0" width="120" height="65"/>
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="65"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cag-Yv-Ibl">
-                                <rect key="frame" x="6" y="0.0" width="39" height="27"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="3cw-qe-dv0">
+                                <rect key="frame" x="0.0" y="15" width="50" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="x5h-ME-Owv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cag-Yv-Ibl">
+                                <rect key="frame" x="6" y="1" width="23" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="TiA-Tt-XcL"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cw-qe-dv0">
-                                <rect key="frame" x="15" y="20" width="90" height="40"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gJH-RR-ywX">
+                                <rect key="frame" x="32" y="10" width="10" height="10"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="x5h-ME-Owv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gJH-RR-ywX">
-                                <rect key="frame" x="45" y="0.0" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="Ofc-8D-pQl"/>
-                                    <constraint firstAttribute="width" constant="30" id="kRz-Kn-YaA"/>
+                                    <constraint firstAttribute="width" constant="10" id="cTe-Jv-JJr"/>
+                                    <constraint firstAttribute="height" constant="10" id="xzH-ZB-Ilv"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="3cw-qe-dv0" secondAttribute="trailing" constant="-1" id="5UY-RU-xV4"/>
-                            <constraint firstItem="gJH-RR-ywX" firstAttribute="leading" secondItem="cag-Yv-Ibl" secondAttribute="trailing" id="5hO-92-vpm"/>
-                            <constraint firstItem="cag-Yv-Ibl" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="8mB-Cx-snv"/>
+                            <constraint firstItem="cag-Yv-Ibl" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" constant="1" id="8mB-Cx-snv"/>
                             <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="UlV-Zw-44W" secondAttribute="bottom" id="Aby-1z-cag"/>
-                            <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="3cw-qe-dv0" secondAttribute="bottom" constant="5" id="Jr1-7C-H87"/>
-                            <constraint firstItem="3cw-qe-dv0" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leadingMargin" constant="-1" id="L60-1r-laP"/>
+                            <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="3cw-qe-dv0" secondAttribute="bottom" constant="20" id="Jr1-7C-H87"/>
+                            <constraint firstItem="3cw-qe-dv0" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leadingMargin" constant="-16" id="L60-1r-laP"/>
                             <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="UlV-Zw-44W" secondAttribute="bottom" id="LbW-tj-lYm"/>
                             <constraint firstItem="UlV-Zw-44W" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="Oox-yF-tp8"/>
                             <constraint firstItem="UlV-Zw-44W" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leading" id="T6P-ci-O3I"/>
                             <constraint firstAttribute="trailing" secondItem="UlV-Zw-44W" secondAttribute="trailing" id="Up3-tT-4Qx"/>
                             <constraint firstItem="UlV-Zw-44W" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leading" id="WNp-lR-mA1"/>
-                            <constraint firstItem="3cw-qe-dv0" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leadingMargin" constant="-1" id="aYf-sd-r1N"/>
+                            <constraint firstItem="gJH-RR-ywX" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" constant="10" id="b8a-nZ-EM3"/>
+                            <constraint firstItem="gJH-RR-ywX" firstAttribute="leading" secondItem="cag-Yv-Ibl" secondAttribute="trailing" constant="3" id="bgV-cT-ePN"/>
                             <constraint firstItem="cag-Yv-Ibl" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leading" constant="6" id="iF9-EP-xJO"/>
                             <constraint firstItem="UlV-Zw-44W" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="k7H-Id-izg"/>
                             <constraint firstAttribute="trailing" secondItem="UlV-Zw-44W" secondAttribute="trailing" id="rir-hB-2LO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="3cw-qe-dv0" secondAttribute="trailing" constant="-1" id="wsL-VS-m4r"/>
-                            <constraint firstItem="gJH-RR-ywX" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="xgi-ao-GMP"/>
-                            <constraint firstAttribute="centerX" secondItem="gJH-RR-ywX" secondAttribute="centerX" id="z2T-B5-Q2F"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3cw-qe-dv0" secondAttribute="trailing" constant="-16" id="wsL-VS-m4r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gJH-RR-ywX" secondAttribute="trailing" constant="-8" id="zNU-Vi-47O"/>
                         </constraints>
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="120" height="65"/>
+                    <size key="freeformSize" width="50" height="65"/>
                     <connections>
                         <outlet property="imageViewBG" destination="UlV-Zw-44W" id="9jB-JF-2Rd"/>
                         <outlet property="imageViewStatus" destination="gJH-RR-ywX" id="ZZf-Ao-k9V"/>

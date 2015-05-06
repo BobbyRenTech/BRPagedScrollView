@@ -72,6 +72,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             
             self.loadActivities()
             isSetup = true
+
+            self.weekHeaderController!.setDateInWeek(NSDate())
         }
     }
     
@@ -108,6 +110,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             dayController.didMoveToParentViewController(self)
             
             self.dayControllers.addObject(dayController)
+            
+            self.weekHeaderController!.updateActivitiesForDate(dayController.activities, date: dayController.currentDate!)
         }
         self.scrollview.contentSize = CGSizeMake(CGFloat(days)*pagewidth, height)
     }
@@ -160,7 +164,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EmbedCalendarHeader" {
             let controller:CalendarHeaderWeekViewController = segue.destinationViewController as! CalendarHeaderWeekViewController
-            controller.setDateInWeek(NSDate())
             controller.view.backgroundColor = UIColor.clearColor()
             self.weekHeaderController = controller
         }
