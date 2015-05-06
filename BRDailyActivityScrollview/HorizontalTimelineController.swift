@@ -35,7 +35,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     var days: Int!
     
     var dayControllers:NSMutableArray!
-    var weekHeaderController:WeekHeaderViewController?
+    var weekHeaderController:CalendarHeaderWeekViewController?
     var currentDayController:DayViewController?
     
     var isSetup:Bool = false
@@ -158,8 +158,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     
     // MARK: Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "EmbedWeekHeader" {
-            let controller:WeekHeaderViewController = segue.destinationViewController as! WeekHeaderViewController
+        if segue.identifier == "EmbedCalendarHeader" {
+            let controller:CalendarHeaderWeekViewController = segue.destinationViewController as! CalendarHeaderWeekViewController
             controller.setDateInWeek(NSDate())
             controller.view.backgroundColor = UIColor.clearColor()
             self.weekHeaderController = controller

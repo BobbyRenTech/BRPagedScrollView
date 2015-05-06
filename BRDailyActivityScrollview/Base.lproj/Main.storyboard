@@ -110,7 +110,7 @@
                                     <constraint firstAttribute="height" constant="70" id="hOJ-wJ-emx"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="KrI-ha-udl" kind="embed" identifier="EmbedWeekHeader" id="dW5-Ns-96E"/>
+                                    <segue destination="KrI-ha-udl" kind="embed" identifier="EmbedCalendarHeader" id="dW5-Ns-96E"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -488,10 +488,10 @@
             </objects>
             <point key="canvasLocation" x="1090" y="1049"/>
         </scene>
-        <!--Week Header View Controller-->
+        <!--Calendar Header Week View Controller-->
         <scene sceneID="jUM-6V-CwP">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KrI-ha-udl" customClass="WeekHeaderViewController" customModule="CareCam_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="KrI-ha-udl" customClass="CalendarHeaderWeekViewController" customModule="CareCam_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LPY-Xg-6WC"/>
                         <viewControllerLayoutGuide type="bottom" id="Eb3-ml-wGB"/>
@@ -506,6 +506,83 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJf-ku-ogP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="979" y="99"/>
+        </scene>
+        <!--Calendar Header Day View Controller-->
+        <scene sceneID="fLB-Vc-xeh">
+            <objects>
+                <viewController storyboardIdentifier="CalendarHeaderDayViewController" id="LbA-sx-uSN" customClass="CalendarHeaderDayViewController" customModule="CareCam_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YSs-ej-JGO"/>
+                        <viewControllerLayoutGuide type="bottom" id="UGn-N8-U7c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="t0m-je-FMf">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="65"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UlV-Zw-44W">
+                                <rect key="frame" x="0.0" y="0.0" width="120" height="65"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cag-Yv-Ibl">
+                                <rect key="frame" x="6" y="0.0" width="39" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="TiA-Tt-XcL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3cw-qe-dv0">
+                                <rect key="frame" x="15" y="20" width="90" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="x5h-ME-Owv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gJH-RR-ywX">
+                                <rect key="frame" x="45" y="0.0" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Ofc-8D-pQl"/>
+                                    <constraint firstAttribute="width" constant="30" id="kRz-Kn-YaA"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="3cw-qe-dv0" secondAttribute="trailing" constant="-1" id="5UY-RU-xV4"/>
+                            <constraint firstItem="gJH-RR-ywX" firstAttribute="leading" secondItem="cag-Yv-Ibl" secondAttribute="trailing" id="5hO-92-vpm"/>
+                            <constraint firstItem="cag-Yv-Ibl" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="8mB-Cx-snv"/>
+                            <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="UlV-Zw-44W" secondAttribute="bottom" id="Aby-1z-cag"/>
+                            <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="3cw-qe-dv0" secondAttribute="bottom" constant="5" id="Jr1-7C-H87"/>
+                            <constraint firstItem="3cw-qe-dv0" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leadingMargin" constant="-1" id="L60-1r-laP"/>
+                            <constraint firstItem="UGn-N8-U7c" firstAttribute="top" secondItem="UlV-Zw-44W" secondAttribute="bottom" id="LbW-tj-lYm"/>
+                            <constraint firstItem="UlV-Zw-44W" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="Oox-yF-tp8"/>
+                            <constraint firstItem="UlV-Zw-44W" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leading" id="T6P-ci-O3I"/>
+                            <constraint firstAttribute="trailing" secondItem="UlV-Zw-44W" secondAttribute="trailing" id="Up3-tT-4Qx"/>
+                            <constraint firstItem="UlV-Zw-44W" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leading" id="WNp-lR-mA1"/>
+                            <constraint firstItem="3cw-qe-dv0" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leadingMargin" constant="-1" id="aYf-sd-r1N"/>
+                            <constraint firstItem="cag-Yv-Ibl" firstAttribute="leading" secondItem="t0m-je-FMf" secondAttribute="leading" constant="6" id="iF9-EP-xJO"/>
+                            <constraint firstItem="UlV-Zw-44W" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="k7H-Id-izg"/>
+                            <constraint firstAttribute="trailing" secondItem="UlV-Zw-44W" secondAttribute="trailing" id="rir-hB-2LO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3cw-qe-dv0" secondAttribute="trailing" constant="-1" id="wsL-VS-m4r"/>
+                            <constraint firstItem="gJH-RR-ywX" firstAttribute="top" secondItem="YSs-ej-JGO" secondAttribute="bottom" id="xgi-ao-GMP"/>
+                            <constraint firstAttribute="centerX" secondItem="gJH-RR-ywX" secondAttribute="centerX" id="z2T-B5-Q2F"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="120" height="65"/>
+                    <connections>
+                        <outlet property="imageViewBG" destination="UlV-Zw-44W" id="9jB-JF-2Rd"/>
+                        <outlet property="imageViewStatus" destination="gJH-RR-ywX" id="ZZf-Ao-k9V"/>
+                        <outlet property="labelDate" destination="3cw-qe-dv0" id="p4D-Qz-E5V"/>
+                        <outlet property="labelDay" destination="cag-Yv-Ibl" id="p1E-HB-aYD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cgF-8k-NIs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="739" y="243.5"/>
         </scene>
         <!--Weight Input View Controller-->
         <scene sceneID="vpB-5g-Qwm">
