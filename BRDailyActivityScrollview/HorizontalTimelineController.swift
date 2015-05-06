@@ -181,6 +181,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     
     // MARK: DayViewDelegate
     func didSelectActivityTile(controller: DayViewController, activity: Activity, canvas:UIView, frame: CGRect) {
+        self.buttonLeft.enabled = false
+        self.buttonRight.enabled = false
+
         let frameInView = controller.view.convertRect(frame, toView: self.view)
         println("Activity: \(activity.text) frame: \(frameInView.origin.x) \(frameInView.origin.y)")
         
@@ -193,9 +196,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         self.view.addSubview(self.copyView!)
         self.copyFrame = frameInView
 
-        var final:CGRect = CGRectMake(0, 0, self.view.frame.size.width-20, self.maskingView.frame.size.height + 5)
+        var final:CGRect = CGRectMake(0, 0, self.view.frame.size.width-20, self.view.frame.size.height - (self.calendarView.frame.origin.y + self.calendarView.frame.size.height + 10))
         final.origin.x = (self.view.frame.size.width - final.size.width)/2
-        final.origin.y = self.calendarView.frame.origin.y
+        final.origin.y = self.calendarView.frame.origin.y + self.calendarView.frame.size.height
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.copyView!.frame = final
             self.maskingView.alpha = 0
@@ -226,17 +229,20 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             self.copyView!.alpha = 0
         }
         else {
-            let tap = UITapGestureRecognizer(target: self, action: "closeEmptyActivityView")
+            let tap = UITapGestureRecognizer(target: self, action: "closeActivityView")
             self.copyView!.addGestureRecognizer(tap)
         }
     }
     
-    func closeEmptyActivityView() {
+    func closeActivityView() {
         self.maskingView.alpha = 1
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.copyView!.frame = self.copyFrame!
             }, completion: { (success) -> Void in
                 self.copyView!.removeFromSuperview()
+                
+                self.buttonLeft.enabled = true
+                self.buttonRight.enabled = true
         })
     }
     
@@ -253,12 +259,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         if self.currentActivityController != nil {
             self.copyView!.alpha = 1
             self.currentActivityController!.view.alpha = 0
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                self.copyView!.frame = self.copyFrame!
-            }, completion: { (success) -> Void in
-                self.currentActivityController!.view.removeFromSuperview()
-                self.copyView!.removeFromSuperview()
-            })
+            
+            self.closeActivityView()
+            self.currentActivityController!.view.removeFromSuperview()
             
             self.maskingView.alpha = 1
         }
@@ -269,30 +272,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         // for now, generate a random number of activities
         for index in 0...days-1 {
             let dayController = self.dayControllers[index] as! DayViewController
-            let activityCt = 6//arc4random_uniform(6) + 2
-            var activitiesArray = [AnyObject]()
-            
-            activitiesArray.append(self.sponsoredActivity())
-            activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
-            activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
-            activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
-            activitiesArray.append(self.challengeActivity())
-            dayController.updateWithActivities(activitiesArray as [AnyObject])
+            dayController.loadActivities()
         }
-    }
-    
-    func sponsoredActivity() -> Activity {
-        // generate the sponsored CVS activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored]
-        let activity = Activity(params: params)
-        return activity
-    }
-    
-    func challengeActivity() -> Activity {
-        // generate the sponsored challenge activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge]
-        let activity = Activity(params: params)
-        return activity
     }
 }
 

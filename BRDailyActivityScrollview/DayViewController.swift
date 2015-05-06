@@ -136,4 +136,33 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellWide", forIndexPath: indexPath) as! ActivityCell
         return cell.frame.size.width
     }
+    
+    // MARK: fake activities
+    func loadActivities() {
+        var activitiesArray = [AnyObject]()
+        
+        activitiesArray.append(self.sponsoredActivity())
+        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger]))
+        activitiesArray.append(self.challengeActivity())
+        self.updateWithActivities(activitiesArray as [AnyObject])
+    }
+    
+    func sponsoredActivity() -> Activity {
+        // generate the sponsored CVS activity
+        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored]
+        let activity = Activity(params: params)
+        return activity
+    }
+    
+    func challengeActivity() -> Activity {
+        // generate the sponsored challenge activity
+        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge]
+        let activity = Activity(params: params)
+        return activity
+    }
 }
