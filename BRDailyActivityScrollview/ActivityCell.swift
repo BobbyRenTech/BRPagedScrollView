@@ -40,7 +40,10 @@ class ActivityCell: UICollectionViewCell {
         if activity.completed == true {
             self.backgroundColor = ColorUtil.darkBlueColor()
             self.icon.image = activity.icon
-            self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
+            self.labelText.textColor = UIColor.whiteColor()
+            if activity.type == ActivityType.Weight && activity.weight != nil {
+                self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
+            }
         }
         
         if activity.text != nil {

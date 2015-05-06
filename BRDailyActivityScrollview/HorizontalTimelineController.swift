@@ -58,6 +58,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             width = self.scrollview.frame.size.width - 2 * BORDER
             height = self.scrollview.frame.size.height - 2 * BORDER
             pagewidth = self.scrollview.frame.size.width
+            
+            // generates the day controllers
             days = 7 // display one week
             self.populateDays()
             
@@ -70,6 +72,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
                 }
             }
             
+            // generates fake activities
             self.loadActivities()
             isSetup = true
 
@@ -110,8 +113,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
             dayController.didMoveToParentViewController(self)
             
             self.dayControllers.addObject(dayController)
-            
-            self.weekHeaderController!.updateActivitiesForDate(dayController.activities, date: dayController.currentDate!)
         }
         self.scrollview.contentSize = CGSizeMake(CGFloat(days)*pagewidth, height)
     }
@@ -276,6 +277,8 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         for index in 0...days-1 {
             let dayController = self.dayControllers[index] as! DayViewController
             dayController.loadActivities()
+            
+            self.weekHeaderController!.updateActivitiesForDate(dayController.activities, date: dayController.currentDate!)
         }
     }
 }

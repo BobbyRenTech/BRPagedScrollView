@@ -84,18 +84,26 @@ class CalendarHeaderDayViewController: UIViewController {
     }
     private func isComplete() -> Bool {
         var completeCount: Int = 0
+        var completableCount: Int = 0
         
         let array = self.activities as NSArray
         if array.count == 0 {
             return false
         }
         
+        // iterate through activities and count complete statuses
         for activity in array as! [Activity] {
+            // skip sponsored/challenge activities
+            if activity.type == ActivityType.Sponsored || activity.type == ActivityType.Challenge {
+                continue
+            }
+
+            completableCount += 1
             if activity.completed != nil && activity.completed! == true{
                 completeCount += 1
             }
         }
-        let percent:Float = Float(completeCount / self.activities.count)
+        let percent:Float = Float(completeCount) / Float(completableCount)
         return percent >= 0.8
     }
     

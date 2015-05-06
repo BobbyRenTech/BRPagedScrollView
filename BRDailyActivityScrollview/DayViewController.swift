@@ -142,12 +142,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         var activitiesArray = [AnyObject]()
         
         activitiesArray.append(self.sponsoredActivity())
-        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feel]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "completed":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "completed":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "completed":true]))
         activitiesArray.append(self.challengeActivity())
         self.updateWithActivities(activitiesArray as [AnyObject])
     }
