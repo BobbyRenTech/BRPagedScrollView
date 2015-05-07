@@ -43,8 +43,16 @@ class WeightInputViewController: UIViewController {
             self.labelWeight.text = "Enter your weight"
         }
     }
+
+    @IBAction func didPressButton(sender:UIButton!) {
+        sender.backgroundColor = ColorUtil.blueColor()
+    }
     
     @IBAction func didClickButton(sender:UIButton!) {
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            sender.backgroundColor = UIColor.clearColor()
+        }) { (success) -> Void in
+        }
         if sender == self.buttonMinus {
             if weight != nil {
                 weight = weight! - 1
@@ -98,11 +106,13 @@ class WeightInputViewController: UIViewController {
                 let string = "\(val)" as String
                 button.setTitle(string, forState: UIControlState.Normal)
                 button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+                button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
                 button.titleLabel!.font = UIFont.systemFontOfSize(30)
                 button.layer.cornerRadius = CGFloat(width/2)
                 button.layer.borderWidth = border
                 button.layer.borderColor = ColorUtil.blueColor().CGColor
                 button.tag = val
+                button.addTarget(self, action: "didPressButton:", forControlEvents: UIControlEvents.TouchDown)
                 button.addTarget(self, action: "didClickButton:", forControlEvents: UIControlEvents.TouchUpInside)
                 self.viewKeyboard.addSubview(button)
             }
