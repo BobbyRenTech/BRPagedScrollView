@@ -11,5 +11,6 @@
 
 #import "BRDateUtils.h"
 #import "RFQuiltLayout.h"
+#import "NSObject+Notify.h"
 
 #endif

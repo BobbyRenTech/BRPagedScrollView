@@ -10,11 +10,7 @@ import UIKit
 
 let BORDER:CGFloat = 10
 
-protocol DayViewDelegate {
-    func didSelectActivityTile(controller:DayViewController, activity:Activity, canvas:UIView, frame:CGRect)
-}
-
-class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate {
+class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate,WeightViewDelegate {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
 
@@ -22,16 +18,20 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
 
     var currentDate: NSDate?
     var activities: NSMutableArray!
-    var delegate: DayViewDelegate?
     
+    var currentActivityController: UIViewController?
+    var copyView: UIView?
+    var bgView: UIView?
+    var copyFrame: CGRect?
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         self.view.backgroundColor = UIColor.clearColor()
-        
-        let appDelegate = UIApplication.sharedApplication().delegate!
         
         // default date is today
         if currentDate == nil {
@@ -104,9 +104,8 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         let cell: ActivityCell = self.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! ActivityCell
         let frame = collectionView.convertRect(cell.frame, toView: self.view)
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
-        if self.delegate != nil {
-            self.delegate!.didSelectActivityTile(self, activity:activity, canvas:cell, frame: frame)
-        }
+
+        self.didSelectActivityTile(activity, canvas:cell, frame: frame)
     }
     
     // MARK: - RFQuiltLayoutDelegate
@@ -142,27 +141,115 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         var activitiesArray = [AnyObject]()
         
         activitiesArray.append(self.sponsoredActivity())
-        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "complete":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "complete":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "complete":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feel]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":true]))
         activitiesArray.append(self.challengeActivity())
         self.updateWithActivities(activitiesArray as [AnyObject])
     }
     
     func sponsoredActivity() -> Activity {
         // generate the sponsored CVS activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Sponsored, "date":self.currentDate,]
         let activity = Activity(params: params)
         return activity
     }
     
     func challengeActivity() -> Activity {
         // generate the sponsored challenge activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge, "date":self.currentDate,]
         let activity = Activity(params: params)
         return activity
+    }
+    
+    // MARK: Activity selection
+    func didSelectActivityTile(activity: Activity, canvas:UIView, frame: CGRect) {
+        
+        let baseView = appDelegate.window!.rootViewController!.view as UIView
+        let frameInView = self.view.convertRect(frame, toView: baseView)
+        println("Activity: \(activity.text) frame: \(frameInView.origin.x) \(frameInView.origin.y)")
+        
+        self.bgView = UIView(frame: baseView.frame) as UIView
+        self.bgView!.alpha = 0.0
+        self.bgView!.backgroundColor = UIColor.blackColor()
+        baseView.addSubview(bgView!)
+        
+        // create a copy of the view
+        self.copyView = UIView(frame: frameInView)
+        self.copyView!.backgroundColor = canvas.backgroundColor
+        self.copyView!.layer.cornerRadius = canvas.layer.cornerRadius
+        self.copyView!.layer.borderWidth = canvas.layer.borderWidth
+        self.copyView!.layer.borderColor = canvas.layer.borderColor
+        baseView.addSubview(self.copyView!)
+        self.copyFrame = frameInView
+        
+        var final:CGRect = CGRectMake(0, 0, baseView.frame.size.width - 20, baseView.frame.size.height - 30)
+        final.origin.x = (baseView.frame.size.width - final.size.width)/2
+        final.origin.y = 20
+        
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.bgView!.alpha = 0.5
+            self.copyView!.frame = final
+            }) { (success) -> Void in
+                println("done")
+                self.displayActivityDetails(activity)
+        }
+    }
+    
+    func displayActivityDetails(activity:Activity) {
+        let baseView = appDelegate.window!.rootViewController!.view as UIView
+        if activity.type == ActivityType.Weight {
+            let controller = storyboard!.instantiateViewControllerWithIdentifier("WeightViewController") as! WeightViewController
+            appDelegate.window!.rootViewController!.addChildViewController(controller)
+            controller.delegate = self
+            controller.activity = activity
+            
+            controller.view.frame = self.copyView!.frame
+            baseView.addSubview(controller.view)
+            controller.didMoveToParentViewController(self)
+            
+            controller.view.backgroundColor = self.copyView!.backgroundColor
+            controller.view.layer.cornerRadius = self.copyView!.layer.cornerRadius
+            controller.view.layer.borderWidth = self.copyView!.layer.borderWidth
+            controller.view.layer.borderColor = self.copyView!.layer.borderColor
+            
+            self.currentActivityController = controller
+            
+            self.copyView!.alpha = 0
+        }
+        else {
+            let tap = UITapGestureRecognizer(target: self, action: "closeActivityView")
+            self.copyView!.addGestureRecognizer(tap)
+        }
+    }
+    
+    func closeActivityView() {
+        if self.bgView != nil {
+            self.bgView!.removeFromSuperview()
+        }
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.copyView!.frame = self.copyFrame!
+            }, completion: { (success) -> Void in
+                self.copyView!.removeFromSuperview()
+        })
+    }
+
+    // MARK: - Activity delegates
+    
+    // MARK: WeightViewDelegate
+    func didCompleteActivity(activity: Activity!) {
+        self.collectionView.reloadData()
+        if self.currentActivityController != nil {
+            self.copyView!.alpha = 1
+            self.currentActivityController!.view.alpha = 0
+            
+            self.closeActivityView()
+            self.currentActivityController!.view.removeFromSuperview()
+        }
+        let userInfo: [String:[Activity]] = ["activity":[activity]]
+        self.notify("activities:updated:forDate", object: self.currentDate, userInfo: userInfo)
     }
 }

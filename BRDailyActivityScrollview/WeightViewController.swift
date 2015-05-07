@@ -8,11 +8,9 @@
 
 import UIKit
 
-protocol WeightViewDelegate {
-    func didEnterWeight(weight:CGFloat)
-    func didCloseEnterWeight()
+protocol WeightViewDelegate { // todo: this can be a generic activityDelegate?
+    func didCompleteActivity(activity:Activity!)
 }
-
 
 class WeightViewController: UIViewController, WeightInputDelegate {
     
@@ -22,6 +20,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
     var activity: Activity?
 
     weak var inputController: WeightInputViewController?
+    weak var date: NSDate!
 
     var delegate: WeightViewDelegate?
 
@@ -45,11 +44,6 @@ class WeightViewController: UIViewController, WeightInputDelegate {
         self.inputController!.setupButtons()
     }
     
-    @IBAction func done() {
-        if self.delegate != nil {
-            self.delegate!.didCloseEnterWeight()
-        }
-    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -70,10 +64,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
     func didSetWeight(newWeight: CGFloat) {
         if newWeight != 0 {
             self.activity!.didCompleteWeight(newWeight)
-            self.delegate!.didEnterWeight(self.activity!.weight!)
         }
-        else {
-            self.delegate!.didCloseEnterWeight()
-        }
+        self.delegate!.didCompleteActivity(self.activity)
     }
 }

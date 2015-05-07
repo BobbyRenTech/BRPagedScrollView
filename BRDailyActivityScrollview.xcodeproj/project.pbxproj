@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AC0224D01AF80E530003EDEF /* WeightInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC0224CF1AF80E530003EDEF /* WeightInputViewController.swift */; };
+		AC1C8FF41AFA822200271403 /* NSObject+Notify.m in Sources */ = {isa = PBXBuildFile; fileRef = AC1C8FF31AFA822200271403 /* NSObject+Notify.m */; };
+		AC1C8FF61AFA86C300271403 /* CalendarHeaderDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1C8FF51AFA86C300271403 /* CalendarHeaderDayViewController.swift */; };
 		AC3D2EB21AEE918000789420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB11AEE918000789420 /* AppDelegate.swift */; };
 		AC3D2EB41AEE918000789420 /* HorizontalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */; };
 		AC3D2EB71AEE918000789420 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EB51AEE918000789420 /* Main.storyboard */; };
@@ -16,7 +18,7 @@
 		AC3D2EC81AEE918000789420 /* BRDailyActivityScrollviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */; };
 		AC3D2ED21AEE94BB00789420 /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2ED11AEE94BB00789420 /* DayViewController.swift */; };
 		ACA553271AF3D59D00C97734 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA553261AF3D59D00C97734 /* ActivityCell.swift */; };
-		ACA553291AF4291C00C97734 /* WeekHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA553281AF4291C00C97734 /* WeekHeaderViewController.swift */; };
+		ACA553291AF4291C00C97734 /* CalendarHeaderWeekViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACA553281AF4291C00C97734 /* CalendarHeaderWeekViewController.swift */; };
 		ACABC8351AF4482800E3EBA5 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACABC8341AF4482800E3EBA5 /* QuartzCore.framework */; };
 		ACBA283C1AF72D3800F16EDD /* WeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA283B1AF72D3800F16EDD /* WeightViewController.swift */; };
 		ACBA283E1AF7403100F16EDD /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA283D1AF7403100F16EDD /* ColorUtil.swift */; };
@@ -38,6 +40,9 @@
 		206740DEB198BF020EF35B5E /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		48043A0E8E25D6C77DAA715D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC0224CF1AF80E530003EDEF /* WeightInputViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightInputViewController.swift; sourceTree = "<group>"; };
+		AC1C8FF21AFA822200271403 /* NSObject+Notify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Notify.h"; sourceTree = "<group>"; };
+		AC1C8FF31AFA822200271403 /* NSObject+Notify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Notify.m"; sourceTree = "<group>"; };
+		AC1C8FF51AFA86C300271403 /* CalendarHeaderDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHeaderDayViewController.swift; sourceTree = "<group>"; };
 		AC3D2EAC1AEE918000789420 /* CareCam Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CareCam Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3D2EB01AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3D2EB11AEE918000789420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,7 +55,7 @@
 		AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRDailyActivityScrollviewTests.swift; sourceTree = "<group>"; };
 		AC3D2ED11AEE94BB00789420 /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
 		ACA553261AF3D59D00C97734 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
-		ACA553281AF4291C00C97734 /* WeekHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekHeaderViewController.swift; sourceTree = "<group>"; };
+		ACA553281AF4291C00C97734 /* CalendarHeaderWeekViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarHeaderWeekViewController.swift; sourceTree = "<group>"; };
 		ACABC8341AF4482800E3EBA5 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		ACBA283B1AF72D3800F16EDD /* WeightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeightViewController.swift; sourceTree = "<group>"; };
 		ACBA283D1AF7403100F16EDD /* ColorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorUtil.swift; sourceTree = "<group>"; };
@@ -111,12 +116,15 @@
 		AC3D2EAE1AEE918000789420 /* BRDailyActivityScrollview */ = {
 			isa = PBXGroup;
 			children = (
+				AC1C8FF21AFA822200271403 /* NSObject+Notify.h */,
+				AC1C8FF31AFA822200271403 /* NSObject+Notify.m */,
 				ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */,
 				AC3D2EB11AEE918000789420 /* AppDelegate.swift */,
 				AC3D2EB51AEE918000789420 /* Main.storyboard */,
 				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
 				AC3D2ED11AEE94BB00789420 /* DayViewController.swift */,
-				ACA553281AF4291C00C97734 /* WeekHeaderViewController.swift */,
+				ACA553281AF4291C00C97734 /* CalendarHeaderWeekViewController.swift */,
+				AC1C8FF51AFA86C300271403 /* CalendarHeaderDayViewController.swift */,
 				ACBA283D1AF7403100F16EDD /* ColorUtil.swift */,
 				ACBA283A1AF72D2C00F16EDD /* Activities */,
 				ACA553261AF3D59D00C97734 /* ActivityCell.swift */,
@@ -315,12 +323,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC3D2EB41AEE918000789420 /* HorizontalTimelineController.swift in Sources */,
-				ACA553291AF4291C00C97734 /* WeekHeaderViewController.swift in Sources */,
+				ACA553291AF4291C00C97734 /* CalendarHeaderWeekViewController.swift in Sources */,
 				AC3D2EB21AEE918000789420 /* AppDelegate.swift in Sources */,
 				ACEF59F51AF25F9C00EB19BC /* Activity.swift in Sources */,
+				AC1C8FF41AFA822200271403 /* NSObject+Notify.m in Sources */,
 				AC0224D01AF80E530003EDEF /* WeightInputViewController.swift in Sources */,
 				AC3D2ED21AEE94BB00789420 /* DayViewController.swift in Sources */,
 				ACBA283C1AF72D3800F16EDD /* WeightViewController.swift in Sources */,
+				AC1C8FF61AFA86C300271403 /* CalendarHeaderDayViewController.swift in Sources */,
 				ACA553271AF3D59D00C97734 /* ActivityCell.swift in Sources */,
 				ACBA283E1AF7403100F16EDD /* ColorUtil.swift in Sources */,
 			);
