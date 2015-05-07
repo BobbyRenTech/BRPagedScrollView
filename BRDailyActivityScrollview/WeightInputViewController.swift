@@ -13,6 +13,7 @@ protocol WeightInputDelegate {
 }
 
 class WeightInputViewController: UIViewController {
+    @IBOutlet weak var viewAmount:UIView!
     @IBOutlet weak var buttonMinus:UIButton!
     @IBOutlet weak var buttonPlus:UIButton!
     @IBOutlet weak var labelWeight:UILabel!
@@ -28,6 +29,9 @@ class WeightInputViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.updateWeight()
+        
+        self.viewAmount.layer.borderWidth = 1
+        self.viewAmount.layer.borderColor = UIColor.lightGrayColor().CGColor
     }
 
     override func didReceiveMemoryWarning() {
