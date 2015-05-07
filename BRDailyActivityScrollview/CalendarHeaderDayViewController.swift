@@ -8,6 +8,8 @@
 
 import UIKit
 
+let COMPLIANCE_PERCENT = Float(0.01)
+
 class CalendarHeaderDayViewController: UIViewController {
 
     @IBOutlet weak var imageViewBG: UIImageView!
@@ -125,7 +127,7 @@ class CalendarHeaderDayViewController: UIViewController {
             }
         }
         let percent:Float = Float(completeCount) / Float(completableCount)
-        return percent >= 0.8
+        return percent >= COMPLIANCE_PERCENT
     }
     
     // MARK: - Notifications

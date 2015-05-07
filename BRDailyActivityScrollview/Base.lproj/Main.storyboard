@@ -240,10 +240,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9j8-ma-6we">
-                                                    <rect key="frame" x="55" y="28" width="212" height="43"/>
+                                                    <rect key="frame" x="86" y="28" width="158" height="43"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="43" id="SGy-72-hdC"/>
-                                                        <constraint firstAttribute="width" constant="212" id="W4c-PU-3cU"/>
+                                                        <constraint firstAttribute="width" constant="158" id="W4c-PU-3cU"/>
                                                     </constraints>
                                                     <attributedString key="attributedText">
                                                         <fragment content="Label">
@@ -257,13 +257,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Ua-Uc-Ljp">
-                                                    <rect key="frame" x="8" y="27" width="45" height="45"/>
+                                                    <rect key="frame" x="30" y="27" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="znJ-1J-RA3"/>
                                                     </constraints>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="51B-jf-07V">
-                                                    <rect key="frame" x="277" y="27" width="45" height="45"/>
+                                                    <rect key="frame" x="250" y="27" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="xnm-wL-l08"/>
                                                     </constraints>
@@ -277,17 +277,18 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="51B-jf-07V" secondAttribute="bottom" constant="20" id="HLy-4S-vqk"/>
                                             <constraint firstAttribute="centerY" secondItem="9j8-ma-6we" secondAttribute="centerY" id="HXt-vs-bgs"/>
                                             <constraint firstItem="51B-jf-07V" firstAttribute="top" secondItem="lmR-uJ-2Lb" secondAttribute="topMargin" constant="19" id="Ilk-fl-8Jy"/>
-                                            <constraint firstItem="9j8-ma-6we" firstAttribute="leading" secondItem="6Ua-Uc-Ljp" secondAttribute="trailing" constant="2" id="J2H-NG-CUQ"/>
+                                            <constraint firstItem="9j8-ma-6we" firstAttribute="leading" secondItem="6Ua-Uc-Ljp" secondAttribute="trailing" constant="11" id="J2H-NG-CUQ"/>
                                             <constraint firstItem="6Ua-Uc-Ljp" firstAttribute="top" secondItem="lmR-uJ-2Lb" secondAttribute="topMargin" constant="19" id="J6V-7D-vUt"/>
-                                            <constraint firstItem="51B-jf-07V" firstAttribute="trailing" secondItem="lmR-uJ-2Lb" secondAttribute="trailingMargin" id="PoG-dN-SdR"/>
-                                            <constraint firstItem="51B-jf-07V" firstAttribute="leading" secondItem="9j8-ma-6we" secondAttribute="trailing" constant="10" id="WEI-Qa-nGM"/>
-                                            <constraint firstItem="6Ua-Uc-Ljp" firstAttribute="leading" secondItem="lmR-uJ-2Lb" secondAttribute="leadingMargin" id="upk-9V-qzi"/>
+                                            <constraint firstItem="51B-jf-07V" firstAttribute="trailing" secondItem="lmR-uJ-2Lb" secondAttribute="trailingMargin" constant="-27" id="PoG-dN-SdR"/>
+                                            <constraint firstItem="51B-jf-07V" firstAttribute="leading" secondItem="9j8-ma-6we" secondAttribute="trailing" constant="6" id="WEI-Qa-nGM"/>
+                                            <constraint firstItem="6Ua-Uc-Ljp" firstAttribute="leading" secondItem="lmR-uJ-2Lb" secondAttribute="leadingMargin" constant="22" id="upk-9V-qzi"/>
                                         </constraints>
                                         <size key="customSize" width="330" height="100"/>
                                         <connections>
                                             <outlet property="constraintLabelHeight" destination="SGy-72-hdC" id="HhF-M2-iCE"/>
                                             <outlet property="constraintLabelWidth" destination="W4c-PU-3cU" id="6bP-RK-g5x"/>
                                             <outlet property="icon" destination="6Ua-Uc-Ljp" id="Ol0-KY-inS"/>
+                                            <outlet property="iconSponsor" destination="51B-jf-07V" id="fnd-fQ-7fG"/>
                                             <outlet property="labelText" destination="9j8-ma-6we" id="GrB-ds-BxY"/>
                                         </connections>
                                     </collectionViewCell>

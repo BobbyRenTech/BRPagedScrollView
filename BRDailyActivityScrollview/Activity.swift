@@ -23,7 +23,7 @@ enum ActivityType {
 class Activity: NSObject {
     var type: ActivityType
     var iconName: String?
-    var icon: UIImage?
+    var iconNameComplete: String?
     var text: String?
     var completed: Bool?
     var weight: CGFloat?
@@ -31,6 +31,8 @@ class Activity: NSObject {
     var date: NSDate?
     
     init(params:[String: Any]) {
+        self.type = ActivityType.Sponsored
+        
         if let activityType = params["type"] as? ActivityType {
             self.type = activityType
             self.completed = params["completed"] as? Bool
@@ -46,26 +48,32 @@ class Activity: NSObject {
             case ActivityType.Weight:
                 self.text = "Check your weight"
                 self.iconName = "scale-blue"
+                self.iconNameComplete = "scale"
                 break;
             case ActivityType.Feet:
                 self.text = "Check your feet"
                 self.iconName = "foot-blue"
+                self.iconNameComplete = "foot"
                 break;
             case ActivityType.Glucose:
                 self.text = "Check your glucose"
                 self.iconName = "diabetes-blue"
+                self.iconNameComplete = "diabetes"
                 break;
             case ActivityType.Hunger:
                 self.text = "How's your hunger?"
                 self.iconName = "apple-blue"
+                self.iconNameComplete = "apple"
                 break;
             case ActivityType.Medicine:
                 self.text = "Take your medicine"
                 self.iconName = "pills-blue"
+                self.iconNameComplete = "pills"
                 break;
             case ActivityType.Feel:
                 self.text = "How do you feel?"
                 self.iconName = "person-blue"
+                self.iconNameComplete = "person"
                 break;
             case ActivityType.Challenge:
                 self.text = "Whole foods challenge"
@@ -74,16 +82,6 @@ class Activity: NSObject {
             default:
                 break;
             }
-        }
-        else {
-            self.type = ActivityType.Challenge
-        }
-        
-        if self.iconName != nil {
-            self.icon = UIImage(named: self.iconName!)
-        }
-        else {
-            self.icon = nil
         }
         
         // Configure the cell
@@ -94,7 +92,6 @@ class Activity: NSObject {
                     // todo: use a common method like didCompleteWeight
                     self.text = "Today's weight\n\(weight) lbs"
                     self.iconName = "scale"
-                    self.icon = UIImage(named: self.iconName!)
                 }
             }
         }
@@ -113,8 +110,6 @@ class Activity: NSObject {
         self.completed = true
         self.weight = weight
         self.text = "Today's weight\n\(weight) lbs"
-        self.iconName = "scale"
-        self.icon = UIImage(named: self.iconName!)
     }
 
 }

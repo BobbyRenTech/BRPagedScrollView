@@ -9,6 +9,8 @@
 import UIKit
 import QuartzCore
 
+let SHOW_ICONS = true
+
 class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
     @IBOutlet weak var icon: UIImageView!
@@ -23,23 +25,40 @@ class ActivityCell: UICollectionViewCell {
     
     func setupWithActivity(activity:Activity) {
         self.layer.borderWidth = 4
-        self.layer.borderColor = ColorUtil.greenColor().CGColor
+        
+        // incomplete activities (default)
+        self.layer.borderColor = ColorUtil.blueColor().CGColor
         self.backgroundColor = UIColor.whiteColor()
         self.labelText.text = activity.text
         self.labelText.textColor = ColorUtil.blueColor()
-        
-        if activity.icon != nil {
-            self.icon.image = activity.icon
+
+        if SHOW_ICONS {
+            if activity.iconName != nil {
+                self.icon.image = UIImage(named:activity.iconName!)
+            }
         }
-        if activity.type == ActivityType.Sponsored && self.iconSponsor != nil {
-            // sponsor icon should be company icon
-//            self.iconSponsor!.image = activity
+        
+        if activity.type == ActivityType.Sponsored {
+            if self.iconSponsor != nil && activity.iconName != nil {
+                // sponsor icon should be company icon - TODO use activity.iconSponsorName
+                self.iconSponsor!.image = UIImage(named:activity.iconName!)
+            }
+            if activity.iconName != nil {
+                self.icon.image = UIImage(named:activity.iconName!)
+            }
         }
         
         // completed activities
         if activity.completed == true {
+            self.layer.borderColor = ColorUtil.greenColor().CGColor
             self.backgroundColor = ColorUtil.darkBlueColor()
-            self.icon.image = activity.icon
+            
+            if SHOW_ICONS {
+                if activity.iconNameComplete != nil {
+                    self.icon.image = UIImage(named:activity.iconNameComplete!)
+                }
+            }
+            
             self.labelText.textColor = UIColor.whiteColor()
             if activity.type == ActivityType.Weight && activity.weight != nil {
                 self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
