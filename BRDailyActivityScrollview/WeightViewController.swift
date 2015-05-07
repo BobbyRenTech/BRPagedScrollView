@@ -22,6 +22,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
     var activity: Activity?
 
     weak var inputController: WeightInputViewController?
+    weak var date: NSDate!
 
     var delegate: WeightViewDelegate?
 
@@ -45,11 +46,6 @@ class WeightViewController: UIViewController, WeightInputDelegate {
         self.inputController!.setupButtons()
     }
     
-    @IBAction func done() {
-        if self.delegate != nil {
-            self.delegate!.didCloseEnterWeight()
-        }
-    }
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

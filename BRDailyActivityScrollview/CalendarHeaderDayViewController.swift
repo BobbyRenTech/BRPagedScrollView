@@ -43,6 +43,9 @@ class CalendarHeaderDayViewController: UIViewController {
         self.labelDay.text = BRDateUtils.weekdayStringFromDate(date, arrayStartingWithMonday: weekdays, GMT: false)
         let dateString = dateFormatter.stringFromDate(date)
         self.labelDate.text = dateString
+        
+        self.stopListeningFor("activities:updated:forDate")
+        self.listenFor("activities:updated:forDate", action: "handleActivitiesUpdated", object:date)
     }
     
     func updateActivities(activities:NSArray?, replaceExisting:Bool) {

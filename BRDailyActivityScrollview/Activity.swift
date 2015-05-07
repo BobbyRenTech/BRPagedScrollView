@@ -28,6 +28,7 @@ class Activity: NSObject {
     var completed: Bool?
     var weight: CGFloat?
     var feetStatus: String?
+    var date: NSDate?
     
     init(params:[String: Any]) {
         if let activityType = params["type"] as? ActivityType {
@@ -35,6 +36,7 @@ class Activity: NSObject {
             self.completed = params["completed"] as? Bool
             self.weight = params["weight"] as? CGFloat
             self.feetStatus = params["feetStatus"] as? String
+            self.date = params["date"] as? NSDate
             
             switch self.type {
             case ActivityType.Sponsored:

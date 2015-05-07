@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayViewDelegate, WeightViewDelegate {
+class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var calendarView: UIView!
     @IBOutlet weak var maskingView : UIView!
@@ -21,10 +21,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
     @IBOutlet weak var buttonLeft: UIButton!
     @IBOutlet weak var buttonRight: UIButton!
     @IBOutlet weak var labelDate: UILabel!
-    
-    var currentActivityController: UIViewController?
-    var copyView: UIView?
-    var copyFrame: CGRect?
     
     let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)!
     
@@ -107,7 +103,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
 
             self.addChildViewController(dayController)
             dayController.view.frame = frame
-            dayController.delegate = self
             
             self.scrollview.addSubview(dayController.view)
             dayController.didMoveToParentViewController(self)
@@ -182,95 +177,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate, DayV
         button.enabled = false // temporarily disable multiple clicks on it
         self.scrollview.setContentOffset(offset, animated: true)
     }
-    
-    // MARK: DayViewDelegate
-    func didSelectActivityTile(controller: DayViewController, activity: Activity, canvas:UIView, frame: CGRect) {
-        self.buttonLeft.enabled = false
-        self.buttonRight.enabled = false
-
-        let frameInView = controller.view.convertRect(frame, toView: self.view)
-        println("Activity: \(activity.text) frame: \(frameInView.origin.x) \(frameInView.origin.y)")
         
-        // create a copy of the view
-        self.copyView = UIView(frame: frameInView)
-        self.copyView!.backgroundColor = canvas.backgroundColor
-        self.copyView!.layer.cornerRadius = canvas.layer.cornerRadius
-        self.copyView!.layer.borderWidth = canvas.layer.borderWidth
-        self.copyView!.layer.borderColor = canvas.layer.borderColor
-        self.view.addSubview(self.copyView!)
-        self.copyFrame = frameInView
-
-        var final:CGRect = CGRectMake(0, 0, self.view.frame.size.width-20, self.view.frame.size.height - (self.calendarView.frame.origin.y + self.calendarView.frame.size.height + 10))
-        final.origin.x = (self.view.frame.size.width - final.size.width)/2
-        final.origin.y = self.calendarView.frame.origin.y + self.calendarView.frame.size.height
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.copyView!.frame = final
-            self.maskingView.alpha = 0
-        }) { (success) -> Void in
-            println("done")
-            self.displayActivityDetails(activity)
-        }
-    }
-    
-    func displayActivityDetails(activity:Activity) {
-        if activity.type == ActivityType.Weight {
-            let controller = storyboard!.instantiateViewControllerWithIdentifier("WeightViewController") as! WeightViewController
-            self.addChildViewController(controller)
-            controller.delegate = self
-            controller.activity = activity
-
-            controller.view.frame = self.copyView!.frame
-            self.view.addSubview(controller.view)
-            controller.didMoveToParentViewController(self)
-            
-            controller.view.backgroundColor = self.copyView!.backgroundColor
-            controller.view.layer.cornerRadius = self.copyView!.layer.cornerRadius
-            controller.view.layer.borderWidth = self.copyView!.layer.borderWidth
-            controller.view.layer.borderColor = self.copyView!.layer.borderColor
-            
-            self.currentActivityController = controller
-
-            self.copyView!.alpha = 0
-        }
-        else {
-            let tap = UITapGestureRecognizer(target: self, action: "closeActivityView")
-            self.copyView!.addGestureRecognizer(tap)
-        }
-    }
-    
-    func closeActivityView() {
-        self.maskingView.alpha = 1
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.copyView!.frame = self.copyFrame!
-            }, completion: { (success) -> Void in
-                self.copyView!.removeFromSuperview()
-                
-                self.buttonLeft.enabled = true
-                self.buttonRight.enabled = true
-        })
-    }
-    
-    // MARK: WeightViewDelegate
-    func didEnterWeight(weight: CGFloat) {
-        println("new weight: \(weight)")
-        if self.currentDayController != nil {
-            self.currentDayController!.collectionView.reloadData()
-        }
-        self.didCloseEnterWeight()
-    }
-    
-    func didCloseEnterWeight() {
-        if self.currentActivityController != nil {
-            self.copyView!.alpha = 1
-            self.currentActivityController!.view.alpha = 0
-            
-            self.closeActivityView()
-            self.currentActivityController!.view.removeFromSuperview()
-            
-            self.maskingView.alpha = 1
-        }
-    }
-    
     // MARK: Activity data
     func loadActivities() {
         // for now, generate a random number of activities
