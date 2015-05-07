@@ -45,7 +45,7 @@ class CalendarHeaderDayViewController: UIViewController {
         self.labelDate.text = dateString
         
         self.stopListeningFor("activities:updated:forDate")
-        self.listenFor("activities:updated:forDate", action: "handleActivitiesUpdated", object:date)
+        self.listenFor("activities:updated:forDate", action: "handleActivitiesUpdated:", object:date)
     }
     
     func updateActivities(activities:NSArray?, replaceExisting:Bool) {
@@ -55,10 +55,28 @@ class CalendarHeaderDayViewController: UIViewController {
         
         if activities != nil && activities!.count > 0 {
             // todo: check each individual one
-            self.activities.addObjectsFromArray(activities! as [AnyObject])
+            for activity in activities! as! [Activity] {
+                self.addOrUpdateActivity(activity)
+            }
         }
         
         self.updateStatus()
+    }
+    
+    private func addOrUpdateActivity(newActivity:Activity) {
+        // todo: refactor or remove this method if using core data
+        // assume only one of each type, use type as unique key
+        let array = self.activities as NSArray
+        for activity in array as! [Activity] {
+            if activity.type == newActivity.type {
+                println("replacing activity of type \(activity.type)")
+                self.activities.replaceObjectAtIndex(self.activities.indexOfObject(activity), withObject: newActivity)
+                return
+            }
+        }
+        
+        println("adding new activity of type \(newActivity.type)")
+        self.activities.addObject(newActivity)
     }
     
     func setIsCurrentDay(isCurrentDay:Bool) {
@@ -108,6 +126,17 @@ class CalendarHeaderDayViewController: UIViewController {
         }
         let percent:Float = Float(completeCount) / Float(completableCount)
         return percent >= 0.8
+    }
+    
+    // MARK: - Notifications
+    func handleActivitiesUpdated(n:NSNotification) {
+        let userInfo = n.userInfo
+        if userInfo != nil {
+            let activities = userInfo!["activity"] as? [Activity]
+            if activities != nil {
+                self.updateActivities(activities, replaceExisting: false)
+            }
+        }
     }
     
     /*

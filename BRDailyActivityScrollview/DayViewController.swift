@@ -249,5 +249,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
             self.closeActivityView()
             self.currentActivityController!.view.removeFromSuperview()
         }
+        let userInfo: [String:[Activity]] = ["activity":[activity]]
+        self.notify("activities:updated:forDate", object: self.currentDate, userInfo: userInfo)
     }
 }
