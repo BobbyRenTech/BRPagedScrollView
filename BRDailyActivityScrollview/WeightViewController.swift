@@ -8,11 +8,9 @@
 
 import UIKit
 
-protocol WeightViewDelegate {
-    func didEnterWeight(weight:CGFloat)
-    func didCloseEnterWeight()
+protocol WeightViewDelegate { // todo: this can be a generic activityDelegate?
+    func didCompleteActivity(activity:Activity!)
 }
-
 
 class WeightViewController: UIViewController, WeightInputDelegate {
     
@@ -66,10 +64,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
     func didSetWeight(newWeight: CGFloat) {
         if newWeight != 0 {
             self.activity!.didCompleteWeight(newWeight)
-            self.delegate!.didEnterWeight(self.activity!.weight!)
         }
-        else {
-            self.delegate!.didCloseEnterWeight()
-        }
+        self.delegate!.didCompleteActivity(self.activity)
     }
 }

@@ -240,13 +240,8 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     // MARK: - Activity delegates
     
     // MARK: WeightViewDelegate
-    func didEnterWeight(weight: CGFloat) {
-        println("new weight: \(weight)")
+    func didCompleteActivity(activity: Activity!) {
         self.collectionView.reloadData()
-        self.didCloseEnterWeight()
-    }
-    
-    func didCloseEnterWeight() {
         if self.currentActivityController != nil {
             self.copyView!.alpha = 1
             self.currentActivityController!.view.alpha = 0
@@ -255,5 +250,4 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
             self.currentActivityController!.view.removeFromSuperview()
         }
     }
-
 }
