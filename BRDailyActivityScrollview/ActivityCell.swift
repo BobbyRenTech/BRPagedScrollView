@@ -20,7 +20,7 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var constraintLabelHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
-        self.layer.cornerRadius = 5
+        self.layer.cornerRadius = 10
     }
     
     func setupWithActivity(activity:Activity) {
