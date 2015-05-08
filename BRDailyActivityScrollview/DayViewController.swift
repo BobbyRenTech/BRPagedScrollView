@@ -10,7 +10,7 @@ import UIKit
 
 let BORDER:CGFloat = 10
 
-class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate,WeightViewDelegate {
+class DayViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, RFQuiltLayoutDelegate, ActivityCellDelegate, WeightViewDelegate {
     @IBOutlet weak var constraintContentWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintContentHeight: NSLayoutConstraint!
 
@@ -94,6 +94,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
             cell = collectionView.dequeueReusableCellWithReuseIdentifier("ActivityCellSingle", forIndexPath: indexPath) as! ActivityCell
         }
         
+        cell.delegate = self
         cell.setupWithActivity(activity)
         
         return cell
@@ -102,12 +103,8 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     // MARK: - UICollectionViewDelegate 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell: ActivityCell = self.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! ActivityCell
-        var frame = collectionView.convertRect(cell.frame, toView: self.view)
-        frame.origin.y += 20
-        frame.size.height -= 20 // hack: convert cell.viewBorder.frame instead of cell
-        let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
-
-        self.didSelectActivityTile(activity, canvas:cell.viewBorder, frame: frame)
+        // not used: cell selection has been replaced with gesture handling
+        self.didSelectActivityTile(cell)
     }
     
     // MARK: - RFQuiltLayoutDelegate
@@ -168,7 +165,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     }
     
     // MARK: Activity selection
-    func didSelectActivityTile(activity: Activity, canvas:UIView, frame: CGRect) {
+    func didSelectActivityTile(cell:ActivityCell) {
+        let canvas = cell.viewBorder
+        var frame = collectionView.convertRect(cell.frame, toView: self.view)
+        frame.origin.y += 20
+        frame.size.height -= 20 // hack: convert cell.viewBorder.frame instead of cell
+        let activity:Activity = cell.activity!
         
         let baseView = appDelegate.window!.rootViewController!.view as UIView
         let frameInView = self.view.convertRect(frame, toView: baseView)
