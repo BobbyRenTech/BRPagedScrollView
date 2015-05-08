@@ -136,5 +136,11 @@ class Activity: NSObject {
         }
         return self.iconStates!.containsObject("kudos")
     }
+    func isLocked() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("lock")
+    }
 
 }

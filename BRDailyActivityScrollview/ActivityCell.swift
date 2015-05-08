@@ -66,10 +66,13 @@ class ActivityCell: UICollectionViewCell {
             self.iconRewards!.image = UIImage(named: "tile_star")
         }
         if activity.hasSpecial() && self.iconSpecial != nil {
-            self.iconSpecial!.image = UIImage(named: "tile_lock")
+            // no special status tiles
         }
         if activity.hasKudos() && self.iconKudos != nil {
             self.iconKudos!.image = UIImage(named: "tile_kudos")
+        }
+        if activity.isLocked() && self.iconStatus != nil {
+            self.iconStatus!.image = UIImage(named: "tile_lock")
         }
     
         if activity.type == ActivityType.Sponsored {
@@ -169,7 +172,7 @@ class ActivityCell: UICollectionViewCell {
         
         var targetString = baseString as NSString
         var range = targetString.rangeOfString(boldString)
-        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(18), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
         
