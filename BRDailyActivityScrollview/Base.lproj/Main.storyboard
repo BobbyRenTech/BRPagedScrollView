@@ -115,14 +115,41 @@
                                             <constraint firstAttribute="width" constant="66" id="xLZ-aX-bzL"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrq-0k-4I9">
+                                        <rect key="frame" x="13" y="497" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="e3T-0E-qIa"/>
+                                            <constraint firstAttribute="width" constant="30" id="hPP-my-gyC"/>
+                                        </constraints>
+                                        <state key="normal" image="settings">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wWN-qz-0LP">
+                                        <rect key="frame" x="556" y="497" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Laj-LI-aK7"/>
+                                            <constraint firstAttribute="width" constant="30" id="b5D-08-h4O"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="?">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="wrq-0k-4I9" firstAttribute="leading" secondItem="3xd-Zf-La6" secondAttribute="leading" constant="13" id="7iT-VV-DS1"/>
                                     <constraint firstAttribute="centerX" secondItem="br5-p1-3pU" secondAttribute="centerX" id="HHG-2K-KZj"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="8TV-Lv-cmU" secondAttribute="trailing" constant="-8" id="Kws-pX-9MM"/>
                                     <constraint firstAttribute="bottom" secondItem="br5-p1-3pU" secondAttribute="bottom" id="N7m-Fy-Ei1"/>
                                     <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="3xd-Zf-La6" secondAttribute="topMargin" constant="-8" id="Wmg-Hn-agB"/>
+                                    <constraint firstAttribute="trailing" secondItem="wWN-qz-0LP" secondAttribute="trailing" constant="14" id="Xfk-rD-wtu"/>
                                     <constraint firstItem="8TV-Lv-cmU" firstAttribute="leading" secondItem="3xd-Zf-La6" secondAttribute="leadingMargin" constant="-8" id="p0z-L8-VYc"/>
+                                    <constraint firstAttribute="bottom" secondItem="wrq-0k-4I9" secondAttribute="bottom" constant="13" id="uc1-3Q-I5u"/>
+                                    <constraint firstAttribute="bottom" secondItem="wWN-qz-0LP" secondAttribute="bottom" constant="13" id="uvS-CD-pCh"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="8TV-Lv-cmU" secondAttribute="bottom" constant="-8" id="wUL-wr-5fq"/>
                                 </constraints>
                             </view>
@@ -155,8 +182,10 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
+                        <outlet property="buttonHelp" destination="wWN-qz-0LP" id="QXe-53-gc3"/>
                         <outlet property="buttonLeft" destination="Rdg-8V-3bn" id="9Yh-oH-Fo6"/>
                         <outlet property="buttonRight" destination="UDY-nh-01K" id="BJy-dG-eDr"/>
+                        <outlet property="buttonSettings" destination="wrq-0k-4I9" id="wyT-Uq-0uL"/>
                         <outlet property="calendarView" destination="ud9-F1-uB4" id="Wej-Cj-Jsk"/>
                         <outlet property="dateView" destination="UXA-4e-ydf" id="yzU-jY-BT7"/>
                         <outlet property="labelDate" destination="YAC-4n-Exg" id="riD-R0-Hx1"/>
@@ -842,6 +871,7 @@
         <image name="caretLeft" width="14" height="30"/>
         <image name="caretRight" width="14" height="30"/>
         <image name="scale-blue" width="257" height="306"/>
+        <image name="settings" width="21" height="15"/>
         <image name="tabBlank" width="66" height="50"/>
     </resources>
 </document>

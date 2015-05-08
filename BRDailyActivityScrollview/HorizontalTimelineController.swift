@@ -22,6 +22,9 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var buttonRight: UIButton!
     @IBOutlet weak var labelDate: UILabel!
     
+    @IBOutlet weak var buttonSettings: UIButton!
+    @IBOutlet weak var buttonHelp: UIButton!
+    
     let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)!
     
     var pagewidth: CGFloat!
@@ -40,6 +43,13 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         dayControllers = NSMutableArray()
+        
+        self.buttonSettings.layer.borderWidth = 2
+        self.buttonHelp.layer.borderWidth = 2
+        self.buttonSettings.layer.borderColor = UIColor.whiteColor().CGColor
+        self.buttonHelp.layer.borderColor = UIColor.whiteColor().CGColor
+        self.buttonSettings.layer.cornerRadius = self.buttonSettings.frame.size.width / 2
+        self.buttonHelp.layer.cornerRadius = self.buttonHelp.frame.size.width / 2
     }
 
     override func didReceiveMemoryWarning() {
