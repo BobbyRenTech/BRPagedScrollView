@@ -130,15 +130,17 @@ class ActivityCell: UICollectionViewCell {
 
     func attributedStringForWeight(weight:CGFloat) -> NSAttributedString? {
         var boldString = "\(Int(weight)) lbs"
-        var baseString = "Today's weight\n\(boldString) lbs"
+        var baseString = "Today's weight\n\(boldString)"
         
         var attributedString = NSMutableAttributedString(string: baseString)
-        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.blueColor()]
+        var font:UIFont = UIFont(name: "Helvetica-Light", size: 14)!
+        var attrs = [NSFontAttributeName : font, NSForegroundColorAttributeName: ColorUtil.blueColor()]
         var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
         
         var targetString = baseString as NSString
         var range = targetString.rangeOfString(boldString)
-        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
+        font = UIFont(name:"Helvetica", size:36)!
+        var otherAttrs = [NSFontAttributeName : font, NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
         
@@ -150,12 +152,12 @@ class ActivityCell: UICollectionViewCell {
         var baseString = "Whole Foods Challenge\nWalk 10 miles in 7 days"
         
         var attributedString = NSMutableAttributedString(string: baseString)
-        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.darkGreenColor()]
+        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(16), NSForegroundColorAttributeName: ColorUtil.darkGreenColor()]
         var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
         
         var targetString = baseString as NSString
         var range = targetString.rangeOfString(boldString)
-        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(20)] as [NSObject:AnyObject]
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(16)] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
         
