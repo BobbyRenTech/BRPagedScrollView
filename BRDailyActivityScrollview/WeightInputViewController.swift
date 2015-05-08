@@ -49,14 +49,13 @@ class WeightInputViewController: UIViewController {
     }
 
     @IBAction func didPressButton(sender:UIButton!) {
+        if sender == self.buttonMinus || sender == self.buttonPlus {
+            return
+        }
         sender.backgroundColor = ColorUtil.blueColor()
     }
     
     @IBAction func didClickButton(sender:UIButton!) {
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            sender.backgroundColor = UIColor.clearColor()
-        }) { (success) -> Void in
-        }
         if sender == self.buttonMinus {
             if weight != nil {
                 weight = weight! - 1
@@ -68,6 +67,10 @@ class WeightInputViewController: UIViewController {
             }
         }
         else {
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                sender.backgroundColor = UIColor.clearColor()
+                }) { (success) -> Void in
+            }
             if weight == nil {
                 weight = 0
             }
@@ -113,7 +116,7 @@ class WeightInputViewController: UIViewController {
                 let string = "\(val)" as String
                 button.setTitle(string, forState: UIControlState.Normal)
                 button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
-                button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
+//                button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
                 button.titleLabel!.font = UIFont.systemFontOfSize(30)
                 button.layer.cornerRadius = CGFloat(width/2)
                 button.layer.borderWidth = border
