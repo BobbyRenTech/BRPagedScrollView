@@ -13,7 +13,16 @@ let SHOW_ICONS = true
 
 class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
-    @IBOutlet weak var icon: UIImageView!
+    
+    @IBOutlet weak var iconGeneral: UIImageView?
+    @IBOutlet weak var iconReminders: UIImageView? // top left
+    @IBOutlet weak var iconStatus: UIImageView? // middle
+    @IBOutlet weak var iconMessages: UIImageView? // top right
+    @IBOutlet weak var iconRewards: UIImageView? // bottom left
+    @IBOutlet weak var iconSpecial: UIImageView? // middle
+    @IBOutlet weak var iconKudos: UIImageView? // bottom left
+    
+    
     @IBOutlet weak var iconSponsor: UIImageView?
     
     @IBOutlet weak var constraintLabelWidth: NSLayoutConstraint!
@@ -32,32 +41,46 @@ class ActivityCell: UICollectionViewCell {
         self.labelText.text = activity.text
         self.labelText.textColor = ColorUtil.blueColor()
 
-        if SHOW_ICONS {
-            if activity.iconName != nil {
-                self.icon.image = UIImage(named:activity.iconName!)
+        // icons
+        if activity.hasReminders() && self.iconReminders != nil {
+            self.iconReminders!.image = UIImage(named: "tile_doctor")
+        }
+        if activity.hasStatus() && self.iconStatus != nil {
+            self.iconReminders!.image = UIImage(named: "tile_clock")
+        }
+        if activity.hasMessages() && self.iconMessages != nil {
+            self.iconReminders!.image = UIImage(named: "tile_speechBubble")
+        }
+        if activity.hasRewards() && self.iconRewards != nil {
+            self.iconReminders!.image = UIImage(named: "tile_star")
+        }
+        if activity.hasSpecial() && self.iconSpecial != nil {
+            self.iconReminders!.image = UIImage(named: "tile_lock")
+        }
+        if activity.hasKudos() && self.iconKudos != nil {
+            self.iconReminders!.image = UIImage(named: "tile_kudos")
+        }
+    
+        if activity.type == ActivityType.Sponsored {
+            if self.iconSponsor != nil && activity.sponsor != nil {
+                self.iconSponsor!.image = UIImage(named:activity.sponsor!)
+            }
+            if self.iconGeneral != nil {
+                self.iconGeneral!.image = UIImage(named:"tile_syringe")
             }
         }
         
-        if activity.type == ActivityType.Sponsored {
-            if self.iconSponsor != nil && activity.iconName != nil {
-                // sponsor icon should be company icon - TODO use activity.iconSponsorName
-                self.iconSponsor!.image = UIImage(named:activity.iconName!)
-            }
-            if activity.iconName != nil {
-                self.icon.image = UIImage(named:activity.iconName!)
+        if activity.type == ActivityType.Challenge {
+            if self.iconGeneral != nil {
+                self.iconGeneral!.image = UIImage(named:activity.sponsor!)
             }
         }
+
         
         // completed activities
         if activity.completed == true {
-            self.layer.borderColor = ColorUtil.greenColor().CGColor
+            self.layer.borderColor = ColorUtil.blueColor().CGColor
             self.backgroundColor = ColorUtil.darkBlueColor()
-            
-            if SHOW_ICONS {
-                if activity.iconNameComplete != nil {
-                    self.icon.image = UIImage(named:activity.iconNameComplete!)
-                }
-            }
             
             self.labelText.textColor = UIColor.whiteColor()
             if activity.type == ActivityType.Weight && activity.weight != nil {
@@ -68,7 +91,13 @@ class ActivityCell: UICollectionViewCell {
         if activity.text != nil {
             let string = activity.text! as NSString
             let size:CGSize = string.sizeWithAttributes([NSFontAttributeName: labelText.font])
-            self.constraintLabelHeight.constant = size.height + 5
+            
+            if activity.type == ActivityType.Sponsored || activity.type == ActivityType.Challenge {
+                self.constraintLabelWidth.constant = size.width
+            }
+            else {
+//                self.constraintLabelHeight.constant = size.height + 5
+            }
         }
 
     }

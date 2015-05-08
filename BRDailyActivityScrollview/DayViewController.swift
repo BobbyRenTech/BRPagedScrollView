@@ -141,12 +141,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         var activitiesArray = [AnyObject]()
         
         activitiesArray.append(self.sponsoredActivity())
-        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false, "icons":["rewards", "kudos"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false, "icons":["status", "messages"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":true, "icons":["rewards"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":false, "icons":["status"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":false, "icons":["status"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":false, "icons":["status"]]))
         activitiesArray.append(self.challengeActivity())
         self.updateWithActivities(activitiesArray as [AnyObject])
     }

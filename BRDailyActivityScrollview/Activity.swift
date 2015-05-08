@@ -22,13 +22,15 @@ enum ActivityType {
 
 class Activity: NSObject {
     var type: ActivityType
-    var iconName: String?
-    var iconNameComplete: String?
+    var sponsor: String?
     var text: String?
     var completed: Bool?
     var weight: CGFloat?
     var feetStatus: String?
     var date: NSDate?
+    
+    // icon information
+    var iconStates: NSArray?
     
     init(params:[String: Any]) {
         self.type = ActivityType.Sponsored
@@ -40,44 +42,34 @@ class Activity: NSObject {
             self.feetStatus = params["feetStatus"] as? String
             self.date = params["date"] as? NSDate
             
+            self.iconStates = params["icons"] as? NSArray
+            
             switch self.type {
             case ActivityType.Sponsored:
                 self.text = "Get a flu shot"
-                self.iconName = "cvs"
+                self.sponsor = "cvs"
                 break;
             case ActivityType.Weight:
                 self.text = "Check your weight"
-                self.iconName = "scale-blue"
-                self.iconNameComplete = "scale"
                 break;
             case ActivityType.Feet:
                 self.text = "Check your feet"
-                self.iconName = "foot-blue"
-                self.iconNameComplete = "foot"
                 break;
             case ActivityType.Glucose:
                 self.text = "Check your glucose"
-                self.iconName = "diabetes-blue"
-                self.iconNameComplete = "diabetes"
                 break;
             case ActivityType.Hunger:
                 self.text = "How's your hunger?"
-                self.iconName = "apple-blue"
-                self.iconNameComplete = "apple"
                 break;
             case ActivityType.Medicine:
                 self.text = "Take your medicine"
-                self.iconName = "pills-blue"
-                self.iconNameComplete = "pills"
                 break;
             case ActivityType.Feel:
                 self.text = "How do you feel?"
-                self.iconName = "person-blue"
-                self.iconNameComplete = "person"
                 break;
             case ActivityType.Challenge:
                 self.text = "Whole foods challenge"
-                self.iconName = "wholefoods"
+                self.sponsor = "wholefoods"
                 break;
             default:
                 break;
@@ -91,7 +83,6 @@ class Activity: NSObject {
                 if self.completed == true {
                     // todo: use a common method like didCompleteWeight
                     self.text = "Today's weight\n\(weight) lbs"
-                    self.iconName = "scale"
                 }
             }
         }
@@ -110,6 +101,45 @@ class Activity: NSObject {
         self.completed = true
         self.weight = weight
         self.text = "Today's weight\n\(weight) lbs"
+    }
+    
+    // hack: quick way to know whether an icon show be displayed for an activity
+    // todo: check actual activity parameters
+    func hasReminders() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("reminders")
+    }
+    func hasStatus() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("status")
+    }
+    func hasMessages() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("messages")
+    }
+    func hasRewards() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("rewards")
+    }
+    func hasSpecial() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("special")
+    }
+    func hasKudos() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("kudos")
     }
 
 }
