@@ -74,7 +74,10 @@ class WeightInputViewController: UIViewController {
             
             if sender.tag == -1 {
                 // erase
-                weight = weight! / 10
+                //weight = weight! / 10
+                
+                // cancel
+                self.delegate!.didSetWeight(0)
             }
             else if sender.tag == 10 {
                 // confirm
