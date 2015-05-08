@@ -197,6 +197,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         UIView.animateWithDuration(0.5, animations: { () -> Void in
             self.bgView!.alpha = 0.5
             self.copyView!.frame = final
+            self.copyView!.backgroundColor = UIColor.whiteColor()
             }) { (success) -> Void in
                 println("done")
                 self.displayActivityDetails(activity)

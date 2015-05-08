@@ -587,7 +587,7 @@
                                         <rect key="frame" x="14" y="8" width="31" height="37"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="B51-7a-RGt" firstAttribute="top" secondItem="bjW-3u-rJ8" secondAttribute="top" constant="3" id="0Za-D2-tqJ"/>
                                     <constraint firstItem="B51-7a-RGt" firstAttribute="leading" secondItem="6H2-Et-3E5" secondAttribute="trailing" constant="15" id="1Cx-ZR-v1k"/>
