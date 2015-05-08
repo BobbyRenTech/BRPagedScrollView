@@ -194,13 +194,27 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         final.origin.x = (baseView.frame.size.width - final.size.width)/2
         final.origin.y = 20
         
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            self.bgView!.alpha = 0.5
-            self.copyView!.frame = final
-            self.copyView!.backgroundColor = UIColor.whiteColor()
-            }) { (success) -> Void in
-                println("done")
-                self.displayActivityDetails(activity)
+        let damping:CGFloat = 0.6
+        let velocity:CGFloat = 1.1
+        if (UIDevice.currentDevice().systemVersion as NSString).floatValue >= 7.0 {
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                self.bgView!.alpha = 0.5
+                self.copyView!.frame = final
+                self.copyView!.backgroundColor = UIColor.whiteColor()
+                }) { (success) -> Void in
+                    println("done")
+                    self.displayActivityDetails(activity)
+            }
+        }
+        else {
+            UIView.animateWithDuration(0.5, animations: { () -> Void in
+                self.bgView!.alpha = 0.5
+                self.copyView!.frame = final
+                self.copyView!.backgroundColor = UIColor.whiteColor()
+                }) { (success) -> Void in
+                    println("done")
+                    self.displayActivityDetails(activity)
+            }
         }
     }
     
