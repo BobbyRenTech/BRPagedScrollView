@@ -57,7 +57,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         layout.blockPixels = CGSizeMake(width, height)
         
         // because we want dayViewController to fade, the top part of the scrollable area needs to be blank.
-        self.collectionView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
+        self.collectionView.contentInset = UIEdgeInsetsMake(60, 0, 60, 0)
     }
     
     // MARK: Populating data
@@ -102,10 +102,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     // MARK: - UICollectionViewDelegate 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell: ActivityCell = self.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! ActivityCell
-        let frame = collectionView.convertRect(cell.frame, toView: self.view)
+        var frame = collectionView.convertRect(cell.frame, toView: self.view)
+        frame.origin.y += 20
+        frame.size.height -= 20 // hack: convert cell.viewBorder.frame instead of cell
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
 
-        self.didSelectActivityTile(activity, canvas:cell, frame: frame)
+        self.didSelectActivityTile(activity, canvas:cell.viewBorder, frame: frame)
     }
     
     // MARK: - RFQuiltLayoutDelegate
@@ -125,7 +127,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
         let top:CGFloat = 0
         let left:CGFloat = BORDER
-        let bottom:CGFloat = BORDER
+        let bottom:CGFloat = 0 //BORDER
         let right:CGFloat = 0
         return UIEdgeInsetsMake(top, left, bottom, right);
     }
@@ -141,12 +143,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         var activitiesArray = [AnyObject]()
         
         activitiesArray.append(self.sponsoredActivity())
-        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":true]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":true]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":true]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":true]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false, "icons":["rewards", "kudos"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false, "icons":["reminders", "messages"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":true, "icons":["rewards"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":false, "icons":["lock"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":false, "icons":["status"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":false, "icons":["lock"]]))
         activitiesArray.append(self.challengeActivity())
         self.updateWithActivities(activitiesArray as [AnyObject])
     }

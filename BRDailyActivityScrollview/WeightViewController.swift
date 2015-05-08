@@ -28,7 +28,7 @@ class WeightViewController: UIViewController, WeightInputDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.viewContent.layer.borderColor = ColorUtil.blueColor().CGColor
+        self.viewContent.layer.borderColor = ColorUtil.greenColor().CGColor
         self.viewContent.layer.borderWidth = 1
         self.viewContent.layer.backgroundColor = UIColor.whiteColor().CGColor
     }

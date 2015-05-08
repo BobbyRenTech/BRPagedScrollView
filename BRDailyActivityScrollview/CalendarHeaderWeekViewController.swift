@@ -32,10 +32,10 @@ class CalendarHeaderWeekViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        let width:CGFloat = (self.view.frame.size.width - 40) / 7
+        let width:CGFloat = (self.view.frame.size.width - 20) / 7
         for i in 0 ... 6 {
             let dayController: CalendarHeaderDayViewController = storyboard!.instantiateViewControllerWithIdentifier("CalendarHeaderDayViewController") as! CalendarHeaderDayViewController
-            let frame:CGRect = CGRectMake(20 + width * CGFloat(i), 0, width, self.view.frame.size.height)
+            let frame:CGRect = CGRectMake(10 + width * CGFloat(i), 0, width, self.view.frame.size.height)
             dayController.view.frame = frame
             
             if !self.didInitViews {

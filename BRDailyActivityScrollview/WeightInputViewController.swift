@@ -13,6 +13,7 @@ protocol WeightInputDelegate {
 }
 
 class WeightInputViewController: UIViewController {
+    @IBOutlet weak var viewAmount:UIView!
     @IBOutlet weak var buttonMinus:UIButton!
     @IBOutlet weak var buttonPlus:UIButton!
     @IBOutlet weak var labelWeight:UILabel!
@@ -28,6 +29,9 @@ class WeightInputViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         self.updateWeight()
+        
+        self.viewAmount.layer.borderWidth = 1
+        self.viewAmount.layer.borderColor = UIColor.lightGrayColor().CGColor
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,6 +47,13 @@ class WeightInputViewController: UIViewController {
             self.labelWeight.text = "Enter your weight"
         }
     }
+
+    @IBAction func didPressButton(sender:UIButton!) {
+        if sender == self.buttonMinus || sender == self.buttonPlus {
+            return
+        }
+        sender.backgroundColor = ColorUtil.blueColor()
+    }
     
     @IBAction func didClickButton(sender:UIButton!) {
         if sender == self.buttonMinus {
@@ -56,13 +67,20 @@ class WeightInputViewController: UIViewController {
             }
         }
         else {
+            UIView.animateWithDuration(0.25, animations: { () -> Void in
+                sender.backgroundColor = UIColor.clearColor()
+                }) { (success) -> Void in
+            }
             if weight == nil {
                 weight = 0
             }
             
             if sender.tag == -1 {
                 // erase
-                weight = weight! / 10
+                //weight = weight! / 10
+                
+                // cancel
+                self.delegate!.didSetWeight(0)
             }
             else if sender.tag == 10 {
                 // confirm
@@ -98,11 +116,13 @@ class WeightInputViewController: UIViewController {
                 let string = "\(val)" as String
                 button.setTitle(string, forState: UIControlState.Normal)
                 button.setTitleColor(UIColor.grayColor(), forState: UIControlState.Normal)
+//                button.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Highlighted)
                 button.titleLabel!.font = UIFont.systemFontOfSize(30)
                 button.layer.cornerRadius = CGFloat(width/2)
                 button.layer.borderWidth = border
                 button.layer.borderColor = ColorUtil.blueColor().CGColor
                 button.tag = val
+                button.addTarget(self, action: "didPressButton:", forControlEvents: UIControlEvents.TouchDown)
                 button.addTarget(self, action: "didClickButton:", forControlEvents: UIControlEvents.TouchUpInside)
                 self.viewKeyboard.addSubview(button)
             }

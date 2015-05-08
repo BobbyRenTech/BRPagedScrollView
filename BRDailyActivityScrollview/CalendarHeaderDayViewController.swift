@@ -8,6 +8,8 @@
 
 import UIKit
 
+let COMPLIANCE_PERCENT = Float(0.2) // 2 activities or more
+
 class CalendarHeaderDayViewController: UIViewController {
 
     @IBOutlet weak var imageViewBG: UIImageView!
@@ -96,11 +98,16 @@ class CalendarHeaderDayViewController: UIViewController {
     private func updateStatus() {
         self.imageViewStatus.backgroundColor = UIColor.clearColor()
         let frame = self.imageViewStatus.frame
+        
         if self.isComplete() {
             self.imageViewStatus.image = UIImage(named: "iconCheck");
         }
         else {
-            self.imageViewStatus.image = UIImage(named: "iconX")
+            if self.date.timeIntervalSinceDate(BRDateUtils.beginningOfDate(NSDate(), GMT: false)) >= 0 {
+                self.imageViewStatus.image = nil
+            } else {
+                self.imageViewStatus.image = UIImage(named: "iconX")
+            }
         }
     }
     private func isComplete() -> Bool {
@@ -125,7 +132,7 @@ class CalendarHeaderDayViewController: UIViewController {
             }
         }
         let percent:Float = Float(completeCount) / Float(completableCount)
-        return percent >= 0.8
+        return percent >= COMPLIANCE_PERCENT
     }
     
     // MARK: - Notifications

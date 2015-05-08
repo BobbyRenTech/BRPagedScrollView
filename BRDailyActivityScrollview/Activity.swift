@@ -22,15 +22,21 @@ enum ActivityType {
 
 class Activity: NSObject {
     var type: ActivityType
-    var iconName: String?
-    var icon: UIImage?
+    var date: NSDate?
+    var sponsor: String?
     var text: String?
+    var textComplete: String?
     var completed: Bool?
+    
     var weight: CGFloat?
     var feetStatus: String?
-    var date: NSDate?
+    
+    // icon information
+    var iconStates: NSArray?
     
     init(params:[String: Any]) {
+        self.type = ActivityType.Sponsored
+        
         if let activityType = params["type"] as? ActivityType {
             self.type = activityType
             self.completed = params["completed"] as? Bool
@@ -38,67 +44,45 @@ class Activity: NSObject {
             self.feetStatus = params["feetStatus"] as? String
             self.date = params["date"] as? NSDate
             
+            self.iconStates = params["icons"] as? NSArray
+            
             switch self.type {
             case ActivityType.Sponsored:
                 self.text = "Get a flu shot"
-                self.iconName = "cvs"
+                self.sponsor = "cvs"
                 break;
             case ActivityType.Weight:
                 self.text = "Check your weight"
-                self.iconName = "scale-blue"
                 break;
             case ActivityType.Feet:
                 self.text = "Check your feet"
-                self.iconName = "foot-blue"
+                self.textComplete = "Feet are clear today"
+                self.feetStatus = "clear"
                 break;
             case ActivityType.Glucose:
                 self.text = "Check your glucose"
-                self.iconName = "diabetes-blue"
+                self.textComplete = "Glucose checked"
                 break;
             case ActivityType.Hunger:
                 self.text = "How's your hunger?"
-                self.iconName = "apple-blue"
+                self.textComplete = "Hunger logged"
                 break;
             case ActivityType.Medicine:
                 self.text = "Take your medicine"
-                self.iconName = "pills-blue"
+                self.textComplete = "Medicine taken"
                 break;
             case ActivityType.Feel:
                 self.text = "How do you feel?"
-                self.iconName = "person-blue"
+                self.textComplete = "I feel good today"
                 break;
             case ActivityType.Challenge:
-                self.text = "Whole foods challenge"
-                self.iconName = "wholefoods"
+                self.text = "Whole foods challenge\nWalk 10 miles in 7 days"
+                self.sponsor = "wholefoods"
                 break;
             default:
                 break;
             }
         }
-        else {
-            self.type = ActivityType.Challenge
-        }
-        
-        if self.iconName != nil {
-            self.icon = UIImage(named: self.iconName!)
-        }
-        else {
-            self.icon = nil
-        }
-        
-        // Configure the cell
-        // hack: activity for weight checks for stored weight in DayViewController; should be stored in activity
-        if self.type == ActivityType.Weight {
-            if self.weight != nil {
-                if self.completed == true {
-                    // todo: use a common method like didCompleteWeight
-                    self.text = "Today's weight\n\(weight) lbs"
-                    self.iconName = "scale"
-                    self.icon = UIImage(named: self.iconName!)
-                }
-            }
-        }
-
     }
     
     func isWide()->Bool {
@@ -112,9 +96,51 @@ class Activity: NSObject {
     func didCompleteWeight(weight:CGFloat) {
         self.completed = true
         self.weight = weight
-        self.text = "Today's weight\n\(weight) lbs"
-        self.iconName = "scale"
-        self.icon = UIImage(named: self.iconName!)
+    }
+    
+    // hack: quick way to know whether an icon show be displayed for an activity
+    // todo: check actual activity parameters
+    func hasReminders() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("reminders")
+    }
+    func hasStatus() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("status")
+    }
+    func hasMessages() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("messages")
+    }
+    func hasRewards() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("rewards")
+    }
+    func hasSpecial() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("special")
+    }
+    func hasKudos() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("kudos")
+    }
+    func isLocked() -> Bool {
+        if self.iconStates == nil {
+            return false;
+        }
+        return self.iconStates!.containsObject("lock")
     }
 
 }
