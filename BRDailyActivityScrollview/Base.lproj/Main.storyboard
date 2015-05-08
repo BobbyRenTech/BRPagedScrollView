@@ -94,10 +94,33 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="Ef7-ig-MRh"/>
                                         </connections>
                                     </scrollView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="br5-p1-3pU" userLabel="View - tab">
+                                        <rect key="frame" x="267" y="490" width="66" height="50"/>
+                                        <subviews>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="tabBlank" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-ag-DF8">
+                                                <rect key="frame" x="0.0" y="0.0" width="66" height="50"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fg8-Vc-F4q">
+                                                <rect key="frame" x="12" y="9" width="42" height="21"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="ObN-uX-rhI"/>
+                                            <constraint firstAttribute="width" constant="66" id="xLZ-aX-bzL"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="br5-p1-3pU" secondAttribute="centerX" id="HHG-2K-KZj"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="8TV-Lv-cmU" secondAttribute="trailing" constant="-8" id="Kws-pX-9MM"/>
+                                    <constraint firstAttribute="bottom" secondItem="br5-p1-3pU" secondAttribute="bottom" id="N7m-Fy-Ei1"/>
                                     <constraint firstItem="8TV-Lv-cmU" firstAttribute="top" secondItem="3xd-Zf-La6" secondAttribute="topMargin" constant="-8" id="Wmg-Hn-agB"/>
                                     <constraint firstItem="8TV-Lv-cmU" firstAttribute="leading" secondItem="3xd-Zf-La6" secondAttribute="leadingMargin" constant="-8" id="p0z-L8-VYc"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="8TV-Lv-cmU" secondAttribute="bottom" constant="-8" id="wUL-wr-5fq"/>
@@ -819,5 +842,6 @@
         <image name="caretLeft" width="14" height="30"/>
         <image name="caretRight" width="14" height="30"/>
         <image name="scale-blue" width="257" height="306"/>
+        <image name="tabBlank" width="66" height="50"/>
     </resources>
 </document>
