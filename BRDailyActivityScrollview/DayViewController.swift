@@ -57,7 +57,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         layout.blockPixels = CGSizeMake(width, height)
         
         // because we want dayViewController to fade, the top part of the scrollable area needs to be blank.
-        self.collectionView.contentInset = UIEdgeInsetsMake(60, 0, 0, 0)
+        self.collectionView.contentInset = UIEdgeInsetsMake(60, 0, 60, 0)
     }
     
     // MARK: Populating data
@@ -142,11 +142,11 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
         
         activitiesArray.append(self.sponsoredActivity())
         activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false, "icons":["rewards", "kudos"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false, "icons":["status", "messages"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false, "icons":["reminders", "messages"]]))
         activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":true, "icons":["rewards"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":false, "icons":["status"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":false, "icons":["lock"]]))
         activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":false, "icons":["status"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":false, "icons":["status"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":false, "icons":["lock"]]))
         activitiesArray.append(self.challengeActivity())
         self.updateWithActivities(activitiesArray as [AnyObject])
     }

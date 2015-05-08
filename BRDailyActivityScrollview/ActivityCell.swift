@@ -49,19 +49,19 @@ class ActivityCell: UICollectionViewCell {
             self.iconReminders!.image = UIImage(named: "tile_doctor")
         }
         if activity.hasStatus() && self.iconStatus != nil {
-            self.iconReminders!.image = UIImage(named: "tile_clock")
+            self.iconStatus!.image = UIImage(named: "tile_clock")
         }
         if activity.hasMessages() && self.iconMessages != nil {
-            self.iconReminders!.image = UIImage(named: "tile_speechBubble")
+            self.iconMessages!.image = UIImage(named: "tile_speechBubble")
         }
         if activity.hasRewards() && self.iconRewards != nil {
-            self.iconReminders!.image = UIImage(named: "tile_star")
+            self.iconRewards!.image = UIImage(named: "tile_star")
         }
         if activity.hasSpecial() && self.iconSpecial != nil {
-            self.iconReminders!.image = UIImage(named: "tile_lock")
+            self.iconSpecial!.image = UIImage(named: "tile_lock")
         }
         if activity.hasKudos() && self.iconKudos != nil {
-            self.iconReminders!.image = UIImage(named: "tile_kudos")
+            self.iconKudos!.image = UIImage(named: "tile_kudos")
         }
     
         if activity.type == ActivityType.Sponsored {
