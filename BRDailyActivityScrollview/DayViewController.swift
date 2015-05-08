@@ -102,10 +102,12 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     // MARK: - UICollectionViewDelegate 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         let cell: ActivityCell = self.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! ActivityCell
-        let frame = collectionView.convertRect(cell.frame, toView: self.view)
+        var frame = collectionView.convertRect(cell.frame, toView: self.view)
+        frame.origin.y += 20
+        frame.size.height -= 20 // hack: convert cell.viewBorder.frame instead of cell
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
 
-        self.didSelectActivityTile(activity, canvas:cell, frame: frame)
+        self.didSelectActivityTile(activity, canvas:cell.viewBorder, frame: frame)
     }
     
     // MARK: - RFQuiltLayoutDelegate

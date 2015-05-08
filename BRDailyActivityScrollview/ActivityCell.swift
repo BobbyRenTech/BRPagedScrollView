@@ -44,6 +44,14 @@ class ActivityCell: UICollectionViewCell {
         self.labelText.text = activity.text
         self.labelText.textColor = ColorUtil.blueColor()
 
+        // reset icons in case of reuse
+        self.iconReminders?.image = nil
+        self.iconStatus?.image = nil
+        self.iconMessages?.image = nil
+        self.iconRewards?.image = nil
+        self.iconSpecial?.image = nil
+        self.iconKudos?.image = nil
+
         // icons
         if activity.hasReminders() && self.iconReminders != nil {
             self.iconReminders!.image = UIImage(named: "tile_doctor")
@@ -94,6 +102,11 @@ class ActivityCell: UICollectionViewCell {
             if activity.type == ActivityType.Weight && activity.weight != nil {
                 self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
             }
+            /*
+            self.iconReminders?.hidden = true
+            self.iconMessages?.hidden = true
+            self.iconStatus?.hidden = true
+            */
         }
         
         if activity.text != nil {
