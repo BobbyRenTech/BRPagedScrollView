@@ -22,12 +22,14 @@ enum ActivityType {
 
 class Activity: NSObject {
     var type: ActivityType
+    var date: NSDate?
     var sponsor: String?
     var text: String?
+    var textComplete: String?
     var completed: Bool?
+    
     var weight: CGFloat?
     var feetStatus: String?
-    var date: NSDate?
     
     // icon information
     var iconStates: NSArray?
@@ -54,18 +56,24 @@ class Activity: NSObject {
                 break;
             case ActivityType.Feet:
                 self.text = "Check your feet"
+                self.textComplete = "Feet are clear today"
+                self.feetStatus = "clear"
                 break;
             case ActivityType.Glucose:
                 self.text = "Check your glucose"
+                self.textComplete = "Glucose checked"
                 break;
             case ActivityType.Hunger:
                 self.text = "How's your hunger?"
+                self.textComplete = "Hunger logged"
                 break;
             case ActivityType.Medicine:
                 self.text = "Take your medicine"
+                self.textComplete = "Medicine taken"
                 break;
             case ActivityType.Feel:
                 self.text = "How do you feel?"
+                self.textComplete = "I feel good today"
                 break;
             case ActivityType.Challenge:
                 self.text = "Whole foods challenge\nWalk 10 miles in 7 days"
@@ -75,18 +83,6 @@ class Activity: NSObject {
                 break;
             }
         }
-        
-        // Configure the cell
-        // hack: activity for weight checks for stored weight in DayViewController; should be stored in activity
-        if self.type == ActivityType.Weight {
-            if self.weight != nil {
-                if self.completed == true {
-                    // todo: use a common method like didCompleteWeight
-                    self.text = "Today's weight\n\(weight) lbs"
-                }
-            }
-        }
-
     }
     
     func isWide()->Bool {
@@ -100,7 +96,6 @@ class Activity: NSObject {
     func didCompleteWeight(weight:CGFloat) {
         self.completed = true
         self.weight = weight
-        self.text = "Today's weight\n\(weight) lbs"
     }
     
     // hack: quick way to know whether an icon show be displayed for an activity

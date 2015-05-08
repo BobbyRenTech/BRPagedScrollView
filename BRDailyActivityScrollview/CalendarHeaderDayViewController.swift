@@ -8,7 +8,7 @@
 
 import UIKit
 
-let COMPLIANCE_PERCENT = Float(0.01)
+let COMPLIANCE_PERCENT = Float(0.2) // 2 activities or more
 
 class CalendarHeaderDayViewController: UIViewController {
 
@@ -98,11 +98,16 @@ class CalendarHeaderDayViewController: UIViewController {
     private func updateStatus() {
         self.imageViewStatus.backgroundColor = UIColor.clearColor()
         let frame = self.imageViewStatus.frame
+        
         if self.isComplete() {
             self.imageViewStatus.image = UIImage(named: "iconCheck");
         }
         else {
-            self.imageViewStatus.image = UIImage(named: "iconX")
+            if self.date.timeIntervalSinceDate(BRDateUtils.beginningOfDate(NSDate(), GMT: false)) >= 0 {
+                self.imageViewStatus.image = nil
+            } else {
+                self.imageViewStatus.image = UIImage(named: "iconX")
+            }
         }
     }
     private func isComplete() -> Bool {

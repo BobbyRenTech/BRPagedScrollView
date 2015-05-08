@@ -93,7 +93,6 @@ class ActivityCell: UICollectionViewCell {
             }
         }
 
-        
         // completed activities
         if activity.completed == true {
             self.viewBorder.backgroundColor = ColorUtil.darkBlueColor()
@@ -101,6 +100,9 @@ class ActivityCell: UICollectionViewCell {
             self.labelText.textColor = UIColor.whiteColor()
             if activity.type == ActivityType.Weight && activity.weight != nil {
                 self.labelText.attributedText = self.attributedStringForWeight(activity.weight!)
+            }
+            if activity.type == ActivityType.Feet && activity.feetStatus != nil {
+                self.labelText.attributedText = self.attributedStringForFeetStatus(activity.feetStatus!)
             }
             /*
             self.iconReminders?.hidden = true
@@ -124,15 +126,15 @@ class ActivityCell: UICollectionViewCell {
     }
 
     func attributedStringForWeight(weight:CGFloat) -> NSAttributedString? {
-        var weightString = "\(Int(weight)) lbs"
-        var baseString = "Today's weight\n\(weightString)"
+        var boldString = "\(Int(weight)) lbs"
+        var baseString = "Today's weight\n\(boldString) lbs"
         
         var attributedString = NSMutableAttributedString(string: baseString)
         var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.blueColor()]
         var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
         
         var targetString = baseString as NSString
-        var range = targetString.rangeOfString(weightString)
+        var range = targetString.rangeOfString(boldString)
         var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
@@ -142,6 +144,7 @@ class ActivityCell: UICollectionViewCell {
     
     func attributedStringForChallenge(baseString:String) -> NSAttributedString? {
         var boldString = "Walk 10 miles in 7 days"
+        var baseString = "Whole Foods Challenge\nWalk 10 miles in 7 days"
         
         var attributedString = NSMutableAttributedString(string: baseString)
         var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.darkGreenColor()]
@@ -150,6 +153,23 @@ class ActivityCell: UICollectionViewCell {
         var targetString = baseString as NSString
         var range = targetString.rangeOfString(boldString)
         var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(20)] as [NSObject:AnyObject]
+        
+        result.addAttributes(otherAttrs, range: range)
+        
+        return result
+    }
+    
+    func attributedStringForFeetStatus(status:String) -> NSAttributedString? {
+        var boldString = status
+        var baseString = "Feet are " + status + " today"
+        
+        var attributedString = NSMutableAttributedString(string: baseString)
+        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.blueColor()]
+        var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
+        
+        var targetString = baseString as NSString
+        var range = targetString.rangeOfString(boldString)
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
         
