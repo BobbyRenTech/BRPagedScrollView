@@ -12,6 +12,7 @@ import QuartzCore
 let SHOW_ICONS = true
 
 class ActivityCell: UICollectionViewCell {
+    @IBOutlet weak var viewBorder: UIView!
     @IBOutlet weak var labelText: UILabel!
     
     @IBOutlet weak var iconGeneral: UIImageView?
@@ -29,15 +30,17 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var constraintLabelHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
-        self.layer.cornerRadius = 10
+        self.viewBorder.layer.cornerRadius = 10
+        self.viewBorder.layer.borderWidth = 4
+        self.viewBorder.layer.borderColor = ColorUtil.blueColor().CGColor
+        self.backgroundColor = UIColor.clearColor()
     }
     
     func setupWithActivity(activity:Activity) {
-        self.layer.borderWidth = 4
         
         // incomplete activities (default)
-        self.layer.borderColor = ColorUtil.blueColor().CGColor
-        self.backgroundColor = UIColor.whiteColor()
+        self.viewBorder.backgroundColor = UIColor.whiteColor()
+        
         self.labelText.text = activity.text
         self.labelText.textColor = ColorUtil.blueColor()
 
@@ -79,8 +82,7 @@ class ActivityCell: UICollectionViewCell {
         
         // completed activities
         if activity.completed == true {
-            self.layer.borderColor = ColorUtil.blueColor().CGColor
-            self.backgroundColor = ColorUtil.darkBlueColor()
+            self.viewBorder.backgroundColor = ColorUtil.darkBlueColor()
             
             self.labelText.textColor = UIColor.whiteColor()
             if activity.type == ActivityType.Weight && activity.weight != nil {

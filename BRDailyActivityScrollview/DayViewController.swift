@@ -125,7 +125,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     func insetsForItemAtIndexPath(indexPath: NSIndexPath!) -> UIEdgeInsets {
         let top:CGFloat = 0
         let left:CGFloat = BORDER
-        let bottom:CGFloat = BORDER
+        let bottom:CGFloat = 0 //BORDER
         let right:CGFloat = 0
         return UIEdgeInsetsMake(top, left, bottom, right);
     }
