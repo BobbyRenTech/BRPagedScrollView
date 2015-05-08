@@ -23,8 +23,8 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var iconSpecial: UIImageView? // middle
     @IBOutlet weak var iconKudos: UIImageView? // bottom left
     
-    
     @IBOutlet weak var iconSponsor: UIImageView?
+    @IBOutlet weak var progressView: UIProgressView?
     
     @IBOutlet weak var constraintLabelWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintLabelHeight: NSLayoutConstraint!
@@ -74,8 +74,14 @@ class ActivityCell: UICollectionViewCell {
         }
         
         if activity.type == ActivityType.Challenge {
+            if self.progressView != nil {
+                self.progressView!.hidden = false
+            }
             if self.iconGeneral != nil {
                 self.iconGeneral!.image = UIImage(named:activity.sponsor!)
+            }
+            if activity.text != nil {
+                self.labelText.attributedText = self.attributedStringForChallenge(activity.text!)
             }
         }
 
@@ -115,6 +121,22 @@ class ActivityCell: UICollectionViewCell {
         var targetString = baseString as NSString
         var range = targetString.rangeOfString(weightString)
         var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(25), NSForegroundColorAttributeName: UIColor.whiteColor()] as [NSObject:AnyObject]
+        
+        result.addAttributes(otherAttrs, range: range)
+        
+        return result
+    }
+    
+    func attributedStringForChallenge(baseString:String) -> NSAttributedString? {
+        var boldString = "Walk 10 miles in 7 days"
+        
+        var attributedString = NSMutableAttributedString(string: baseString)
+        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.darkGreenColor()]
+        var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
+        
+        var targetString = baseString as NSString
+        var range = targetString.rangeOfString(boldString)
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(20)] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
         

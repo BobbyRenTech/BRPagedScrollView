@@ -68,7 +68,7 @@ class Activity: NSObject {
                 self.text = "How do you feel?"
                 break;
             case ActivityType.Challenge:
-                self.text = "Whole foods challenge"
+                self.text = "Whole foods challenge\nWalk 10 miles in 7 days"
                 self.sponsor = "wholefoods"
                 break;
             default:
