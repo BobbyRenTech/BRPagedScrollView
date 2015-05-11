@@ -37,6 +37,7 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     var delegate:ActivityCellDelegate?
     
     var isPressing: Bool = false
+    var showingBack: Bool = false
     
     override func awakeFromNib() {
         self.viewBorder.layer.cornerRadius = 10
@@ -91,21 +92,7 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
         if activity.isLocked() {
             self.iconStatus?.image = UIImage(named: "tile_lock")
-            
-            // use gray content
-            /*
-            self.labelText.textColor = UIColor.lightGrayColor()
-            self.viewBorder.layer.borderColor = UIColor.lightGrayColor().CGColor
-            */
-            
-            // use alpha
-            /*
-            self.viewBorder.alpha = 0.5
-            */
-            
-            // use gray bg
-            self.labelText.alpha = 0.5
-            self.viewBorder.backgroundColor = UIColor(white: 0.9, alpha: 1)
+            self.toggleLockedOverlay(true)
         }
     
         if activity.type == ActivityType.Sponsored {
@@ -206,6 +193,24 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         return result
     }
     
+    func attributedStringForLock() -> NSAttributedString {
+        var boldString = "locked"
+        var baseString = "This activity is currently locked"
+
+        
+        var attributedString = NSMutableAttributedString(string: baseString)
+        var attrs = [NSFontAttributeName : UIFont.systemFontOfSize(18), NSForegroundColorAttributeName: ColorUtil.blueColor()]
+        var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
+        
+        var targetString = baseString as NSString
+        var range = targetString.rangeOfString(boldString)
+        var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(18), NSForegroundColorAttributeName: UIColor.redColor()] as [NSObject:AnyObject]
+        
+        result.addAttributes(otherAttrs, range: range)
+        
+        return result
+    }
+    
     // MARK: - gesture
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
         let location = touch.locationInView(self)
@@ -237,6 +242,63 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
     }
     
+    func resetBounce() {
+        
+    }
+    
+    func didTap() {
+        if self.activity!.isLocked() {
+            self.flip()
+        }
+        else {
+            self.bounce { () -> Void in
+                println("bounced")
+                if self.delegate != nil && self.activity != nil {
+                    self.delegate!.didSelectActivityTile(self)
+                }
+            }
+        }
+    }
+    
+    func didPressDown() {
+        self.bounceForState(1, completion: { () -> Void in
+            
+        })
+    }
+    
+    func didPressUp() {
+        self.bounceForState(0, completion: { () -> Void in
+            println("bounced")
+            if self.delegate != nil && self.activity != nil {
+                self.delegate!.didSelectActivityTile(self)
+            }
+        })
+    }
+    
+    func toggleLockedOverlay(locked: Bool) {
+        // use gray content
+        /*
+        self.labelText.textColor = UIColor.lightGrayColor()
+        self.viewBorder.layer.borderColor = UIColor.lightGrayColor().CGColor
+        */
+        
+        // use alpha
+        /*
+        self.viewBorder.alpha = 0.5
+        */
+        
+        // use gray bg
+        if locked {
+            self.labelText.alpha = 0.5
+            self.viewBorder.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        }
+        else {
+            self.labelText.alpha = 1
+            self.viewBorder.backgroundColor = UIColor(white: 1, alpha: 1)
+        }
+    }
+    
+    // MARK :- Animations
     func bounce(completion: () -> Void) {
         if (UIDevice.currentDevice().systemVersion as NSString).floatValue < 7.0 {
             completion()
@@ -254,14 +316,14 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             sx = 0.9
             sy = 0.9
             self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
-        }) { (finished) -> Void in
-            UIView.animateWithDuration(duration*2/3, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-                sx = 1
-                sy = 1
-                self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
-            }, completion: { (finished) -> Void in
-                completion()
-            })
+            }) { (finished) -> Void in
+                UIView.animateWithDuration(duration*2/3, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    sx = 1
+                    sy = 1
+                    self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
+                    }, completion: { (finished) -> Void in
+                        completion()
+                })
         }
     }
     
@@ -288,7 +350,7 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
                     println("done")
                     UIView.animateWithDuration(0.01, delay: 0.25, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
                         //self.contentView.transform = CGAffineTransformIdentity;
-                    }, completion: { (finished) -> Void in
+                        }, completion: { (finished) -> Void in
                     })
             }
         }
@@ -304,31 +366,21 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         }
     }
     
-    func resetBounce() {
-        
-    }
-    
-    func didTap() {
-        self.bounce { () -> Void in
-            println("bounced")
-            if self.delegate != nil && self.activity != nil {
-                self.delegate!.didSelectActivityTile(self)
-            }
+    func flip() {
+        self.showingBack = !self.showingBack
+        self.toggleLockedOverlay(!self.showingBack)
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(0.5)
+        UIView.setAnimationTransition(UIViewAnimationTransition.FlipFromRight, forView: self, cache: true)
+        if (self.showingBack) {
+            self.iconStatus?.hidden = true
+            self.labelText.attributedText = self.attributedStringForLock()
         }
-    }
-    
-    func didPressDown() {
-        self.bounceForState(1, completion: { () -> Void in
+        else {
+            self.iconStatus?.hidden = false
+            self.setupWithActivity(self.activity!)
             
-        })
-    }
-    
-    func didPressUp() {
-        self.bounceForState(0, completion: { () -> Void in
-            println("bounced")
-            if self.delegate != nil && self.activity != nil {
-                self.delegate!.didSelectActivityTile(self)
-            }
-        })
+        }
+        UIView.commitAnimations()
     }
 }
