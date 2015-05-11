@@ -347,7 +347,7 @@
                                             <outlet property="viewBorder" destination="DhY-ox-SXy" id="DoR-Sn-wE0"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCellWide" id="lmR-uJ-2Lb" customClass="ActivityCell" customModule="CareCam_Demo" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCellWide" id="lmR-uJ-2Lb" customClass="ActivityCell" customModule="CareCam_Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -587,7 +587,7 @@
                                         <rect key="frame" x="14" y="8" width="31" height="37"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="B51-7a-RGt" firstAttribute="top" secondItem="bjW-3u-rJ8" secondAttribute="top" constant="3" id="0Za-D2-tqJ"/>
                                     <constraint firstItem="B51-7a-RGt" firstAttribute="leading" secondItem="6H2-Et-3E5" secondAttribute="trailing" constant="15" id="1Cx-ZR-v1k"/>

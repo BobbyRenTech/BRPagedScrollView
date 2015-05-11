@@ -116,9 +116,6 @@
 		AC3D2EAE1AEE918000789420 /* BRDailyActivityScrollview */ = {
 			isa = PBXGroup;
 			children = (
-				AC1C8FF21AFA822200271403 /* NSObject+Notify.h */,
-				AC1C8FF31AFA822200271403 /* NSObject+Notify.m */,
-				ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */,
 				AC3D2EB11AEE918000789420 /* AppDelegate.swift */,
 				AC3D2EB51AEE918000789420 /* Main.storyboard */,
 				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
@@ -129,8 +126,10 @@
 				ACBA283A1AF72D2C00F16EDD /* Activities */,
 				ACA553261AF3D59D00C97734 /* ActivityCell.swift */,
 				ACEF59F31AF25F7200EB19BC /* Models */,
+				ACAC0DAA1AFD39E60065D4DF /* Utils */,
 				AC3D2EB81AEE918000789420 /* Images.xcassets */,
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
+				ACEF59F01AF1804600EB19BC /* BRDailyActivityScrollview-Bridging-Header.h */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,
 			);
 			path = BRDailyActivityScrollview;
@@ -159,6 +158,15 @@
 				AC3D2EC61AEE918000789420 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ACAC0DAA1AFD39E60065D4DF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				AC1C8FF21AFA822200271403 /* NSObject+Notify.h */,
+				AC1C8FF31AFA822200271403 /* NSObject+Notify.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 		ACBA283A1AF72D2C00F16EDD /* Activities */ = {

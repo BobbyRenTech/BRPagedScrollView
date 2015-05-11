@@ -11,7 +11,11 @@ import QuartzCore
 
 let SHOW_ICONS = true
 
-class ActivityCell: UICollectionViewCell {
+protocol ActivityCellDelegate {
+    func didSelectActivityTile(cell:ActivityCell)
+}
+
+class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     @IBOutlet weak var viewBorder: UIView!
     @IBOutlet weak var labelText: UILabel!
     
@@ -29,14 +33,26 @@ class ActivityCell: UICollectionViewCell {
     @IBOutlet weak var constraintLabelWidth: NSLayoutConstraint!
     @IBOutlet weak var constraintLabelHeight: NSLayoutConstraint!
     
+    weak var activity:Activity?
+    var delegate:ActivityCellDelegate?
+    
     override func awakeFromNib() {
         self.viewBorder.layer.cornerRadius = 10
         self.viewBorder.layer.borderWidth = 4
         self.viewBorder.layer.borderColor = ColorUtil.blueColor().CGColor
         self.backgroundColor = UIColor.clearColor()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleGesture:")
+        tap.delegate = self
+        self.addGestureRecognizer(tap)
+        let press: UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: "handleGesture:")
+        press.delegate = self
+        press.minimumPressDuration = 0.25
+        self.addGestureRecognizer(press)
     }
     
     func setupWithActivity(activity:Activity) {
+        self.activity = activity
         
         // incomplete activities (default)
         self.viewBorder.backgroundColor = UIColor.whiteColor()
@@ -179,5 +195,115 @@ class ActivityCell: UICollectionViewCell {
         result.addAttributes(otherAttrs, range: range)
         
         return result
+    }
+    
+    // MARK: - gesture
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldReceiveTouch touch: UITouch) -> Bool {
+        let location = touch.locationInView(self)
+        /*
+        if self.iconKudos != nil && CGRectContainsPoint(self.iconKudos!.frame, location) {
+            return false
+        }
+        */
+        
+        return true
+    }
+    
+    func handleGesture(gesture:UIGestureRecognizer) {
+        println("gesture")
+        if gesture.isKindOfClass(UITapGestureRecognizer) && gesture.state == UIGestureRecognizerState.Ended {
+            self.bounce { () -> Void in
+                println("bounced")
+                if self.delegate != nil && self.activity != nil {
+                    self.delegate!.didSelectActivityTile(self)
+                }
+            }
+        }
+        else if gesture.isKindOfClass(UILongPressGestureRecognizer) {
+            if gesture.state == UIGestureRecognizerState.Began {
+                self.bounceForState(1, completion: { () -> Void in
+                    
+                })
+            }
+            else if gesture.state == UIGestureRecognizerState.Ended {
+                self.bounceForState(0, completion: { () -> Void in
+                    println("bounced")
+                    if self.delegate != nil && self.activity != nil {
+                        self.delegate!.didSelectActivityTile(self)
+                    }
+                })
+            }
+        }
+    }
+    
+    func bounce(completion: () -> Void) {
+        if (UIDevice.currentDevice().systemVersion as NSString).floatValue < 7.0 {
+            completion()
+            return
+        }
+        
+        let duration:Double = 0.25
+        let damping:CGFloat = 0.1
+        let velocity:CGFloat = 3
+        
+        var sx:CGFloat = 1
+        var sy:CGFloat = 1
+        
+        UIView.animateWithDuration(duration/3.0, animations: { () -> Void in
+            sx = 0.9
+            sy = 0.9
+            self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
+        }) { (finished) -> Void in
+            UIView.animateWithDuration(duration*2/3, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                sx = 1
+                sy = 1
+                self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
+            }, completion: { (finished) -> Void in
+                completion()
+            })
+        }
+    }
+    
+    func bounceForState(pressed_state:Int, completion: () -> Void) {
+        if (UIDevice.currentDevice().systemVersion as NSString).floatValue < 7.0 {
+            completion()
+            return
+        }
+        
+        let duration:Double = 0.5
+        let damping:CGFloat = 0.1
+        let velocity:CGFloat = 3
+        
+        var sx:CGFloat = 1
+        var sy:CGFloat = 1
+        
+        if pressed_state == 1 {
+            // pressed
+            UIView.animateWithDuration(duration/3.0, animations: { () -> Void in
+                sx = 0.9
+                sy = 0.9
+                self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
+                }) { (finished) -> Void in
+                    println("done")
+                    UIView.animateWithDuration(0.01, delay: 0.25, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                        //self.contentView.transform = CGAffineTransformIdentity;
+                    }, completion: { (finished) -> Void in
+                    })
+            }
+        }
+        else {
+            // not pressed
+            UIView.animateWithDuration(duration, delay: 0, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                sx = 1
+                sy = 1
+                self.contentView.transform = CGAffineTransformScale(CGAffineTransformIdentity, sx, sy)
+                }, completion: { (finished) -> Void in
+                    completion()
+            })
+        }
+    }
+    
+    func resetBounce() {
+        
     }
 }
