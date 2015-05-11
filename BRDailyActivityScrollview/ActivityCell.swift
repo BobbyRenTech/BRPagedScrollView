@@ -36,6 +36,8 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     weak var activity:Activity?
     var delegate:ActivityCellDelegate?
     
+    var isPressing: Bool = false
+    
     override func awakeFromNib() {
         self.viewBorder.layer.cornerRadius = 10
         self.viewBorder.layer.borderWidth = 4
@@ -69,44 +71,56 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         self.iconKudos?.image = nil
 
         // icons
-        if activity.hasReminders() && self.iconReminders != nil {
-            self.iconReminders!.image = UIImage(named: "tile_doctor")
+        if activity.hasReminders() {
+            self.iconReminders?.image = UIImage(named: "tile_doctor")
         }
-        if activity.hasStatus() && self.iconStatus != nil {
-            self.iconStatus!.image = UIImage(named: "tile_clock")
+        if activity.hasStatus() {
+            self.iconStatus?.image = UIImage(named: "tile_clock")
         }
-        if activity.hasMessages() && self.iconMessages != nil {
-            self.iconMessages!.image = UIImage(named: "tile_speechBubble")
+        if activity.hasMessages() {
+            self.iconMessages?.image = UIImage(named: "tile_speechBubble")
         }
-        if activity.hasRewards() && self.iconRewards != nil {
-            self.iconRewards!.image = UIImage(named: "tile_star")
+        if activity.hasRewards() {
+            self.iconRewards?.image = UIImage(named: "tile_star")
         }
-        if activity.hasSpecial() && self.iconSpecial != nil {
+        if activity.hasSpecial() {
             // no special status tiles
         }
-        if activity.hasKudos() && self.iconKudos != nil {
-            self.iconKudos!.image = UIImage(named: "tile_kudos")
+        if activity.hasKudos() {
+            self.iconKudos?.image = UIImage(named: "tile_kudos")
         }
-        if activity.isLocked() && self.iconStatus != nil {
-            self.iconStatus!.image = UIImage(named: "tile_lock")
+        if activity.isLocked() {
+            self.iconStatus?.image = UIImage(named: "tile_lock")
+            
+            // use gray content
+            /*
+            self.labelText.textColor = UIColor.lightGrayColor()
+            self.viewBorder.layer.borderColor = UIColor.lightGrayColor().CGColor
+            */
+            
+            // use alpha
+            /*
+            self.viewBorder.alpha = 0.5
+            */
+            
+            // use gray bg
+            self.labelText.alpha = 0.5
+            self.viewBorder.backgroundColor = UIColor(white: 0.9, alpha: 1)
         }
     
         if activity.type == ActivityType.Sponsored {
-            if self.iconSponsor != nil && activity.sponsor != nil {
-                self.iconSponsor!.image = UIImage(named:activity.sponsor!)
+            if activity.sponsor != nil {
+                self.iconSponsor?.image = UIImage(named:activity.sponsor!)
             }
-            if self.iconGeneral != nil {
-                self.iconGeneral!.image = UIImage(named:"tile_syringe")
-            }
+            self.iconGeneral?.image = UIImage(named:"tile_syringe")
         }
         
         if activity.type == ActivityType.Challenge {
             if self.progressView != nil {
                 self.progressView!.hidden = false
             }
-            if self.iconGeneral != nil {
-                self.iconGeneral!.image = UIImage(named:activity.sponsor!)
-            }
+            self.iconGeneral?.image = UIImage(named:activity.sponsor!)
+            
             if activity.text != nil {
                 self.labelText.attributedText = self.attributedStringForChallenge(activity.text!)
             }
@@ -123,11 +137,6 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             if activity.type == ActivityType.Feet && activity.feetStatus != nil {
                 self.labelText.attributedText = self.attributedStringForFeetStatus(activity.feetStatus!)
             }
-            /*
-            self.iconReminders?.hidden = true
-            self.iconMessages?.hidden = true
-            self.iconStatus?.hidden = true
-            */
         }
         
         if activity.text != nil {
@@ -212,26 +221,18 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     func handleGesture(gesture:UIGestureRecognizer) {
         println("gesture")
         if gesture.isKindOfClass(UITapGestureRecognizer) && gesture.state == UIGestureRecognizerState.Ended {
-            self.bounce { () -> Void in
-                println("bounced")
-                if self.delegate != nil && self.activity != nil {
-                    self.delegate!.didSelectActivityTile(self)
-                }
-            }
+            self.didTap()
         }
         else if gesture.isKindOfClass(UILongPressGestureRecognizer) {
             if gesture.state == UIGestureRecognizerState.Began {
-                self.bounceForState(1, completion: { () -> Void in
-                    
-                })
+                self.isPressing = true
+                self.didPressDown()
             }
             else if gesture.state == UIGestureRecognizerState.Ended {
-                self.bounceForState(0, completion: { () -> Void in
-                    println("bounced")
-                    if self.delegate != nil && self.activity != nil {
-                        self.delegate!.didSelectActivityTile(self)
-                    }
-                })
+                if self.isPressing {
+                    self.didPressUp()
+                }
+                self.isPressing = false
             }
         }
     }
@@ -305,5 +306,29 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     
     func resetBounce() {
         
+    }
+    
+    func didTap() {
+        self.bounce { () -> Void in
+            println("bounced")
+            if self.delegate != nil && self.activity != nil {
+                self.delegate!.didSelectActivityTile(self)
+            }
+        }
+    }
+    
+    func didPressDown() {
+        self.bounceForState(1, completion: { () -> Void in
+            
+        })
+    }
+    
+    func didPressUp() {
+        self.bounceForState(0, completion: { () -> Void in
+            println("bounced")
+            if self.delegate != nil && self.activity != nil {
+                self.delegate!.didSelectActivityTile(self)
+            }
+        })
     }
 }
