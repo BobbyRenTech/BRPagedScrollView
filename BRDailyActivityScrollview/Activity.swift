@@ -21,7 +21,8 @@ enum ActivityType {
 }
 
 class Activity: NSObject {
-    var type: ActivityType
+    var activityWeight: Int = 0 // 0 = regular, 1 = sponsored (wide), 2 = tall, 3 = 2x2
+    var type: ActivityType = ActivityType.Sponsored
     var date: NSDate?
     var sponsor: String?
     var text: String?
@@ -35,8 +36,6 @@ class Activity: NSObject {
     var iconStates: NSArray?
     
     init(params:[String: Any]) {
-        self.type = ActivityType.Sponsored
-        
         if let activityType = params["type"] as? ActivityType {
             self.type = activityType
             self.completed = params["completed"] as? Bool
@@ -50,9 +49,11 @@ class Activity: NSObject {
             case ActivityType.Sponsored:
                 self.text = "Get a flu shot"
                 self.sponsor = "cvs"
+                self.activityWeight = 1
                 break;
             case ActivityType.Weight:
                 self.text = "Check your weight"
+                self.activityWeight = 2
                 break;
             case ActivityType.Feet:
                 self.text = "Check your feet"
@@ -70,6 +71,7 @@ class Activity: NSObject {
             case ActivityType.Medicine:
                 self.text = "Take your medicine"
                 self.textComplete = "Medicine taken"
+                self.activityWeight = 2
                 break;
             case ActivityType.Feel:
                 self.text = "How do you feel?"
@@ -78,6 +80,7 @@ class Activity: NSObject {
             case ActivityType.Challenge:
                 self.text = "Whole foods challenge\nWalk 10 miles in 7 days"
                 self.sponsor = "wholefoods"
+                self.activityWeight = 1
                 break;
             default:
                 break;
@@ -86,11 +89,15 @@ class Activity: NSObject {
     }
     
     func isWide()->Bool {
-        return self.type == ActivityType.Sponsored || self.type == ActivityType.Challenge
+        return self.activityWeight == 1
     }
 
     func isTall()->Bool {
-        return self.type == ActivityType.Weight || self.type == ActivityType.Medicine
+        return self.activityWeight == 2
+    }
+    
+    func isHuge()->Bool {
+        return self.activityWeight == 3
     }
     
     func didCompleteWeight(weight:CGFloat) {
