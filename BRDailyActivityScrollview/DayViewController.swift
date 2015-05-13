@@ -159,7 +159,7 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     
     func challengeActivity() -> Activity {
         // generate the sponsored challenge activity
-        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge, "date":self.currentDate,]
+        let params: Dictionary<String, Any> = ["type": ActivityType.Challenge, "date":self.currentDate]
         let activity = Activity(params: params)
         return activity
     }

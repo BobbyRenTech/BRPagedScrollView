@@ -342,7 +342,7 @@
                                             <outlet property="iconReminders" destination="ofK-BM-cXB" id="hSr-1u-Ssz"/>
                                             <outlet property="iconRewards" destination="o3L-OI-PWo" id="rly-3N-sw2"/>
                                             <outlet property="iconSpecial" destination="jp1-zg-nGn" id="zIH-wH-ljc"/>
-                                            <outlet property="iconStatus" destination="1nQ-Dl-HuZ" id="6Q3-ic-Z83"/>
+                                            <outlet property="iconStatus" destination="1nQ-Dl-HuZ" id="Olf-0H-4Jb"/>
                                             <outlet property="labelText" destination="xD7-ZA-FdQ" id="9Fb-Xc-eSu"/>
                                             <outlet property="viewBorder" destination="DhY-ox-SXy" id="DoR-Sn-wE0"/>
                                         </connections>
