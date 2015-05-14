@@ -90,11 +90,7 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         if activity.hasKudos() {
             self.iconKudos?.image = UIImage(named: "tile_kudos")
         }
-        if activity.isLocked() {
-            self.iconStatus?.image = UIImage(named: "tile_lock")
-            self.toggleLockedOverlay(true)
-        }
-    
+        
         if activity.type == ActivityType.Sponsored {
             if activity.sponsor != nil {
                 self.iconSponsor?.image = UIImage(named:activity.sponsor!)
@@ -124,6 +120,15 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             if activity.type == ActivityType.Feet && activity.feetStatus != nil {
                 self.labelText.attributedText = self.attributedStringForFeetStatus(activity.feetStatus!)
             }
+        }
+        
+        // time based status
+        if activity.isLocked() {
+            self.iconStatus?.image = UIImage(named: "tile_lock")
+            self.toggleLockedOverlay(true)
+        }
+        if activity.isExpired() && activity.completed == false {
+            self.toggleExpiredOverlay()
         }
         
         if activity.text != nil {
@@ -194,8 +199,8 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
     }
     
     func attributedStringForLock() -> NSAttributedString {
-        var boldString = "locked"
-        var baseString = "This activity is currently locked"
+        var dateString = BRDateUtils.simpleTimeForDate(self.activity!.lockDate!)
+        var baseString = "This activity is available at \(dateString)"
 
         
         var attributedString = NSMutableAttributedString(string: baseString)
@@ -203,7 +208,7 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
         var result = NSMutableAttributedString(string: baseString, attributes: attrs) as NSMutableAttributedString
         
         var targetString = baseString as NSString
-        var range = targetString.rangeOfString(boldString)
+        var range = targetString.rangeOfString(dateString)
         var otherAttrs = [NSFontAttributeName : UIFont.boldSystemFontOfSize(18), NSForegroundColorAttributeName: UIColor.redColor()] as [NSObject:AnyObject]
         
         result.addAttributes(otherAttrs, range: range)
@@ -296,6 +301,23 @@ class ActivityCell: UICollectionViewCell, UIGestureRecognizerDelegate {
             self.labelText.alpha = 1
             self.viewBorder.backgroundColor = UIColor(white: 1, alpha: 1)
         }
+    }
+
+    func toggleExpiredOverlay() {
+        // use gray content
+        /*
+        self.labelText.textColor = UIColor.lightGrayColor()
+        self.viewBorder.layer.borderColor = UIColor.lightGrayColor().CGColor
+        */
+        
+        // use alpha
+        /*
+        self.viewBorder.alpha = 0.5
+        */
+        
+        // use gray bg
+        self.labelText.alpha = 0.5
+        self.viewBorder.backgroundColor = UIColor(white: 0.9, alpha: 1)
     }
     
     // MARK :- Animations

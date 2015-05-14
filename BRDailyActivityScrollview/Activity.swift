@@ -23,7 +23,9 @@ enum ActivityType {
 class Activity: NSObject {
     var activityWeight: Int = 0 // 0 = regular, 1 = sponsored (wide), 2 = tall, 3 = 2x2
     var type: ActivityType = ActivityType.Sponsored
-    var date: NSDate?
+    var date: NSDate? // generic date for displaying this activity
+    var lockDate: NSDate? // before this time, activity is locked
+    var dueDate: NSDate? // activity should be done before this date
     var sponsor: String?
     var text: String?
     var textComplete: String?
@@ -42,6 +44,8 @@ class Activity: NSObject {
             self.weight = params["weight"] as? CGFloat
             self.feetStatus = params["feetStatus"] as? String
             self.date = params["date"] as? NSDate
+            self.lockDate = params["lockDate"] as? NSDate
+            self.dueDate = params["dueDate"] as? NSDate
             
             self.iconStates = params["icons"] as? NSArray
             
@@ -143,11 +147,19 @@ class Activity: NSObject {
         }
         return self.iconStates!.containsObject("kudos")
     }
+    
+    // MARK: - date based status
     func isLocked() -> Bool {
-        if self.iconStates == nil {
+        if self.lockDate == nil {
             return false;
         }
-        return self.iconStates!.containsObject("lock")
+        return self.lockDate!.timeIntervalSinceNow > 0
     }
-
+    
+    func isExpired() -> Bool {
+        if self.dueDate == nil {
+            return false;
+        }
+        return self.dueDate!.timeIntervalSinceNow < 0
+    }
 }
