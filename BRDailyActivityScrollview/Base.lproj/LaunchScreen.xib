@@ -9,26 +9,10 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo_title" translatesAutoresizingMaskIntoConstraints="NO" id="QOu-ng-DoI">
-                    <rect key="frame" x="150" y="211" width="181" height="57"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="181" id="RpF-xt-fOs"/>
-                        <constraint firstAttribute="height" constant="57" id="gaG-Jg-3iK"/>
-                    </constraints>
-                </imageView>
-            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <constraints>
-                <constraint firstAttribute="centerX" secondItem="QOu-ng-DoI" secondAttribute="centerX" id="8HC-dI-jLx"/>
-                <constraint firstAttribute="centerY" secondItem="QOu-ng-DoI" secondAttribute="centerY" id="tX5-Jc-L1d"/>
-            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
         </view>
     </objects>
-    <resources>
-        <image name="logo_title" width="181" height="57"/>
-    </resources>
 </document>
