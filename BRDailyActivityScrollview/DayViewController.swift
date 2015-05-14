@@ -141,14 +141,16 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     // MARK: fake activities
     func loadActivities() {
         var activitiesArray = [AnyObject]()
+        let dayEnd = self.currentDate!.dateByAddingTimeInterval(24*3600)
+        let dayMid = self.currentDate!.dateByAddingTimeInterval(12*3600)
         
         activitiesArray.append(self.sponsoredActivity())
-        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "completed":false, "icons":["rewards", "kudos"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "completed":false, "icons":["reminders", "messages"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "completed":true, "icons":["rewards"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "completed":false, "icons":["lock"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "completed":false, "icons":["status"]]))
-        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "completed":false, "icons":["lock"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Weight, "date":self.currentDate, "dueDate":dayEnd, "completed":false, "icons":["rewards", "kudos"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Glucose, "date":self.currentDate, "dueDate":dayEnd, "completed":false, "icons":["reminders", "messages"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feet, "date":self.currentDate, "dueDate":dayEnd, "completed":true, "icons":["rewards"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Feel, "date":self.currentDate, "lockDate": dayMid, "completed":false]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Medicine, "date":self.currentDate, "dueDate":dayEnd, "completed":false, "icons":["status"]]))
+        activitiesArray.append(Activity(params: ["type":ActivityType.Hunger, "date":self.currentDate, "lockDate":dayMid, "completed":false]))
         activitiesArray.append(self.challengeActivity())
         self.updateWithActivities(activitiesArray as [AnyObject])
     }
