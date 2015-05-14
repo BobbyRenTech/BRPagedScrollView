@@ -10,7 +10,6 @@
 		AC3D2EB21AEE918000789420 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB11AEE918000789420 /* AppDelegate.swift */; };
 		AC3D2EB41AEE918000789420 /* HorizontalTimelineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */; };
 		AC3D2EB71AEE918000789420 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EB51AEE918000789420 /* Main.storyboard */; };
-		AC3D2EB91AEE918000789420 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EB81AEE918000789420 /* Images.xcassets */; };
 		AC3D2EBC1AEE918000789420 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */; };
 		AC3D2EC81AEE918000789420 /* BRDailyActivityScrollviewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */; };
 		AC3D2ED21AEE94BB00789420 /* VerticalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC3D2ED11AEE94BB00789420 /* VerticalPageViewController.swift */; };
@@ -28,12 +27,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AC3D2EAC1AEE918000789420 /* CareCam Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CareCam Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC3D2EAC1AEE918000789420 /* BRPagedScrollView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRPagedScrollView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3D2EB01AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3D2EB11AEE918000789420 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTimelineController.swift; sourceTree = "<group>"; };
 		AC3D2EB61AEE918000789420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AC3D2EB81AEE918000789420 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AC3D2EBB1AEE918000789420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		AC3D2EC11AEE918000789420 /* BRDailyActivityScrollviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRDailyActivityScrollviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3D2EC61AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,7 +72,7 @@
 		AC3D2EAD1AEE918000789420 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AC3D2EAC1AEE918000789420 /* CareCam Demo.app */,
+				AC3D2EAC1AEE918000789420 /* BRPagedScrollView.app */,
 				AC3D2EC11AEE918000789420 /* BRDailyActivityScrollviewTests.xctest */,
 			);
 			name = Products;
@@ -87,7 +85,6 @@
 				AC3D2EB51AEE918000789420 /* Main.storyboard */,
 				AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */,
 				AC3D2ED11AEE94BB00789420 /* VerticalPageViewController.swift */,
-				AC3D2EB81AEE918000789420 /* Images.xcassets */,
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,
 			);
@@ -144,7 +141,7 @@
 			);
 			name = BRDailyActivityScrollview;
 			productName = BRDailyActivityScrollview;
-			productReference = AC3D2EAC1AEE918000789420 /* CareCam Demo.app */;
+			productReference = AC3D2EAC1AEE918000789420 /* BRPagedScrollView.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AC3D2EC01AEE918000789420 /* BRDailyActivityScrollviewTests */ = {
@@ -176,6 +173,7 @@
 				TargetAttributes = {
 					AC3D2EAB1AEE918000789420 = {
 						CreatedOnToolsVersion = 6.3;
+						DevelopmentTeam = H799H8B8DD;
 					};
 					AC3D2EC01AEE918000789420 = {
 						CreatedOnToolsVersion = 6.3;
@@ -209,7 +207,6 @@
 			files = (
 				AC3D2EB71AEE918000789420 /* Main.storyboard in Resources */,
 				AC3D2EBC1AEE918000789420 /* LaunchScreen.xib in Resources */,
-				AC3D2EB91AEE918000789420 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,9 +353,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BRDailyActivityScrollview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "CareCam Demo";
+				PRODUCT_NAME = BRPagedScrollView;
 				PROVISIONING_PROFILE = "50e4e931-3dc8-4b42-bd05-97282b49c0c3";
 			};
 			name = Debug;
@@ -367,10 +365,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Fwd Incorporated (88NMDUR8S6)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = BRDailyActivityScrollview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "CareCam Demo";
+				PRODUCT_NAME = BRPagedScrollView;
 				PROVISIONING_PROFILE = "50e4e931-3dc8-4b42-bd05-97282b49c0c3";
 			};
 			name = Release;
