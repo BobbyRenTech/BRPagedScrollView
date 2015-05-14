@@ -45,10 +45,18 @@ class CalendarHeaderWeekViewController: UIViewController {
         }
         
         if !self.didInitViews {
-            self.setDateInWeek(NSDate())
+            self.initializeCalendar()
         }
         
         self.didInitViews = true
+    }
+    
+    func initializeCalendar() {
+        // displays past 5 days, current day, and next day on calendar
+        let today = BRDateUtils.beginningOfDate(NSDate(), GMT: false)
+        self.weekStart = today.dateByAddingTimeInterval(-5 * 24 * 3600)
+        self.weekEnd = today.dateByAddingTimeInterval(2*24*3600 - 1)
+        self.updateWeekIcons()
     }
     
     func setDateInWeek(date: NSDate) {
@@ -59,16 +67,10 @@ class CalendarHeaderWeekViewController: UIViewController {
         println("week range: \(self.weekStart) to \(self.weekEnd)")
         
         self.updateWeekIcons()
-
-        /*
-        var date:NSDate
-        for date = self.weekStart!; date.timeIntervalSinceDate(self.weekEnd!) < 0; date = date.dateByAddingTimeInterval(24*3600) {
-            self.listenFor("activities:changed", action: "updateActivitiesForDate:", object: date)
-        }
-        */
     }
     
-    func setCurrentDayOfWeek(date: NSDate) {
+    func setVisibleDayOfWeek(date: NSDate) {
+        // switches the current day being viewed
         if self.weekStart == nil || self.weekEnd == nil {
             return;
         }
@@ -99,7 +101,7 @@ class CalendarHeaderWeekViewController: UIViewController {
             }
         }
         if self.currentDate != nil {
-            self.setCurrentDayOfWeek(self.currentDate!)
+            self.setVisibleDayOfWeek(self.currentDate!)
         }
     }
     

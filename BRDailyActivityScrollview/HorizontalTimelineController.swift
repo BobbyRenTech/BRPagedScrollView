@@ -81,8 +81,6 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
             // generates fake activities
             self.loadActivities()
             isSetup = true
-
-            self.weekHeaderController!.setDateInWeek(NSDate())
         }
     }
     
@@ -98,7 +96,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
     }
     
     func populateDays() {
-        let weekStart = BRDateUtils.sundayOfWeekForDate(NSDate()).dateByAddingTimeInterval(-7*24*3600)
+        let weekStart = self.weekHeaderController!.weekStart! as NSDate
         for index in 0...days-1 {
             let i = CGFloat(index)
             var frame = self.scrollview.frame as CGRect
@@ -139,7 +137,7 @@ class HorizontalTimelineController: UIViewController, UIScrollViewDelegate {
         if index >= 0 && index < self.dayControllers.count {
             let dayController = self.dayControllers.objectAtIndex(index) as! DayViewController
             if self.weekHeaderController != nil {
-                self.weekHeaderController!.setCurrentDayOfWeek(dayController.currentDate!)
+                self.weekHeaderController!.setVisibleDayOfWeek(dayController.currentDate!)
             }
             
             self.currentDayController = dayController
