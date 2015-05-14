@@ -62,8 +62,8 @@
 		AC3D2EA31AEE918000789420 = {
 			isa = PBXGroup;
 			children = (
-				AC3D2EAE1AEE918000789420 /* BRDailyActivityScrollview */,
-				AC3D2EC41AEE918000789420 /* BRDailyActivityScrollviewTests */,
+				AC3D2EAE1AEE918000789420 /* BRPagedScrollView */,
+				AC3D2EC41AEE918000789420 /* BRPagedScrollViewTests */,
 				AC3D2EAD1AEE918000789420 /* Products */,
 				D5C8741B22B9CF953910C5A2 /* Frameworks */,
 			);
@@ -78,7 +78,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		AC3D2EAE1AEE918000789420 /* BRDailyActivityScrollview */ = {
+		AC3D2EAE1AEE918000789420 /* BRPagedScrollView */ = {
 			isa = PBXGroup;
 			children = (
 				AC3D2EB11AEE918000789420 /* AppDelegate.swift */,
@@ -88,7 +88,7 @@
 				AC3D2EBA1AEE918000789420 /* LaunchScreen.xib */,
 				AC3D2EAF1AEE918000789420 /* Supporting Files */,
 			);
-			path = BRDailyActivityScrollview;
+			path = BRPagedScrollView;
 			sourceTree = "<group>";
 		};
 		AC3D2EAF1AEE918000789420 /* Supporting Files */ = {
@@ -99,13 +99,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AC3D2EC41AEE918000789420 /* BRDailyActivityScrollviewTests */ = {
+		AC3D2EC41AEE918000789420 /* BRPagedScrollViewTests */ = {
 			isa = PBXGroup;
 			children = (
 				AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */,
 				AC3D2EC51AEE918000789420 /* Supporting Files */,
 			);
-			path = BRDailyActivityScrollviewTests;
+			path = BRPagedScrollViewTests;
 			sourceTree = "<group>";
 		};
 		AC3D2EC51AEE918000789420 /* Supporting Files */ = {
@@ -354,7 +354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = BRDailyActivityScrollview/Info.plist;
+				INFOPLIST_FILE = BRPagedScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = BRPagedScrollView;
 				PROVISIONING_PROFILE = "50e4e931-3dc8-4b42-bd05-97282b49c0c3";
@@ -366,7 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				INFOPLIST_FILE = BRDailyActivityScrollview/Info.plist;
+				INFOPLIST_FILE = BRPagedScrollView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = BRPagedScrollView;
 				PROVISIONING_PROFILE = "50e4e931-3dc8-4b42-bd05-97282b49c0c3";
