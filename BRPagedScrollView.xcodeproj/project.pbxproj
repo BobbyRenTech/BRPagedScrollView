@@ -33,7 +33,7 @@
 		AC3D2EB31AEE918000789420 /* HorizontalTimelineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalTimelineController.swift; sourceTree = "<group>"; };
 		AC3D2EB61AEE918000789420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AC3D2EBB1AEE918000789420 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		AC3D2EC11AEE918000789420 /* BRDailyActivityScrollviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRDailyActivityScrollviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC3D2EC11AEE918000789420 /* BRPagedScrollViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BRPagedScrollViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC3D2EC61AEE918000789420 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC3D2EC71AEE918000789420 /* BRDailyActivityScrollviewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRDailyActivityScrollviewTests.swift; sourceTree = "<group>"; };
 		AC3D2ED11AEE94BB00789420 /* VerticalPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalPageViewController.swift; sourceTree = "<group>"; };
@@ -73,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				AC3D2EAC1AEE918000789420 /* BRPagedScrollView.app */,
-				AC3D2EC11AEE918000789420 /* BRDailyActivityScrollviewTests.xctest */,
+				AC3D2EC11AEE918000789420 /* BRPagedScrollViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -127,9 +127,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		AC3D2EAB1AEE918000789420 /* BRDailyActivityScrollview */ = {
+		AC3D2EAB1AEE918000789420 /* BRPagedScrollView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC3D2ECB1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRDailyActivityScrollview" */;
+			buildConfigurationList = AC3D2ECB1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRPagedScrollView" */;
 			buildPhases = (
 				AC3D2EA81AEE918000789420 /* Sources */,
 				AC3D2EA91AEE918000789420 /* Frameworks */,
@@ -139,14 +139,14 @@
 			);
 			dependencies = (
 			);
-			name = BRDailyActivityScrollview;
+			name = BRPagedScrollView;
 			productName = BRDailyActivityScrollview;
 			productReference = AC3D2EAC1AEE918000789420 /* BRPagedScrollView.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AC3D2EC01AEE918000789420 /* BRDailyActivityScrollviewTests */ = {
+		AC3D2EC01AEE918000789420 /* BRPagedScrollViewTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AC3D2ECE1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRDailyActivityScrollviewTests" */;
+			buildConfigurationList = AC3D2ECE1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRPagedScrollViewTests" */;
 			buildPhases = (
 				AC3D2EBD1AEE918000789420 /* Sources */,
 				AC3D2EBE1AEE918000789420 /* Frameworks */,
@@ -157,9 +157,9 @@
 			dependencies = (
 				AC3D2EC31AEE918000789420 /* PBXTargetDependency */,
 			);
-			name = BRDailyActivityScrollviewTests;
+			name = BRPagedScrollViewTests;
 			productName = BRDailyActivityScrollviewTests;
-			productReference = AC3D2EC11AEE918000789420 /* BRDailyActivityScrollviewTests.xctest */;
+			productReference = AC3D2EC11AEE918000789420 /* BRPagedScrollViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -181,7 +181,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AC3D2EA71AEE918000789420 /* Build configuration list for PBXProject "BRDailyActivityScrollview" */;
+			buildConfigurationList = AC3D2EA71AEE918000789420 /* Build configuration list for PBXProject "BRPagedScrollView" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -194,8 +194,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				AC3D2EAB1AEE918000789420 /* BRDailyActivityScrollview */,
-				AC3D2EC01AEE918000789420 /* BRDailyActivityScrollviewTests */,
+				AC3D2EAB1AEE918000789420 /* BRPagedScrollView */,
+				AC3D2EC01AEE918000789420 /* BRPagedScrollViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -243,7 +243,7 @@
 /* Begin PBXTargetDependency section */
 		AC3D2EC31AEE918000789420 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = AC3D2EAB1AEE918000789420 /* BRDailyActivityScrollview */;
+			target = AC3D2EAB1AEE918000789420 /* BRPagedScrollView */;
 			targetProxy = AC3D2EC21AEE918000789420 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -387,7 +387,7 @@
 				);
 				INFOPLIST_FILE = BRDailyActivityScrollviewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BRPagedScrollViewTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BRDailyActivityScrollview.app/BRDailyActivityScrollview";
 			};
 			name = Debug;
@@ -402,7 +402,7 @@
 				);
 				INFOPLIST_FILE = BRDailyActivityScrollviewTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BRPagedScrollViewTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BRDailyActivityScrollview.app/BRDailyActivityScrollview";
 			};
 			name = Release;
@@ -410,7 +410,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AC3D2EA71AEE918000789420 /* Build configuration list for PBXProject "BRDailyActivityScrollview" */ = {
+		AC3D2EA71AEE918000789420 /* Build configuration list for PBXProject "BRPagedScrollView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC3D2EC91AEE918000789420 /* Debug */,
@@ -419,7 +419,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC3D2ECB1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRDailyActivityScrollview" */ = {
+		AC3D2ECB1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRPagedScrollView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC3D2ECC1AEE918000789420 /* Debug */,
@@ -428,7 +428,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AC3D2ECE1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRDailyActivityScrollviewTests" */ = {
+		AC3D2ECE1AEE918000789420 /* Build configuration list for PBXNativeTarget "BRPagedScrollViewTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AC3D2ECF1AEE918000789420 /* Debug */,

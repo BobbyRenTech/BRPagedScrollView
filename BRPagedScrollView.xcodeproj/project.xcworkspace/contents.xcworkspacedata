@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:BRDailyActivityScrollview.xcodeproj">
+      location = "self:BRPagedScrollView.xcodeproj">
    </FileRef>
 </Workspace>

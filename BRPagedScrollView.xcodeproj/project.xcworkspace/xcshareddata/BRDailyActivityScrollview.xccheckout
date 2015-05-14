@@ -14,7 +14,7 @@
 		<string>github.com:BobbyRenTech/BRDailyActivityScrollview.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>BRDailyActivityScrollview.xcodeproj/project.xcworkspace</string>
+	<string>BRPagedScrollView.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DD31841BBB704E914C87C2DB12267955FB0582D8</key>
