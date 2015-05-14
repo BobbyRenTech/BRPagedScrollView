@@ -111,13 +111,16 @@ class DayViewController: UIViewController, UICollectionViewDataSource, UICollect
     func blockSizeForItemAtIndexPath(indexPath: NSIndexPath!) -> CGSize {
         let activity = self.activities.objectAtIndex(indexPath.row) as! Activity
         if activity.isTall() {
-            return CGSizeMake(1, 2);
+            return CGSizeMake(1, 2)
         }
         else if activity.isWide() {
-            return CGSizeMake(2, 1);
+            return CGSizeMake(2, 1)
+        }
+        else if activity.isHuge() {
+            return CGSizeMake(2, 2)
         }
         else {
-            return CGSizeMake(1, 1);
+            return CGSizeMake(1, 1)
         }
     }
     
